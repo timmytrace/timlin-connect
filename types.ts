@@ -14,3 +14,14 @@ export interface Creature {
   abilities: string;
   imageUrl?: string; // Optional, as it's generated in a separate step
 }
+
+// Define and export the Project interface
+export interface Project {
+  id: string;
+  title: string;
+  description: string;
+  technologies: string[];
+  status: 'Completed' | 'In Progress' | 'Ongoing' | 'Deployed';
+  link?: string;
+  imageUrl?: string;
+}
