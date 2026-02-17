@@ -17,8 +17,10 @@ const ContactSection: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
+    // TODO: Implement proper form submission handling with backend API
+    // For now, log to console and clear form
     console.log('Form submitted:', formData);
+    // TODO: Replace with proper toast notification system
     alert('Thank you for your message! We will get back to you soon.');
     setFormData({ name: '', email: '', subject: '', message: '' });
   };
@@ -56,7 +58,7 @@ const ContactSection: React.FC = () => {
               {/* Email */}
               <div className="flex items-start space-x-3">
                 <svg className="w-6 h-6 text-[#00D1FF] flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
                 <div>
                   <p className="text-[#8B949E] text-sm font-semibold mb-1">Email</p>

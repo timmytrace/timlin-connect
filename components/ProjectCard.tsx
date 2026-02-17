@@ -38,7 +38,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         
         {/* Hover Reveal: Description, Tech Stack, Status, CTA */}
         <div className={`transition-all duration-300 ${
-          isHovered ? 'opacity-100 max-h-[500px]' : 'opacity-0 max-h-0 overflow-hidden'
+          isHovered ? 'opacity-100 max-h-[600px]' : 'opacity-0 max-h-0 overflow-hidden'
         }`}>
           <p className="text-[#8B949E] text-sm leading-relaxed mb-4">{project.description}</p>
           
