@@ -1,0 +1,53 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(48, 54, 61, 0.5);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover {
+    box-shadow: 0 8px 30px rgba(46, 91, 255, 0.5);
+}
+
+.status-indicator {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.status-online {
+    background-color: #00D1FF;
+}
+
+.status-offline {
+    background-color: #30363D;
+}
+
+.cyber-shield {
+    background: linear-gradient(135deg, rgba(46, 91, 255, 0.1), rgba(46, 91, 255, 0.5));
+    border: 1px solid #2E5BFF;
+    border-radius: 8px;
+}
+
+.secure-portal {
+    background-color: #0B0E14;
+    color: #FFFFFF;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+body {
+    background-color: #161B22;
+    color: #FFFFFF;
+    font-family: Arial, sans-serif;
+}
