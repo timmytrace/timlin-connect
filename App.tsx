@@ -10,13 +10,12 @@ import Footer from './components/Footer';
 
 const App: React.FC = () => {
   return (
-    <div className="flex flex-col min-h-screen bg-slate-900 text-slate-100 selection:bg-sky-500 selection:text-slate-900">
+    <div className="flex flex-col min-h-screen bg-[#0B0E14] text-[#E6EDF3] selection:bg-[#00D1FF] selection:text-[#0B0E14]">
       <Navbar />
       <main className="flex-grow">
         <HeroSection />
         <ServicesSection />
         <ProjectsSection />
-        <AboutSection />
         <ContactSection />
       </main>
       <Footer />
