@@ -24,35 +24,35 @@ const WrenchScrewdriverIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) =
 
 const services: ServiceItem[] = [
   {
-    id: 'dev',
-    icon: <CodeBracketIcon className="w-10 h-10" />,
-    title: 'Modern Development',
-    description: 'We craft cutting-edge web and mobile applications using the latest technologies. Scalable, performant, and tailored to your unique business needs, from initial concept to final deployment.'
-  },
-  {
     id: 'cyber',
-    icon: <ShieldCheckIcon className="w-10 h-10" />,
+    icon: <ShieldCheckIcon className="w-12 h-12" />,
     title: 'Cybersecurity Solutions',
-    description: 'Protect your valuable digital assets with our comprehensive cybersecurity services. We offer threat assessment, vulnerability management, incident response, and proactive defense strategies.'
+    description: 'Fortify your digital fortress with enterprise-grade security solutions. Comprehensive threat assessment, vulnerability management, incident response, and proactive defense strategies to protect your valuable digital assets.'
   },
   {
     id: 'it',
-    icon: <WrenchScrewdriverIcon className="w-10 h-10" />,
+    icon: <WrenchScrewdriverIcon className="w-12 h-12" />,
     title: 'IT Support & Management',
-    description: 'Reliable IT support and managed services to ensure your operations run smoothly. Benefit from proactive maintenance, responsive helpdesk, and strategic infrastructure optimization.'
+    description: '24/7 reliable IT support and infrastructure management. Proactive maintenance, responsive helpdesk, strategic infrastructure optimization, and continuous monitoring to ensure your operations run smoothly.'
+  },
+  {
+    id: 'dev',
+    icon: <CodeBracketIcon className="w-12 h-12" />,
+    title: 'Modern Web Development',
+    description: 'Cutting-edge web applications built for performance and security. Scalable, modern solutions using the latest technologies, tailored to your unique business needs from concept to deployment.'
   }
 ];
 
 const ServicesSection: React.FC = () => {
   return (
-    <section id="services" className="section bg-slate-900 py-16 sm:py-24">
+    <section id="services" className="section bg-[#0B0E14] py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <h2 className="text-base font-semibold text-sky-400 tracking-wide uppercase">Our Expertise</h2>
-          <p className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-100">
+          <h2 className="text-base font-semibold text-[#00D1FF] tracking-wide uppercase">Our Expertise</h2>
+          <p className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#E6EDF3]">
             Solutions to Elevate Your Business
           </p>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-slate-400">
+          <p className="mt-4 max-w-2xl mx-auto text-lg text-[#8B949E]">
             At Timlin Connect, we provide a suite of services designed to address your technological challenges and drive growth.
           </p>
         </div>
