@@ -62,8 +62,8 @@ const ContactSection: React.FC = () => {
                 </svg>
                 <div>
                   <p className="text-[#8B949E] text-sm font-semibold mb-1">Email</p>
-                  <a href="mailto:contact@timlinconnect.com" className="text-[#00D1FF] hover:text-[#00D1FF]/80 transition-colors">
-                    contact@timlinconnect.com
+                  <a href="mailto:info@timlinconnect.com" className="text-[#00D1FF] hover:text-[#00D1FF]/80 transition-colors">
+                    info@timlinconnect.com
                   </a>
                 </div>
               </div>
