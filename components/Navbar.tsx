@@ -32,8 +32,9 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <div className="flex-shrink-0">
-            <a href="#home" className={`flex items-center text-2xl font-bold hover:opacity-80 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A3E635] rounded-md ${isScrolled ? 'text-[#0B0B0B]' : 'text-white'}`} style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-              Timlin<br />Connect
+            <a href="#home" className={`flex flex-col text-xl font-bold leading-tight hover:opacity-80 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A3E635] rounded-md ${isScrolled ? 'text-[#0B0B0B]' : 'text-white'}`} style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+              <span>Timlin</span>
+              <span>Connect</span>
             </a>
           </div>
           <div className="hidden md:block">

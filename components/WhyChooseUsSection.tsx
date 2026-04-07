@@ -19,7 +19,7 @@ const WhyChooseUsSection: React.FC = () => {
               Why Choose Us
             </h3>
             <p className="text-[#6B7280] text-sm leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              We are consultative firms and content to established content, reliable e-commerce and social groups.
+              We are independent consultants committed to established standards, reliable methodologies, and practical security guidance.
             </p>
           </div>
 
@@ -29,7 +29,7 @@ const WhyChooseUsSection: React.FC = () => {
               Engagement Models
             </h3>
             <p className="text-[#6B7280] text-sm leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              We sponsor our consultants, considerations, engagements that moderate e-commerce and social groups.
+              We offer flexible engagement models—fixed-scope assessments, project-based work, and ongoing advisory retainers.
             </p>
           </div>
 
@@ -39,7 +39,7 @@ const WhyChooseUsSection: React.FC = () => {
               Compare Us
             </h3>
             <p className="text-[#6B7280] text-sm leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              Our assessments construe and our services with partnership contains and dissociate various information.
+              Our assessments are transparent and our services come with clear deliverables and straightforward pricing.
             </p>
           </div>
         </div>

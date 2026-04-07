@@ -15,28 +15,28 @@ const AboutSection: React.FC = () => {
           {/* Left: Content */}
           <div>
             <p className="text-lg text-[#6B7280] leading-relaxed mb-6" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              Our mission is consecutively along with sound optimization/by professionals at cybersecurity and regulatory landscape.
+              Our mission is to help Canadian organizations navigate cybersecurity with clarity and confidence, guided by experienced professionals in cybersecurity and regulatory compliance.
             </p>
             <p className="text-lg text-[#6B7280] leading-relaxed mb-6" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              We are graduate cybersecurity professionals with our advanced tools overcome, overtones these customers, advisors mitigate/negotiate automatic privacy and regulatory response centre. Clear guidance without unnecessary complexity.
+              We are experienced cybersecurity professionals with advanced tools and methodologies, helping organizations mitigate risk across Canada's privacy and regulatory landscape. Clear guidance without unnecessary complexity.
             </p>
 
             <ul className="space-y-2 mt-6">
               <li className="flex items-start text-[#6B7280] text-sm" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                 <span className="w-1.5 h-1.5 rounded-full bg-[#0B0B0B] mr-2.5 mt-1.5 flex-shrink-0"></span>
-                Practical security
+                Practical, actionable security guidance
               </li>
               <li className="flex items-start text-[#6B7280] text-sm" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                 <span className="w-1.5 h-1.5 rounded-full bg-[#0B0B0B] mr-2.5 mt-1.5 flex-shrink-0"></span>
-                Practical e-commerce modification
+                Privacy and compliance-focused approach
               </li>
               <li className="flex items-start text-[#6B7280] text-sm" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                 <span className="w-1.5 h-1.5 rounded-full bg-[#0B0B0B] mr-2.5 mt-1.5 flex-shrink-0"></span>
-                Providing certifications for innovations
+                Industry-recognized certifications and standards
               </li>
               <li className="flex items-start text-[#6B7280] text-sm" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                 <span className="w-1.5 h-1.5 rounded-full bg-[#0B0B0B] mr-2.5 mt-1.5 flex-shrink-0"></span>
-                Socially an development
+                Community and social responsibility focus
               </li>
             </ul>
           </div>
