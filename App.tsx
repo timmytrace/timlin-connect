@@ -13,7 +13,7 @@ import AiAssistant from './components/AiAssistant';
 
 const App: React.FC = () => {
   return (
-    <div className="flex flex-col min-h-screen bg-[#0B0E14] text-[#E6EDF3] selection:bg-[#00D1FF] selection:text-[#0B0E14]">
+    <div className="flex flex-col min-h-screen bg-[#FAFAFA] text-[#0B0B0B] selection:bg-[#A3E635] selection:text-[#0B0B0B]">
       <Navbar />
       <main className="flex-grow">
         <HeroSection />

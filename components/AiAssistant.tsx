@@ -132,11 +132,7 @@ const AiAssistant: React.FC = () => {
       {/* Floating Chat Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 focus-visible:ring-2 focus-visible:ring-[#00D1FF] focus-visible:outline-none"
-        style={{
-          background: 'linear-gradient(135deg, #2E5BFF, #00D1FF)',
-          boxShadow: '0 4px 20px rgba(0, 209, 255, 0.4)',
-        }}
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 focus-visible:ring-2 focus-visible:ring-[#A3E635] focus-visible:outline-none bg-[#0B0B0B]"
         aria-label={isOpen ? 'Close AI Assistant' : 'Open AI Assistant'}
       >
         {isOpen ? (
@@ -153,48 +149,41 @@ const AiAssistant: React.FC = () => {
       {/* Chat Panel */}
       {isOpen && (
         <div
-          className="fixed bottom-24 right-6 z-50 w-[360px] max-w-[calc(100vw-2rem)] flex flex-col rounded-xl overflow-hidden shadow-2xl"
+          className="fixed bottom-24 right-6 z-50 w-[360px] max-w-[calc(100vw-2rem)] flex flex-col rounded-xl overflow-hidden shadow-2xl border border-[#E5E5E5]"
           style={{
             height: '520px',
-            background: 'rgba(11, 14, 20, 0.95)',
-            backdropFilter: 'blur(16px)',
-            border: '1px solid rgba(48, 54, 61, 0.6)',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), 0 0 40px rgba(46, 91, 255, 0.1)',
+            background: '#FFFFFF',
           }}
         >
           {/* Header */}
           <div
-            className="flex items-center gap-3 px-4 py-3 shrink-0"
-            style={{
-              background: 'linear-gradient(135deg, rgba(46, 91, 255, 0.15), rgba(0, 209, 255, 0.1))',
-              borderBottom: '1px solid rgba(48, 54, 61, 0.5)',
-            }}
+            className="flex items-center gap-3 px-4 py-3 shrink-0 bg-[#0B0B0B]"
           >
-            <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #2E5BFF, #00D1FF)' }}>
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <div className="w-8 h-8 rounded-full flex items-center justify-center bg-[#A3E635]">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-[#0B0B0B]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714a2.25 2.25 0 00.659 1.591L19 14.5M14.25 3.104c.251.023.501.05.75.082M19 14.5l-2.47 4.94a2.25 2.25 0 01-2.013 1.244H9.483a2.25 2.25 0 01-2.013-1.244L5 14.5m14 0H5" />
               </svg>
             </div>
             <div className="flex-1">
-              <h3 className="text-sm font-semibold text-[#E6EDF3]">Timlin Connect AI</h3>
+              <h3 className="text-sm font-semibold text-white" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>Timlin Connect AI</h3>
               <div className="flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                <span className="text-xs text-[#8B949E]">Online</span>
+                <span className="w-2 h-2 rounded-full bg-[#A3E635] animate-pulse" />
+                <span className="text-xs text-white/60">Online</span>
               </div>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="p-1 rounded hover:bg-white/10 transition-colors focus-visible:ring-2 focus-visible:ring-[#00D1FF] focus-visible:outline-none"
+              className="p-1 rounded hover:bg-white/10 transition-colors focus-visible:ring-2 focus-visible:ring-[#A3E635] focus-visible:outline-none"
               aria-label="Close chat"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-[#8B949E]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3 ai-assistant-messages">
+          <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3 ai-assistant-messages bg-[#FAFAFA]">
             {messages.map((msg) => (
               <div
                 key={msg.id}
@@ -203,21 +192,10 @@ const AiAssistant: React.FC = () => {
                 <div
                   className={`max-w-[85%] px-3.5 py-2.5 rounded-xl text-sm leading-relaxed ${
                     msg.role === 'user'
-                      ? 'rounded-br-sm'
-                      : 'rounded-bl-sm'
+                      ? 'rounded-br-sm bg-[#0B0B0B] text-white'
+                      : 'rounded-bl-sm bg-white text-[#0B0B0B] border border-[#E5E5E5]'
                   }`}
-                  style={
-                    msg.role === 'user'
-                      ? {
-                          background: 'linear-gradient(135deg, #2E5BFF, #1a3fcc)',
-                          color: '#FFFFFF',
-                        }
-                      : {
-                          background: 'rgba(22, 27, 34, 0.8)',
-                          color: '#E6EDF3',
-                          border: '1px solid rgba(48, 54, 61, 0.5)',
-                        }
-                  }
+                  style={{ fontFamily: "'DM Sans', sans-serif" }}
                 >
                   {msg.content}
                 </div>
@@ -226,16 +204,12 @@ const AiAssistant: React.FC = () => {
             {isLoading && (
               <div className="flex justify-start">
                 <div
-                  className="px-3.5 py-2.5 rounded-xl rounded-bl-sm text-sm"
-                  style={{
-                    background: 'rgba(22, 27, 34, 0.8)',
-                    border: '1px solid rgba(48, 54, 61, 0.5)',
-                  }}
+                  className="px-3.5 py-2.5 rounded-xl rounded-bl-sm text-sm bg-white border border-[#E5E5E5]"
                 >
                   <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-[#00D1FF] animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <span className="w-2 h-2 rounded-full bg-[#00D1FF] animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <span className="w-2 h-2 rounded-full bg-[#00D1FF] animate-bounce" style={{ animationDelay: '300ms' }} />
+                    <span className="w-2 h-2 rounded-full bg-[#A3E635] animate-bounce" style={{ animationDelay: '0ms' }} />
+                    <span className="w-2 h-2 rounded-full bg-[#A3E635] animate-bounce" style={{ animationDelay: '150ms' }} />
+                    <span className="w-2 h-2 rounded-full bg-[#A3E635] animate-bounce" style={{ animationDelay: '300ms' }} />
                   </div>
                 </div>
               </div>
@@ -245,8 +219,7 @@ const AiAssistant: React.FC = () => {
 
           {/* Input */}
           <div
-            className="px-3 py-3 shrink-0"
-            style={{ borderTop: '1px solid rgba(48, 54, 61, 0.5)' }}
+            className="px-3 py-3 shrink-0 border-t border-[#E5E5E5] bg-white"
           >
             <div className="flex items-center gap-2">
               <input
@@ -257,19 +230,13 @@ const AiAssistant: React.FC = () => {
                 onKeyDown={handleKeyDown}
                 placeholder="Ask about our services..."
                 disabled={isLoading}
-                className="flex-1 px-3 py-2.5 rounded-lg text-sm text-[#E6EDF3] placeholder-[#8B949E] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00D1FF] disabled:opacity-50"
-                style={{
-                  background: 'rgba(22, 27, 34, 0.8)',
-                  border: '1px solid rgba(48, 54, 61, 0.5)',
-                }}
+                className="flex-1 px-3 py-2.5 rounded-lg text-sm text-[#0B0B0B] placeholder-[#9CA3AF] bg-[#FAFAFA] border border-[#E5E5E5] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A3E635] disabled:opacity-50"
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
               />
               <button
                 onClick={sendMessage}
                 disabled={!input.trim() || isLoading}
-                className="p-2.5 rounded-lg transition-all duration-200 hover:opacity-90 disabled:opacity-30 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-[#00D1FF] focus-visible:outline-none"
-                style={{
-                  background: 'linear-gradient(135deg, #2E5BFF, #00D1FF)',
-                }}
+                className="p-2.5 rounded-lg transition-all duration-200 hover:opacity-90 disabled:opacity-30 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-[#A3E635] focus-visible:outline-none bg-[#0B0B0B]"
                 aria-label="Send message"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -277,7 +244,7 @@ const AiAssistant: React.FC = () => {
                 </svg>
               </button>
             </div>
-            <p className="text-[10px] text-[#8B949E] mt-1.5 text-center">
+            <p className="text-[10px] text-[#9CA3AF] mt-1.5 text-center" style={{ fontFamily: "'DM Sans', sans-serif" }}>
               AI-powered assistant · For detailed guidance, contact our team directly
             </p>
           </div>
