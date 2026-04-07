@@ -3,12 +3,13 @@ import React, { useState } from 'react';
 const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
+    organization: '',
     email: '',
-    subject: '',
+    helpWith: '',
     message: ''
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -17,28 +18,24 @@ const ContactSection: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement proper form submission handling with backend API
-    // For now, log to console and clear form
     console.log('Form submitted:', formData);
-    // TODO: Replace with proper toast notification system
-    alert('Thank you for your message! We will get back to you soon.');
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    alert('Thank you for your message! We will respond within one business day.');
+    setFormData({ name: '', organization: '', email: '', helpWith: '', message: '' });
   };
 
   return (
     <section id="contact" className="section bg-[#0B0E14] py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-base font-semibold text-[#00D1FF] tracking-wide uppercase">Get In Touch</h2>
+          <h2 className="text-base font-semibold text-[#00D1FF] tracking-wide uppercase">Get Started</h2>
           <p className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#E6EDF3]">
-            Contact Our Team
+            Contact Us
           </p>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-[#8B949E]">
-            Let's discuss how we can help secure and scale your business
+            Whether you need a one‑time assessment or ongoing security support, we'll help you move forward with clarity and confidence.
           </p>
         </div>
 
-        {/* Glassmorphism Contact Container */}
         <div className="glass-effect rounded-lg p-8 max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8">
             {/* Left Side - Contact Info */}
@@ -51,7 +48,7 @@ const ContactSection: React.FC = () => {
                   Secure Connection
                 </h3>
                 <p className="text-[#8B949E] text-sm">
-                  Your privacy and security are our top priorities
+                  No obligation. We'll respond within one business day.
                 </p>
               </div>
 
@@ -81,17 +78,29 @@ const ContactSection: React.FC = () => {
                 </div>
               </div>
 
+              {/* Location */}
+              <div className="flex items-start space-x-3">
+                <svg className="w-6 h-6 text-[#00D1FF] flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                </svg>
+                <div>
+                  <p className="text-[#8B949E] text-sm font-semibold mb-1">Location</p>
+                  <p className="text-[#8B949E] text-sm">Canada‑Based</p>
+                </div>
+              </div>
+
               {/* Hours */}
               <div className="pt-4 border-t border-[#30363D]">
                 <p className="text-[#8B949E] text-sm font-semibold mb-2">Hours of Operation</p>
-                <p className="text-[#8B949E] text-sm">Monday - Friday: 9:00 AM - 6:00 PM EST</p>
-                <p className="text-[#8B949E] text-sm">Saturday - Sunday: Emergency Support Only</p>
+                <p className="text-[#8B949E] text-sm">Monday – Friday: 9:00 AM – 6:00 PM EST</p>
+                <p className="text-[#8B949E] text-sm">Saturday – Sunday: Emergency Support Only</p>
               </div>
 
               {/* Status Indicator */}
               <div className="flex items-center space-x-2 pt-4">
                 <div className="w-3 h-3 rounded-full bg-green-400 pulse-animation"></div>
-                <span className="text-green-400 text-sm font-semibold">Online - Available Now</span>
+                <span className="text-green-400 text-sm font-semibold">Online – Available Now</span>
               </div>
             </div>
 
@@ -115,6 +124,21 @@ const ContactSection: React.FC = () => {
                 </div>
 
                 <div>
+                  <label htmlFor="organization" className="block text-[#E6EDF3] text-sm font-semibold mb-2">
+                    Organization
+                  </label>
+                  <input
+                    type="text"
+                    id="organization"
+                    name="organization"
+                    value={formData.organization}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2.5 bg-[#161B22] border border-[#30363D] rounded-lg text-[#E6EDF3] placeholder-[#8B949E] focus:outline-none focus:border-[#00D1FF] focus:ring-1 focus:ring-[#00D1FF] transition-all"
+                    placeholder="Your organization"
+                  />
+                </div>
+
+                <div>
                   <label htmlFor="email" className="block text-[#E6EDF3] text-sm font-semibold mb-2">
                     Email
                   </label>
@@ -131,19 +155,25 @@ const ContactSection: React.FC = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className="block text-[#E6EDF3] text-sm font-semibold mb-2">
-                    Subject
+                  <label htmlFor="helpWith" className="block text-[#E6EDF3] text-sm font-semibold mb-2">
+                    What can we help with?
                   </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
+                  <select
+                    id="helpWith"
+                    name="helpWith"
+                    value={formData.helpWith}
                     onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2.5 bg-[#161B22] border border-[#30363D] rounded-lg text-[#E6EDF3] placeholder-[#8B949E] focus:outline-none focus:border-[#00D1FF] focus:ring-1 focus:ring-[#00D1FF] transition-all"
-                    placeholder="How can we help?"
-                  />
+                    className="w-full px-4 py-2.5 bg-[#161B22] border border-[#30363D] rounded-lg text-[#E6EDF3] focus:outline-none focus:border-[#00D1FF] focus:ring-1 focus:ring-[#00D1FF] transition-all"
+                  >
+                    <option value="">Select a service...</option>
+                    <option value="risk-assessment">Cybersecurity Risk Assessment</option>
+                    <option value="vulnerability">Vulnerability Assessment</option>
+                    <option value="pentest">Penetration Testing</option>
+                    <option value="compliance">Compliance &amp; Privacy Readiness</option>
+                    <option value="vciso">Virtual CISO (vCISO)</option>
+                    <option value="incident-response">Incident Response Planning</option>
+                    <option value="other">Other / Not Sure</option>
+                  </select>
                 </div>
 
                 <div>
@@ -155,10 +185,9 @@ const ContactSection: React.FC = () => {
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    required
                     rows={4}
                     className="w-full px-4 py-2.5 bg-[#161B22] border border-[#30363D] rounded-lg text-[#E6EDF3] placeholder-[#8B949E] focus:outline-none focus:border-[#00D1FF] focus:ring-1 focus:ring-[#00D1FF] transition-all resize-none"
-                    placeholder="Tell us about your project or question..."
+                    placeholder="Tell us about your organization and security needs..."
                   />
                 </div>
 
@@ -166,7 +195,7 @@ const ContactSection: React.FC = () => {
                   type="submit"
                   className="w-full bg-[#2E5BFF] hover:bg-[#2E5BFF]/80 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-[#2E5BFF]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00D1FF]"
                 >
-                  Send Message
+                  Request a Proposal
                 </button>
 
                 <p className="text-[#8B949E] text-xs text-center mt-4 flex items-center justify-center">

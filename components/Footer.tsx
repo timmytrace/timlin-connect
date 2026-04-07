@@ -5,21 +5,22 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="bg-slate-800 border-t border-slate-700">
-      <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 text-center">
-        <p className="text-slate-400 text-sm">
-          &copy; {currentYear} Timlin Connect. All rights reserved.
-        </p>
-        <p className="text-xs text-slate-500 mt-1">
-          Innovate. Secure. Support.
-        </p>
-        {/* Placeholder for social media icons if needed later
-        <div className="mt-4 flex justify-center space-x-6">
-          <a href="#" className="text-slate-400 hover:text-slate-300">
-            <span className="sr-only">Facebook</span>
-            <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">...</svg>
-          </a>
+      <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="text-center md:text-left">
+            <p className="text-slate-400 text-sm">
+              &copy; {currentYear} Timlin Connect. All rights reserved.
+            </p>
+            <p className="text-xs text-slate-500 mt-1">
+              Practical Cybersecurity for Canadian Organizations.
+            </p>
+          </div>
+          <div className="flex space-x-6 text-sm">
+            <a href="#services" className="text-slate-400 hover:text-slate-300 transition-colors">Services</a>
+            <a href="#about" className="text-slate-400 hover:text-slate-300 transition-colors">About</a>
+            <a href="#contact" className="text-slate-400 hover:text-slate-300 transition-colors">Contact</a>
+          </div>
         </div>
-        */}
       </div>
     </footer>
   );

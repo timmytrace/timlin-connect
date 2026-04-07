@@ -2,7 +2,9 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import ServicesSection from './components/ServicesSection';
-import ProjectsSection from './components/ProjectsSection';
+import WhoWeHelpSection from './components/WhoWeHelpSection';
+import HowWeWorkSection from './components/HowWeWorkSection';
+import WhyChooseUsSection from './components/WhyChooseUsSection';
 import AboutSection from './components/AboutSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
@@ -15,7 +17,10 @@ const App: React.FC = () => {
       <main className="flex-grow">
         <HeroSection />
         <ServicesSection />
-        <ProjectsSection />
+        <WhoWeHelpSection />
+        <HowWeWorkSection />
+        <WhyChooseUsSection />
+        <AboutSection />
         <ContactSection />
       </main>
       <Footer />
