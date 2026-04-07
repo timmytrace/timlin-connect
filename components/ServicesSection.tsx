@@ -47,12 +47,12 @@ const services: ServiceItem[] = [
 ];
 
 const serviceImages = [
-  'https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=600&q=80',
-  'https://images.unsplash.com/photo-1563986768609-322da13575f2?auto=format&fit=crop&w=600&q=80',
-  'https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?auto=format&fit=crop&w=600&q=80',
-  'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=600&q=80',
-  'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80',
-  'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=600&q=80',
+  '/cybersecurity risk assessment.png',
+  '/Vulnerability assessment.png',
+  '/penetration testing.png',
+  '/compliance & privacy readiness.png',
+  '/virtual ciso.png',
+  '/Incident Response Planning.png',
 ];
 
 const ServicesSection: React.FC = () => {
