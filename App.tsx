@@ -8,6 +8,7 @@ import WhyChooseUsSection from './components/WhyChooseUsSection';
 import AboutSection from './components/AboutSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
+import AiAssistant from './components/AiAssistant';
 
 
 const App: React.FC = () => {
@@ -24,6 +25,7 @@ const App: React.FC = () => {
         <ContactSection />
       </main>
       <Footer />
+      <AiAssistant />
     </div>
   );
 };
