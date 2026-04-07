@@ -1,0 +1,59 @@
+body {
+    background-color: #FAFAFA;
+    color: #0B0B0B;
+    font-family: 'DM Sans', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Image placeholder */
+.img-placeholder {
+    background-color: #E5E5E5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 0.75rem;
+}
+
+.img-placeholder span {
+    color: #9CA3AF;
+    font-size: 0.875rem;
+    font-family: 'DM Sans', sans-serif;
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(0.95);
+    }
+}
+
+.pulse-animation {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* AI Assistant Chat Scrollbar */
+.ai-assistant-messages::-webkit-scrollbar {
+    width: 4px;
+}
+
+.ai-assistant-messages::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.ai-assistant-messages::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 2px;
+}
+
+.ai-assistant-messages::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.25);
+}
