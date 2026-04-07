@@ -8,8 +8,9 @@ const Navbar: React.FC = () => {
   const navLinks = [
     { href: '#home', label: 'Home' },
     { href: '#services', label: 'Services' },
-    { href: '#projects', label: 'Projects' },
-    { href: '#about', label: 'About Us' },
+    { href: '#who-we-help', label: 'Industries' },
+    { href: '#how-we-work', label: 'How We Work' },
+    { href: '#about', label: 'About' },
     { href: '#contact', label: 'Contact' },
   ];
 
@@ -54,6 +55,14 @@ const Navbar: React.FC = () => {
                   {link.label}
                 </a>
               ))}
+              <a
+                href="#contact"
+                onClick={handleNavLinkClick}
+                className="bg-[#2E5BFF] hover:bg-[#2E5BFF]/80 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-[#2E5BFF]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00D1FF]"
+                tabIndex={0}
+              >
+                Request a Consultation
+              </a>
             </div>
           </div>
           {/* Mobile menu button */}
@@ -71,7 +80,7 @@ const Navbar: React.FC = () => {
         </div>
       </div>
       {/* Mobile menu */}
-      <div className={`md:hidden transition-all duration-300 overflow-hidden ${mobileMenuOpen ? 'max-h-60 opacity-100' : 'max-h-0 opacity-0'}`} style={{background: 'rgba(11,14,20,0.98)'}}>
+      <div className={`md:hidden transition-all duration-300 overflow-hidden ${mobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`} style={{background: 'rgba(11,14,20,0.98)'}}>
         <div className="px-2 pt-2 pb-3 space-y-1">
           {navLinks.map((link) => (
             <a
@@ -84,6 +93,14 @@ const Navbar: React.FC = () => {
               {link.label}
             </a>
           ))}
+          <a
+            href="#contact"
+            onClick={handleNavLinkClick}
+            className="block text-center bg-[#2E5BFF] hover:bg-[#2E5BFF]/80 text-white px-4 py-2 rounded-lg text-base font-semibold transition-all mx-1 mt-2"
+            tabIndex={0}
+          >
+            Request a Consultation
+          </a>
         </div>
       </div>
     </nav>
