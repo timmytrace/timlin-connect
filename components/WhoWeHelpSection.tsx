@@ -1,25 +1,43 @@
 import React from 'react';
 
-const industries = [
+const industryGroups = [
   {
-    title: 'Small & Mid‑Sized Businesses',
-    description: '10–500 employees needing strong security without a full in‑house team.',
+    icon: (
+      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3H21m-3.75 3H21" />
+      </svg>
+    ),
+    industries: [
+      'Chartered Scale First',
+      'Dominant',
+      'Denomination-Sample',
+      'Dealer',
+      'Partner',
+      'Dealer',
+    ],
   },
   {
-    title: 'Professional Services Firms',
-    description: 'Legal, accounting, and consulting firms that handle sensitive client data.',
+    icon: (
+      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21" />
+      </svg>
+    ),
+    industries: [
+      'Desktop Industries',
+      'Government',
+      'Innovation',
+      'Recovery',
+      'Testing',
+      'Communications',
+    ],
   },
   {
-    title: 'Healthcare & Service Providers',
-    description: 'Clinics and healthcare organizations managing personal health information.',
-  },
-  {
-    title: 'Non‑Profits & Community Organizations',
-    description: 'Mission‑driven organizations that need security without enterprise budgets.',
-  },
-  {
-    title: 'Startups & Growing Companies',
-    description: 'Companies preparing for audits, partnerships, or scaling with security in mind.',
+    icon: (
+      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15a2.25 2.25 0 012.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" />
+      </svg>
+    ),
+    description: 'Follow-Up Support to industries business & modern process for themselves.',
   },
 ];
 
@@ -27,41 +45,39 @@ const WhoWeHelpSection: React.FC = () => {
   return (
     <section id="who-we-help" className="section bg-[#FAFAFA] py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-          {/* Left: Image placeholder */}
-          <div className="img-placeholder w-full aspect-[4/5] bg-[#E5E5E5] rounded-xl flex items-center justify-center">
-            <span className="text-[#9CA3AF] text-sm">Industries visual — People at work</span>
-          </div>
+        {/* Section header — centered */}
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#0B0B0B]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+            Who We Work With
+          </h2>
+          <p className="mt-4 text-lg text-[#6B7280]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+            Targeted industries are complete consultation constituents, customized points and credible industries.
+          </p>
+        </div>
 
-          {/* Right: Content — left-aligned */}
-          <div>
-            <span className="text-sm font-semibold text-[#A3E635] uppercase tracking-wide" style={{ fontFamily: "'DM Sans', sans-serif" }}>Who We Work With</span>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-[#0B0B0B]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-              Security for Organizations That Need It Most
-            </h2>
-            <p className="mt-4 text-lg text-[#6B7280]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              If you handle sensitive personal or business data, security is not optional—we help you get it right.
-            </p>
-            <div className="mt-8 space-y-4">
-              {industries.map((industry, idx) => (
-                <div
-                  key={idx}
-                  className="p-5 rounded-xl border border-[#E5E5E5] bg-white hover:border-[#A3E635] transition-all duration-300"
-                >
-                  <h3 className="text-base font-bold text-[#0B0B0B] mb-1" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{industry.title}</h3>
-                  <p className="text-[#6B7280] text-sm" style={{ fontFamily: "'DM Sans', sans-serif" }}>{industry.description}</p>
-                </div>
-              ))}
+        {/* Industry groups */}
+        <div className="grid md:grid-cols-3 gap-8">
+          {industryGroups.map((group, idx) => (
+            <div key={idx} className="text-center">
+              <div className="w-14 h-14 mx-auto mb-5 rounded-xl bg-[#F0F0F0] flex items-center justify-center text-[#0B0B0B]">
+                {group.icon}
+              </div>
+              {group.industries ? (
+                <ul className="space-y-1.5">
+                  {group.industries.map((industry, i) => (
+                    <li key={i} className="flex items-center justify-center text-[#6B7280] text-sm" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#0B0B0B] mr-2 flex-shrink-0"></span>
+                      {industry}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-[#6B7280] text-sm" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                  {group.description}
+                </p>
+              )}
             </div>
-            <div className="mt-8">
-              <a
-                href="#services"
-                className="inline-block bg-[#0B0B0B] hover:bg-[#0B0B0B]/85 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-300 text-base focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A3E635]"
-              >
-                See Our Services
-              </a>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

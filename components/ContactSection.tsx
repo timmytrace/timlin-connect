@@ -24,67 +24,30 @@ const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="section bg-[#FAFAFA] py-16 sm:py-24">
+    <section id="contact" className="section bg-[#0B0B0B] py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
-          {/* Left Side — Header + Contact Info + Image */}
-          <div>
-            <span className="text-sm font-semibold text-[#A3E635] uppercase tracking-wide" style={{ fontFamily: "'DM Sans', sans-serif" }}>Get Started</span>
-            <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0B0B0B]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-              Contact Us
-            </h2>
-            <p className="mt-4 text-lg text-[#6B7280]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              Whether you need a one‑time assessment or ongoing security support, we'll help you move forward with clarity and confidence.
-            </p>
-
-            {/* Image placeholder */}
-            <div className="img-placeholder w-full aspect-[16/10] bg-[#E5E5E5] rounded-xl flex items-center justify-center mt-8 mb-8">
-              <span className="text-[#9CA3AF] text-sm">Contact visual — Office or meeting photo</span>
-            </div>
-
-            <div className="space-y-4">
-              {/* Email */}
-              <div>
-                <p className="text-sm font-semibold text-[#0B0B0B] mb-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>Email</p>
-                <a href="mailto:info@timlinconnect.com" className="text-[#6B7280] hover:text-[#0B0B0B] transition-colors" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                  info@timlinconnect.com
-                </a>
-              </div>
-
-              {/* Phone */}
-              <div>
-                <p className="text-sm font-semibold text-[#0B0B0B] mb-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>Phone</p>
-                <a href="tel:+14372630314" className="text-[#6B7280] hover:text-[#0B0B0B] transition-colors" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                  +1 (437) 263-0314
-                </a>
-              </div>
-
-              {/* Location */}
-              <div>
-                <p className="text-sm font-semibold text-[#0B0B0B] mb-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>Location</p>
-                <p className="text-[#6B7280] text-sm" style={{ fontFamily: "'DM Sans', sans-serif" }}>Canada‑Based</p>
-              </div>
-
-              {/* Hours */}
-              <div className="pt-4 border-t border-[#E5E5E5]">
-                <p className="text-sm font-semibold text-[#0B0B0B] mb-2" style={{ fontFamily: "'DM Sans', sans-serif" }}>Hours of Operation</p>
-                <p className="text-[#6B7280] text-sm" style={{ fontFamily: "'DM Sans', sans-serif" }}>Monday – Friday: 9:00 AM – 6:00 PM EST</p>
-                <p className="text-[#6B7280] text-sm" style={{ fontFamily: "'DM Sans', sans-serif" }}>Saturday – Sunday: Emergency Support Only</p>
-              </div>
-
-              {/* Status */}
-              <div className="flex items-center space-x-2 pt-2">
-                <div className="w-2.5 h-2.5 rounded-full bg-[#A3E635] pulse-animation"></div>
-                <span className="text-[#0B0B0B] text-sm font-medium" style={{ fontFamily: "'DM Sans', sans-serif" }}>Available Now</span>
-              </div>
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          {/* Left Side — Image */}
+          <div className="hidden lg:block">
+            <div className="w-full aspect-[3/4] rounded-xl overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80"
+                alt="Team meeting"
+                className="w-full h-full object-cover grayscale opacity-60"
+                loading="lazy"
+              />
             </div>
           </div>
 
           {/* Right Side - Contact Form */}
-          <div className="bg-white rounded-xl border border-[#E5E5E5] p-8">
+          <div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-8" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+              Contact Us
+            </h2>
+
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label htmlFor="name" className="block text-[#0B0B0B] text-sm font-semibold mb-2" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                <label htmlFor="name" className="block text-white/70 text-sm font-medium mb-2" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                   Name
                 </label>
                 <input
@@ -94,14 +57,14 @@ const ContactSection: React.FC = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-[#FAFAFA] border border-[#E5E5E5] rounded-lg text-[#0B0B0B] placeholder-[#9CA3AF] focus:outline-none focus:border-[#A3E635] focus:ring-1 focus:ring-[#A3E635] transition-all"
+                  className="w-full px-4 py-3 bg-white border border-white/20 rounded-lg text-[#0B0B0B] placeholder-[#9CA3AF] focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all"
                   placeholder="Your name"
                   style={{ fontFamily: "'DM Sans', sans-serif" }}
                 />
               </div>
 
               <div>
-                <label htmlFor="organization" className="block text-[#0B0B0B] text-sm font-semibold mb-2" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                <label htmlFor="organization" className="block text-white/70 text-sm font-medium mb-2" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                   Organization
                 </label>
                 <input
@@ -110,14 +73,14 @@ const ContactSection: React.FC = () => {
                   name="organization"
                   value={formData.organization}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-[#FAFAFA] border border-[#E5E5E5] rounded-lg text-[#0B0B0B] placeholder-[#9CA3AF] focus:outline-none focus:border-[#A3E635] focus:ring-1 focus:ring-[#A3E635] transition-all"
+                  className="w-full px-4 py-3 bg-white border border-white/20 rounded-lg text-[#0B0B0B] placeholder-[#9CA3AF] focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all"
                   placeholder="Your organization"
                   style={{ fontFamily: "'DM Sans', sans-serif" }}
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-[#0B0B0B] text-sm font-semibold mb-2" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                <label htmlFor="email" className="block text-white/70 text-sm font-medium mb-2" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                   Email
                 </label>
                 <input
@@ -127,25 +90,25 @@ const ContactSection: React.FC = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-[#FAFAFA] border border-[#E5E5E5] rounded-lg text-[#0B0B0B] placeholder-[#9CA3AF] focus:outline-none focus:border-[#A3E635] focus:ring-1 focus:ring-[#A3E635] transition-all"
+                  className="w-full px-4 py-3 bg-white border border-white/20 rounded-lg text-[#0B0B0B] placeholder-[#9CA3AF] focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all"
                   placeholder="your.email@example.com"
                   style={{ fontFamily: "'DM Sans', sans-serif" }}
                 />
               </div>
 
               <div>
-                <label htmlFor="helpWith" className="block text-[#0B0B0B] text-sm font-semibold mb-2" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                  What can we help with?
+                <label htmlFor="helpWith" className="block text-white/70 text-sm font-medium mb-2" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                  Service
                 </label>
                 <select
                   id="helpWith"
                   name="helpWith"
                   value={formData.helpWith}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-[#FAFAFA] border border-[#E5E5E5] rounded-lg text-[#0B0B0B] focus:outline-none focus:border-[#A3E635] focus:ring-1 focus:ring-[#A3E635] transition-all"
+                  className="w-full px-4 py-3 bg-white border border-white/20 rounded-lg text-[#0B0B0B] focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all"
                   style={{ fontFamily: "'DM Sans', sans-serif" }}
                 >
-                  <option value="">Select a service...</option>
+                  <option value="">Select a service</option>
                   <option value="risk-assessment">Cybersecurity Risk Assessment</option>
                   <option value="vulnerability">Vulnerability Assessment</option>
                   <option value="pentest">Penetration Testing</option>
@@ -157,7 +120,7 @@ const ContactSection: React.FC = () => {
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-[#0B0B0B] text-sm font-semibold mb-2" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                <label htmlFor="message" className="block text-white/70 text-sm font-medium mb-2" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                   Message
                 </label>
                 <textarea
@@ -166,7 +129,7 @@ const ContactSection: React.FC = () => {
                   value={formData.message}
                   onChange={handleChange}
                   rows={4}
-                  className="w-full px-4 py-3 bg-[#FAFAFA] border border-[#E5E5E5] rounded-lg text-[#0B0B0B] placeholder-[#9CA3AF] focus:outline-none focus:border-[#A3E635] focus:ring-1 focus:ring-[#A3E635] transition-all resize-none"
+                  className="w-full px-4 py-3 bg-white border border-white/20 rounded-lg text-[#0B0B0B] placeholder-[#9CA3AF] focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all resize-none"
                   placeholder="Tell us about your organization and security needs..."
                   style={{ fontFamily: "'DM Sans', sans-serif" }}
                 />
@@ -174,15 +137,11 @@ const ContactSection: React.FC = () => {
 
               <button
                 type="submit"
-                className="w-full bg-[#0B0B0B] hover:bg-[#0B0B0B]/85 text-white font-semibold px-6 py-3.5 rounded-lg transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A3E635]"
+                className="w-full bg-white hover:bg-white/90 text-[#0B0B0B] font-semibold px-6 py-3.5 rounded-lg transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
                 Request a Proposal
               </button>
-
-              <p className="text-[#9CA3AF] text-xs text-center mt-4" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                No obligation. We'll respond within one business day.
-              </p>
             </form>
           </div>
         </div>
