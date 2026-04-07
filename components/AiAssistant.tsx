@@ -106,7 +106,8 @@ const AiAssistant: React.FC = () => {
       };
 
       setMessages((prev) => [...prev, assistantMessage]);
-    } catch {
+    } catch (error) {
+      console.error('AI Assistant error:', error);
       const errorMessage: ChatMessage = {
         id: `error-${Date.now()}`,
         role: 'assistant',
