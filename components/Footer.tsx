@@ -4,8 +4,8 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#0B0B0B] border-t border-[#E5E5E5]/10">
-      <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+    <footer className="bg-[#0B0B0B] border-t border-white/10">
+      <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <div>
             <p className="text-white/60 text-sm" style={{ fontFamily: "'DM Sans', sans-serif" }}>
