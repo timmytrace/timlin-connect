@@ -1,6 +1,8 @@
 import React from 'react';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const WhyChooseUsSection: React.FC = () => {
+  const gridRef = useScrollAnimation();
   return (
     <section id="why-us" className="section bg-[#FAFAFA] py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -12,7 +14,7 @@ const WhyChooseUsSection: React.FC = () => {
         </div>
 
         {/* Three column layout */}
-        <div className="grid md:grid-cols-3 gap-10">
+        <div ref={gridRef} className="stagger-children grid md:grid-cols-3 gap-10">
           {/* Why Choose Us */}
           <div>
             <h3 className="text-xl font-bold text-[#0B0B0B] mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>

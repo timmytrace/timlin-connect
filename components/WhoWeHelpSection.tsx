@@ -1,4 +1,5 @@
 import React from 'react';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const industryGroups = [
   {
@@ -42,6 +43,7 @@ const industryGroups = [
 ];
 
 const WhoWeHelpSection: React.FC = () => {
+  const gridRef = useScrollAnimation();
   return (
     <section id="who-we-help" className="section bg-[#FAFAFA] py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -56,7 +58,7 @@ const WhoWeHelpSection: React.FC = () => {
         </div>
 
         {/* Industry groups */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <div ref={gridRef} className="stagger-children grid md:grid-cols-3 gap-8">
           {industryGroups.map((group, idx) => (
             <div key={idx} className="text-center">
               <div className="w-14 h-14 mx-auto mb-5 rounded-xl bg-[#F0F0F0] flex items-center justify-center text-[#0B0B0B]">

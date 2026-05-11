@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+// Sign up at https://formspree.io, create a form, and paste your form ID below.
+const FORMSPREE_FORM_ID = 'YOUR_FORMSPREE_FORM_ID';
+
 const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -8,6 +11,7 @@ const ContactSection: React.FC = () => {
     helpWith: '',
     message: ''
   });
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -16,11 +20,24 @@ const ContactSection: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! We will respond within one business day.');
-    setFormData({ name: '', organization: '', email: '', helpWith: '', message: '' });
+    setStatus('loading');
+    try {
+      const response = await fetch(`https://formspree.io/f/${FORMSPREE_FORM_ID}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      if (response.ok) {
+        setStatus('success');
+        setFormData({ name: '', organization: '', email: '', helpWith: '', message: '' });
+      } else {
+        setStatus('error');
+      }
+    } catch {
+      setStatus('error');
+    }
   };
 
   return (
@@ -137,11 +154,24 @@ const ContactSection: React.FC = () => {
 
               <button
                 type="submit"
-                className="w-full bg-white hover:bg-white/90 text-[#0B0B0B] font-semibold px-6 py-3.5 rounded-lg transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                disabled={status === 'loading'}
+                className="w-full bg-white hover:bg-white/90 disabled:opacity-60 disabled:cursor-not-allowed text-[#0B0B0B] font-semibold px-6 py-3.5 rounded-lg transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
-                Request a Proposal
+                {status === 'loading' ? 'Sending…' : 'Request a Proposal'}
               </button>
+
+              {status === 'success' && (
+                <p className="text-[#A3E635] text-sm text-center pt-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                  Thank you! We'll be in touch within one business day.
+                </p>
+              )}
+              {status === 'error' && (
+                <p className="text-red-400 text-sm text-center pt-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                  Something went wrong. Please email us at{' '}
+                  <a href="mailto:info@timlinconnect.com" className="underline">info@timlinconnect.com</a>.
+                </p>
+              )}
             </form>
           </div>
         </div>

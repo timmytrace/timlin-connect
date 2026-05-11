@@ -31,7 +31,9 @@ const HeroSection: React.FC = () => {
       {/* Background image overlay */}
       <div className="absolute inset-0 z-0">
         <div className="w-full h-full bg-[#1a1a1a]" style={{
-          backgroundImage: 'url("https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1920&q=80")',
+          // Download this image and save to public/hero-bg.jpg:
+          // https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1920&q=80
+          backgroundImage: 'url("/hero-bg.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           filter: 'grayscale(100%) brightness(0.4)',
@@ -43,10 +45,10 @@ const HeroSection: React.FC = () => {
         <div className="max-w-7xl mx-auto w-full">
           <div className="max-w-2xl">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] text-white" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-              Cybersecurity for<br />Canadian organizations.
+              Protect what<br />you've built.
             </h1>
             <p className="mt-6 text-lg sm:text-xl text-white/70 max-w-xl leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              Practical security guidance that actually works. Risk assessments, compliance support, and advisory services tailored to Canada's privacy and regulatory landscape. Clear guidance without unnecessary complexity.
+              Practical security guidance that actually works. Risk assessments, compliance support, and advisory services aligned with privacy laws and recognized frameworks. Clear guidance without unnecessary complexity.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
               <a

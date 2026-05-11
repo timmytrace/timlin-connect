@@ -1,4 +1,5 @@
 import React from 'react';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const steps = [
   {
@@ -65,6 +66,7 @@ const steps = [
 ];
 
 const HowWeWorkSection: React.FC = () => {
+  const gridRef = useScrollAnimation();
   return (
     <section id="how-we-work" className="section bg-white py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -76,7 +78,7 @@ const HowWeWorkSection: React.FC = () => {
         </div>
 
         {/* Steps grid */}
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div ref={gridRef} className="stagger-children grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {steps.map((step) => (
             <div
               key={step.number}
