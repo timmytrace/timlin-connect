@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
                 &copy; {currentYear} Timlin Connect. All rights reserved.
               </p>
               <p className="text-white/40 text-xs mt-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                Practical Cybersecurity for Canadian Organizations.
+                Practical Cybersecurity for Organizations Worldwide.
               </p>
             </div>
           </div>

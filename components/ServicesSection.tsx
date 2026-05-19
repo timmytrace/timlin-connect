@@ -27,8 +27,8 @@ const services: ServiceItem[] = [
   {
     id: 'compliance',
     title: 'Compliance & Privacy Readiness',
-    description: 'Align your security controls with Canadian privacy laws and recognized compliance standards.',
-    includes: ['Gap analysis against PIPEDA / PHIPA / SOC 2', 'Policy & procedure review', 'Compliance roadmap', 'Board-ready reporting'],
+    description: 'Align your security controls with globally recognized privacy laws and compliance standards.',
+    includes: ['Gap analysis against SOC 2 / ISO 27001 / GDPR / CCPA / HIPAA', 'Policy & procedure review', 'Compliance roadmap', 'Board-ready reporting'],
     bestFor: 'Organizations preparing for audits or regulatory reviews',
   },
   {

@@ -48,7 +48,7 @@ const HeroSection: React.FC = () => {
               Protect what<br />you've built.
             </h1>
             <p className="mt-6 text-lg sm:text-xl text-white/70 max-w-xl leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              Practical security guidance that actually works. Risk assessments, compliance support, and advisory services aligned with privacy laws and recognized frameworks. Clear guidance without unnecessary complexity.
+              Practical security guidance built for organizations that operate across borders. Risk assessments, compliance support, and advisory services aligned with ISO 27001, SOC 2, NIST, and global privacy regulations. Clear guidance without unnecessary complexity.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
               <a
@@ -76,7 +76,7 @@ const HeroSection: React.FC = () => {
           <div className="flex flex-wrap justify-start gap-8 sm:gap-12">
             <div className="flex items-center gap-2.5 text-white/70">
               <ShieldIcon />
-              <span className="text-sm font-medium">PIPEDA‑Aligned</span>
+              <span className="text-sm font-medium">SOC 2 / ISO 27001</span>
             </div>
             <div className="flex items-center gap-2.5 text-white/70">
               <GlobeIcon />
@@ -87,8 +87,8 @@ const HeroSection: React.FC = () => {
               <span className="text-sm font-medium">Vendor‑Neutral</span>
             </div>
             <div className="flex items-center gap-2.5 text-white/70">
-              <MapPinIcon />
-              <span className="text-sm font-medium">Serving Canada</span>
+              <GlobeIcon />
+              <span className="text-sm font-medium">Global Delivery</span>
             </div>
           </div>
         </div>

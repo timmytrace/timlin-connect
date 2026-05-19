@@ -15,10 +15,10 @@ const AboutSection: React.FC = () => {
           {/* Left: Content */}
           <div>
             <p className="text-lg text-[#6B7280] leading-relaxed mb-6" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              Our mission is to help Canadian organizations navigate cybersecurity with clarity and confidence, guided by experienced professionals in cybersecurity and regulatory compliance.
+              Our mission is to help growing organizations navigate international cybersecurity and regulatory landscapes with clarity and confidence, guided by experienced professionals in cybersecurity and compliance.
             </p>
             <p className="text-lg text-[#6B7280] leading-relaxed mb-6" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              We are experienced cybersecurity professionals with advanced tools and methodologies, helping organizations mitigate risk across Canada's privacy and regulatory landscape. Clear guidance without unnecessary complexity.
+              We are experienced cybersecurity professionals with advanced tools and methodologies, helping organizations mitigate risk across complex, cross-border security and regulatory landscapes. Clear guidance without unnecessary complexity.
             </p>
 
             <ul className="space-y-2 mt-6">
