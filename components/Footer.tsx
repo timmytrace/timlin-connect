@@ -2,6 +2,7 @@ import React from 'react';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
+  const isHomeRoute = window.location.pathname === '/';
 
   return (
     <footer className="bg-[#0B0B0B] border-t border-white/10">
@@ -16,12 +17,16 @@ const Footer: React.FC = () => {
               <p className="text-white/40 text-xs mt-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                 Practical Cybersecurity for Organizations Worldwide.
               </p>
+              <p className="text-white/40 text-xs mt-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                MagNum AI is currently in development. Early access coming soon.
+              </p>
             </div>
           </div>
           <div className="flex space-x-6 text-sm">
-            <a href="#services" className="text-white/60 hover:text-white transition-colors" style={{ fontFamily: "'DM Sans', sans-serif" }}>Services</a>
-            <a href="#about" className="text-white/60 hover:text-white transition-colors" style={{ fontFamily: "'DM Sans', sans-serif" }}>About</a>
-            <a href="#contact" className="text-white/60 hover:text-white transition-colors" style={{ fontFamily: "'DM Sans', sans-serif" }}>Contact</a>
+            <a href={isHomeRoute ? '#services' : '/#services'} className="text-white/60 hover:text-white transition-colors" style={{ fontFamily: "'DM Sans', sans-serif" }}>Services</a>
+            <a href="/magnum-ai" className="text-white/60 hover:text-white transition-colors" style={{ fontFamily: "'DM Sans', sans-serif" }}>MagNum AI</a>
+            <a href={isHomeRoute ? '#about' : '/#about'} className="text-white/60 hover:text-white transition-colors" style={{ fontFamily: "'DM Sans', sans-serif" }}>About</a>
+            <a href={isHomeRoute ? '#contact' : '/#contact'} className="text-white/60 hover:text-white transition-colors" style={{ fontFamily: "'DM Sans', sans-serif" }}>Contact</a>
           </div>
         </div>
       </div>
