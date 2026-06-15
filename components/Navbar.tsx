@@ -14,6 +14,7 @@ const Navbar: React.FC = () => {
     { href: isHomeRoute ? '#who-we-help' : '/#who-we-help', label: 'Industries' },
     { href: isHomeRoute ? '#how-we-work' : '/#how-we-work', label: 'How We Work' },
     { href: isHomeRoute ? '#about' : '/#about', label: 'About' },
+    { href: isHomeRoute ? '#contact' : '/#contact', label: 'Contact' },
   ];
 
   useEffect(() => {
@@ -42,7 +43,7 @@ const Navbar: React.FC = () => {
               </span>
             </a>
           </div>
-          <div className="hidden lg:flex items-center gap-2">
+          <div className="hidden xl:flex items-center gap-2">
             <div className="flex items-center gap-1 whitespace-nowrap">
               {navLinks.map((link) => (
                 <a
@@ -80,7 +81,7 @@ const Navbar: React.FC = () => {
               </a>
             </div>
           </div>
-          <div className="lg:hidden flex items-center">
+          <div className="xl:hidden flex items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className={`inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A3E635] transition-all ${navIsSolid ? 'text-[#0B0B0B] hover:bg-[#F0F0F0]' : 'text-white hover:bg-white/10'}`}
@@ -95,7 +96,7 @@ const Navbar: React.FC = () => {
           </div>
         </div>
       </div>
-      <div id="mobile-navigation" className={`lg:hidden transition-all duration-300 overflow-hidden ${mobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`} style={{background: navIsSolid ? 'rgba(250,250,250,0.98)' : 'rgba(11,11,11,0.95)'}}>
+      <div id="mobile-navigation" className={`xl:hidden transition-all duration-300 overflow-hidden ${mobileMenuOpen ? 'max-h-[28rem] opacity-100' : 'max-h-0 opacity-0'}`} style={{background: navIsSolid ? 'rgba(250,250,250,0.98)' : 'rgba(11,11,11,0.95)'}}>
         <div className="px-4 pt-2 pb-4 space-y-1">
           {navLinks.map((link) => (
             <a
