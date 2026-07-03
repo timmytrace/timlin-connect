@@ -99,6 +99,57 @@ const MagnumAIPage: React.FC = () => {
           </article>
 
           <article className="rounded-xl border border-[#E5E7EB] bg-white p-6 sm:p-7 lg:col-span-2">
+            <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-8 items-center">
+              <div>
+                <p
+                  className="inline-flex items-center rounded-full border border-[#D1D5DB] bg-[#F9FAFB] px-3 py-1 text-xs font-semibold tracking-wide text-[#374151]"
+                  style={{ fontFamily: "'DM Sans', sans-serif" }}
+                >
+                  Demo Preview
+                </p>
+                <h3 className="mt-4 text-2xl font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                  Product Demo Placeholder
+                </h3>
+                <p className="mt-4 text-[#4B5563] leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                  Use this area to showcase a walkthrough video, product screenshots, dashboard
+                  mockups, or a short animated demo once MagNum AI visuals are ready.
+                </p>
+                <ul className="mt-5 space-y-2 text-sm text-[#374151]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                  <li className="flex gap-2">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#A3E635]" />
+                    Video thumbnail or embedded demo
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#A3E635]" />
+                    Product screenshots or interface mockups
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#A3E635]" />
+                    Before-and-after security workflow visuals
+                  </li>
+                </ul>
+              </div>
+
+              <div className="rounded-2xl border border-[#D1D5DB] bg-[#0B0B0B] p-4 shadow-sm">
+                <div className="aspect-video rounded-xl border border-white/10 bg-gradient-to-br from-white/12 via-white/5 to-[#A3E635]/20 flex items-center justify-center text-center">
+                  <div>
+                    <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-white text-[#0B0B0B] shadow-lg">
+                      <svg className="h-7 w-7 translate-x-0.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M8 5v14l11-7L8 5z" />
+                      </svg>
+                    </div>
+                    <p className="mt-5 text-lg font-semibold text-white" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                      Demo video / image placeholder
+                    </p>
+                    <p className="mt-2 text-sm text-white/65" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                      Replace this card with your product media when ready.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article className="rounded-xl border border-[#E5E7EB] bg-white p-6 sm:p-7 lg:col-span-2">
             <h3 className="text-2xl font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
               How MagNum AI Is Designed to Work
             </h3>
