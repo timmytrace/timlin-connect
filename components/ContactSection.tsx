@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 
-// Sign up at https://formspree.io, create a form, and paste your form ID below.
-const FORMSPREE_FORM_ID = 'YOUR_FORMSPREE_FORM_ID';
-
 const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -20,14 +17,19 @@ const ContactSection: React.FC = () => {
     });
   };
 
+  const encode = (data: Record<string, string>) =>
+    Object.entries(data)
+      .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
+      .join('&');
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('loading');
     try {
-      const response = await fetch(`https://formspree.io/f/${FORMSPREE_FORM_ID}`, {
+      const response = await fetch('/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(formData),
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encode({ 'form-name': 'contact', ...formData }),
       });
       if (response.ok) {
         setStatus('success');
@@ -62,7 +64,8 @@ const ContactSection: React.FC = () => {
               Contact Us
             </h2>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form name="contact" data-netlify="true" onSubmit={handleSubmit} className="space-y-5">
+              <input type="hidden" name="form-name" value="contact" />
               <div>
                 <label htmlFor="name" className="block text-white/70 text-sm font-medium mb-2" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                   Name

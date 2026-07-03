@@ -59,6 +59,15 @@
 </script>
 </head>
 <body>
+  <!-- Netlify Forms bot detection (hidden, required for SPA) -->
+  <form name="contact" netlify hidden>
+    <input type="text" name="name" />
+    <input type="text" name="organization" />
+    <input type="email" name="email" />
+    <select name="helpWith"></select>
+    <textarea name="message"></textarea>
+  </form>
+
   <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>
