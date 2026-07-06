@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const plannedCapabilities = [
   'Prompt Injection Detection',
@@ -9,7 +9,52 @@ const plannedCapabilities = [
   'Shadow Mode Testing',
 ];
 
+const demoScreenshots = [
+  {
+    id: 'dashboard',
+    label: 'Dashboard',
+    title: 'Security Overview Dashboard',
+    description: 'Real-time gateway monitoring with threat counts, risk score, activity charts, and security posture.',
+    src: '/magnumai-demo/dashboard-overview.png',
+    alt: 'MagNum AI security overview dashboard with threat metrics and charts',
+  },
+  {
+    id: 'logs',
+    label: 'Logs',
+    title: 'Interaction Logs',
+    description: 'Review model interactions by status, risk level, detection type, API key, and risk score.',
+    src: '/magnumai-demo/interaction-logs.png',
+    alt: 'MagNum AI interaction logs table showing allowed, flagged, blocked, and sanitized requests',
+  },
+  {
+    id: 'blocked',
+    label: 'Blocked',
+    title: 'Blocked Requests',
+    description: 'See prompt injection and jailbreak attempts stopped by the AI security gateway.',
+    src: '/magnumai-demo/blocked-requests.png',
+    alt: 'MagNum AI blocked requests table listing high risk prompt injection attempts',
+  },
+  {
+    id: 'analytics',
+    label: 'Analytics',
+    title: 'Risk Analytics',
+    description: 'Track risk distribution, threat patterns, block rate, latency, and detection performance.',
+    src: '/magnumai-demo/risk-analytics.png',
+    alt: 'MagNum AI risk analytics dashboard with charts and detection benchmark cards',
+  },
+  {
+    id: 'policies',
+    label: 'Policies',
+    title: 'Security Policies',
+    description: 'Configure gateway rules for blocking, sanitization, PII redaction, and tool-call controls.',
+    src: '/magnumai-demo/security-policies.png',
+    alt: 'MagNum AI security policies page listing active gateway policies',
+  },
+];
+
 const MagnumAIPage: React.FC = () => {
+  const [selectedDemo, setSelectedDemo] = useState(demoScreenshots[0]);
+
   return (
     <main className="flex-grow bg-[#FAFAFA] text-[#0B0B0B] pt-24 sm:pt-28 pb-16 sm:pb-24">
       <section className="px-4 sm:px-6 lg:px-8">
@@ -99,54 +144,83 @@ const MagnumAIPage: React.FC = () => {
           </article>
 
           <article className="rounded-xl border border-[#E5E7EB] bg-white p-6 sm:p-7 lg:col-span-2">
-            <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-8 items-center">
-              <div>
+            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-5">
+              <div className="max-w-3xl">
                 <p
                   className="inline-flex items-center rounded-full border border-[#D1D5DB] bg-[#F9FAFB] px-3 py-1 text-xs font-semibold tracking-wide text-[#374151]"
                   style={{ fontFamily: "'DM Sans', sans-serif" }}
                 >
-                  Demo Preview
+                  Product Preview
                 </p>
                 <h3 className="mt-4 text-2xl font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                  Product Demo Placeholder
+                  See MagNum AI in Action
                 </h3>
                 <p className="mt-4 text-[#4B5563] leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                  Use this area to showcase a walkthrough video, product screenshots, dashboard
-                  mockups, or a short animated demo once MagNum AI visuals are ready.
+                  Explore screenshots from the MagNum AI security platform, including gateway monitoring,
+                  request review, blocked threats, risk analytics, and policy controls.
                 </p>
-                <ul className="mt-5 space-y-2 text-sm text-[#374151]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                  <li className="flex gap-2">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#A3E635]" />
-                    Video thumbnail or embedded demo
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#A3E635]" />
-                    Product screenshots or interface mockups
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#A3E635]" />
-                    Before-and-after security workflow visuals
-                  </li>
-                </ul>
               </div>
+              <p className="text-sm text-[#6B7280]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                Showing: <span className="font-semibold text-[#0B0B0B]">{selectedDemo.title}</span>
+              </p>
+            </div>
 
-              <div className="rounded-2xl border border-[#D1D5DB] bg-[#0B0B0B] p-4 shadow-sm">
-                <div className="aspect-video rounded-xl border border-white/10 bg-gradient-to-br from-white/12 via-white/5 to-[#A3E635]/20 flex items-center justify-center text-center">
-                  <div>
-                    <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-white text-[#0B0B0B] shadow-lg">
-                      <svg className="h-7 w-7 translate-x-0.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                        <path d="M8 5v14l11-7L8 5z" />
-                      </svg>
-                    </div>
-                    <p className="mt-5 text-lg font-semibold text-white" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                      Demo video / image placeholder
-                    </p>
-                    <p className="mt-2 text-sm text-white/65" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                      Replace this card with your product media when ready.
-                    </p>
-                  </div>
+            <div className="mt-7 rounded-2xl border border-[#111827] bg-[#0B0B0B] p-3 sm:p-4 shadow-xl">
+              <div className="overflow-hidden rounded-xl border border-white/10 bg-[#050A12]">
+                <div className="aspect-[4/3]">
+                  <img
+                    src={selectedDemo.src}
+                    alt={selectedDemo.alt}
+                    className="h-full w-full object-contain"
+                    loading="lazy"
+                  />
                 </div>
               </div>
+              <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-1">
+                <div>
+                  <p className="text-lg font-semibold text-white" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                    {selectedDemo.title}
+                  </p>
+                  <p className="mt-1 text-sm text-white/65" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    {selectedDemo.description}
+                  </p>
+                </div>
+                <span className="inline-flex w-fit rounded-full border border-[#A3E635]/30 bg-[#A3E635]/10 px-3 py-1 text-xs font-semibold text-[#A3E635]">
+                  Live demo visuals
+                </span>
+              </div>
+            </div>
+
+            <div className="mt-5 grid grid-cols-2 md:grid-cols-5 gap-3">
+              {demoScreenshots.map((screenshot) => {
+                const isSelected = screenshot.id === selectedDemo.id;
+
+                return (
+                  <button
+                    key={screenshot.id}
+                    type="button"
+                    onClick={() => setSelectedDemo(screenshot)}
+                    aria-pressed={isSelected}
+                    className={`group rounded-xl border p-2 text-left transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A3E635] ${
+                      isSelected
+                        ? 'border-[#0B0B0B] bg-[#0B0B0B] text-white shadow-md'
+                        : 'border-[#E5E7EB] bg-[#F9FAFB] text-[#374151] hover:border-[#0B0B0B]/30'
+                    }`}
+                  >
+                    <span className="block overflow-hidden rounded-lg border border-black/10 bg-[#0B0B0B]">
+                      <img
+                        src={screenshot.src}
+                        alt=""
+                        className="aspect-video w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                    </span>
+                    <span className="mt-2 block text-sm font-semibold" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                      {screenshot.label}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
           </article>
           <article className="rounded-xl border border-[#E5E7EB] bg-white p-6 sm:p-7 lg:col-span-2">
