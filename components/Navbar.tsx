@@ -7,7 +7,7 @@ const Navbar: React.FC = () => {
   const pathname = window.location.pathname;
   const isHomeRoute = pathname === '/' || pathname === '/index.html';
   const isMagnumRoute = pathname === '/magnum-ai' || pathname === '/products/magnum-ai';
-  const isBlogRoute = pathname === '/blog';
+  const isBlogRoute = pathname === '/blog' || pathname.startsWith('/blog/');
   // Routes whose page starts with a dark hero can carry a transparent navbar until scroll.
   const hasDarkHero = isHomeRoute || isBlogRoute;
   const navIsSolid = !hasDarkHero || isScrolled;
