@@ -10,6 +10,10 @@
     {
       "source": "/products/magnum-ai",
       "destination": "/index.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/index.html"
     }
   ]
 }

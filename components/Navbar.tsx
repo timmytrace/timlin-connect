@@ -7,12 +7,16 @@ const Navbar: React.FC = () => {
   const pathname = window.location.pathname;
   const isHomeRoute = pathname === '/' || pathname === '/index.html';
   const isMagnumRoute = pathname === '/magnum-ai' || pathname === '/products/magnum-ai';
-  const navIsSolid = !isHomeRoute || isScrolled;
+  const isBlogRoute = pathname === '/blog';
+  // Routes whose page starts with a dark hero can carry a transparent navbar until scroll.
+  const hasDarkHero = isHomeRoute || isBlogRoute;
+  const navIsSolid = !hasDarkHero || isScrolled;
 
   const navLinks = [
     { href: isHomeRoute ? '#services' : '/#services', label: 'Services' },
     { href: isHomeRoute ? '#who-we-help' : '/#who-we-help', label: 'Industries' },
     { href: isHomeRoute ? '#how-we-work' : '/#how-we-work', label: 'How We Work' },
+    { href: '/blog', label: 'Blog' },
     { href: isHomeRoute ? '#about' : '/#about', label: 'About' },
     { href: isHomeRoute ? '#contact' : '/#contact', label: 'Contact' },
   ];
