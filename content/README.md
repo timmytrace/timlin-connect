@@ -52,11 +52,22 @@ The renderer (`content/Markdown.tsx`) deliberately supports a small, safe subset
 - Paragraphs separated by a blank line
 - `##`, `###`, `####` headings
 - `-` bulleted lists and `1.` numbered lists
-- `> ` blockquotes
+- `> ` pull quotes
+- `![alt](/path.png "Optional caption")` on its own line — renders as a captioned figure
 - `**bold**`, `*italic*`, `` `code` ``, `[links](https://example.com)`
-- `---` horizontal rules
+- `---` section breaks
 
 Raw HTML is **not** rendered — it will appear as literal text. This is intentional: post content can never inject markup into the page.
+
+### Reading experience
+
+Body copy is set in Source Serif 4 at long-form reading size in a ~680px column, which is the layout most long-form publications converge on. A few things follow from that:
+
+- **Use `##` headings.** Two or more headings automatically produce a sticky contents rail beside the article on wide screens, with the current section highlighted as you scroll. Fewer than two and the rail is hidden.
+- **Break up long stretches with figures and pull quotes.** Both are styled to sit wider and looser than the body text.
+- **Image paths may contain spaces and `&`** — several files in `public/` do, and the renderer handles them.
+
+Headings get anchor IDs derived from their text, so `## Scoping the test` is linkable at `/blog/your-post#scoping-the-test`. Renaming a heading changes that anchor.
 
 ## What happens automatically
 

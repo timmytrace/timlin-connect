@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import Markdown from '../content/Markdown';
+import Markdown, { extractHeadings, Heading } from '../content/Markdown';
 import { BlogPost, categories, getPostBySlug, posts } from '../content/posts';
 
 const HEADING = "'Space Grotesk', sans-serif";
@@ -48,16 +48,10 @@ const blogStyles = `
   transition: background-size 400ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 .tc-card:hover .tc-underline { background-size: 100% 2px; }
-.tc-article-body > p:first-of-type::first-letter {
-  float: left;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 3.6rem;
-  line-height: 0.82;
-  font-weight: 700;
-  padding: 0.32rem 0.7rem 0 0;
-  color: #0B0B0B;
-}
-.tc-article-body > * + * { margin-top: 1.5rem; }
+/* Long-form reading column: the first paragraph leads without an indent, and
+   the serif sizing is handled by the Markdown renderer itself. */
+.tc-article-body > p:first-of-type { margin-top: 0; }
+.tc-toc-link { transition: color 200ms ease, border-color 200ms ease; }
 
 /* Staggered reveal for the card grid.
    Driven by a CSS animation rather than an observer-toggled class: the grid is
@@ -226,6 +220,72 @@ const PostCard: React.FC<{ post: BlogPost; compact?: boolean }> = ({ post, compa
 );
 
 /* ------------------------------------------------------------------ */
+/* Table of contents                                                   */
+/* ------------------------------------------------------------------ */
+
+const TableOfContents: React.FC<{ headings: Heading[] }> = ({ headings }) => {
+  const [activeId, setActiveId] = useState<string>(headings[0]?.id ?? '');
+
+  useEffect(() => {
+    if (headings.length === 0) return;
+
+    const elements = headings
+      .map((h) => document.getElementById(h.id))
+      .filter((el): el is HTMLElement => el !== null);
+    if (elements.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible[0]) setActiveId(visible[0].target.id);
+      },
+      // Bias the "active" band toward the top of the viewport.
+      { rootMargin: '-96px 0px -70% 0px', threshold: 0 }
+    );
+
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [headings]);
+
+  if (headings.length < 2) return null;
+
+  return (
+    <nav aria-label="Table of contents">
+      <p
+        className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#9CA3AF]"
+        style={{ fontFamily: BODY }}
+      >
+        Contents
+      </p>
+      <ul className="mt-4 space-y-1">
+        {headings.map((heading) => {
+          const active = heading.id === activeId;
+          return (
+            <li key={heading.id}>
+              <a
+                href={`#${heading.id}`}
+                className={`tc-toc-link block border-l-2 py-1.5 text-sm leading-snug ${
+                  heading.level > 2 ? 'pl-6' : 'pl-4'
+                } ${
+                  active
+                    ? 'border-[#A3E635] font-semibold text-[#0B0B0B]'
+                    : 'border-[#E5E5E5] text-[#9CA3AF] hover:border-[#D1D5DB] hover:text-[#0B0B0B]'
+                }`}
+                style={{ fontFamily: BODY }}
+              >
+                {heading.text}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  );
+};
+
+/* ------------------------------------------------------------------ */
 /* Article view                                                        */
 /* ------------------------------------------------------------------ */
 
@@ -247,6 +307,8 @@ const ArticleView: React.FC<{ post: BlogPost }> = ({ post }) => {
     onScroll();
     return () => window.removeEventListener('scroll', onScroll);
   }, [post.id]);
+
+  const headings: Heading[] = useMemo(() => extractHeadings(post.body), [post.body]);
 
   const related = useMemo(() => {
     const sameCategory = posts.filter((p) => p.id !== post.id && p.category === post.category);
@@ -279,7 +341,7 @@ const ArticleView: React.FC<{ post: BlogPost }> = ({ post }) => {
           <div className="pointer-events-none absolute inset-0 tc-blog-glow" aria-hidden="true" />
           <div className="pointer-events-none absolute inset-0 tc-blog-grid-bg" aria-hidden="true" />
 
-          <div className="relative z-10 mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <div className="relative z-10 mx-auto max-w-[42.5rem] px-4 sm:px-6">
             <RouteLink
               href="/blog"
               className="tc-rise inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-1.5 text-sm font-semibold text-white/70 transition-colors hover:border-white/40 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A3E635]"
@@ -329,8 +391,8 @@ const ArticleView: React.FC<{ post: BlogPost }> = ({ post }) => {
         </header>
 
         {/* Hero image overlapping the header */}
-        <div className="relative z-10 -mt-28 px-4 sm:-mt-32 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-white/10 bg-[#E5E5E5] shadow-[0_30px_70px_-30px_rgba(11,11,11,0.6)]">
+        <div className="relative z-10 -mt-28 px-4 sm:-mt-32 sm:px-6">
+          <div className="mx-auto max-w-[48rem] overflow-hidden rounded-2xl border border-white/10 bg-[#E5E5E5] shadow-[0_30px_70px_-30px_rgba(11,11,11,0.6)]">
             <div className="aspect-[16/9] w-full">
               <img src={post.image} alt="" loading="lazy" className="h-full w-full object-cover" />
             </div>
@@ -338,8 +400,15 @@ const ArticleView: React.FC<{ post: BlogPost }> = ({ post }) => {
         </div>
 
         {/* Body */}
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <Markdown source={post.body} className="tc-article-body mt-12" />
+        <div className="relative mx-auto mt-12 max-w-[42.5rem] px-4 sm:px-6">
+          {/* Contents rail — only where there is room beside the reading column. */}
+          <aside className="absolute left-full top-0 hidden h-full w-56 pl-8 xl:block">
+            <div className="sticky top-28">
+              <TableOfContents headings={headings} />
+            </div>
+          </aside>
+
+          <Markdown source={post.body} className="tc-article-body" />
 
           {/* Share row */}
           <div className="mt-10 flex flex-wrap items-center gap-3 border-y border-[#E5E5E5] py-5">
