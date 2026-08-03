@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import Markdown from '../content/Markdown';
 import { BlogPost, categories, getPostBySlug, posts } from '../content/posts';
 
@@ -60,19 +59,19 @@ const blogStyles = `
 }
 .tc-article-body > * + * { margin-top: 1.5rem; }
 
-/* Staggered reveal for the card grid (self-contained: styles.css is not linked). */
+/* Staggered reveal for the card grid.
+   Driven by a CSS animation rather than an observer-toggled class: the grid is
+   remounted whenever filters change, so anything that depends on JS adding a
+   class after mount would leave the new cards stuck at opacity 0. */
 .tc-stagger > * {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: tcRise 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
-.tc-stagger.is-visible > * { opacity: 1; transform: translateY(0); }
-.tc-stagger.is-visible > *:nth-child(1) { transition-delay: 0ms; }
-.tc-stagger.is-visible > *:nth-child(2) { transition-delay: 70ms; }
-.tc-stagger.is-visible > *:nth-child(3) { transition-delay: 140ms; }
-.tc-stagger.is-visible > *:nth-child(4) { transition-delay: 210ms; }
-.tc-stagger.is-visible > *:nth-child(5) { transition-delay: 280ms; }
-.tc-stagger.is-visible > *:nth-child(6) { transition-delay: 350ms; }
+.tc-stagger > *:nth-child(1) { animation-delay: 0ms; }
+.tc-stagger > *:nth-child(2) { animation-delay: 70ms; }
+.tc-stagger > *:nth-child(3) { animation-delay: 140ms; }
+.tc-stagger > *:nth-child(4) { animation-delay: 210ms; }
+.tc-stagger > *:nth-child(5) { animation-delay: 280ms; }
+.tc-stagger > *:nth-child(n+6) { animation-delay: 350ms; }
 
 @keyframes tcPulse {
   0%, 100% { opacity: 1; transform: scale(1); }
@@ -84,7 +83,7 @@ const blogStyles = `
   .tc-rise { animation: none; }
   .tc-pulse { animation: none; }
   .tc-card-img { transition: none; }
-  .tc-stagger > * { opacity: 1; transform: none; transition: none; }
+  .tc-stagger > * { animation: none; }
 }
 `;
 
@@ -462,8 +461,6 @@ const ArticleView: React.FC<{ post: BlogPost }> = ({ post }) => {
 const BlogIndex: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const [query, setQuery] = useState('');
-  const gridRef = useScrollAnimation();
-
   const counts = useMemo(() => {
     const map: Record<string, number> = { All: posts.length };
     posts.forEach((p) => {
@@ -697,7 +694,6 @@ const BlogIndex: React.FC = () => {
 
               <div
                 key={`${activeCategory}-${query}`}
-                ref={gridRef}
                 className="tc-stagger grid gap-8 md:grid-cols-2 lg:grid-cols-3"
               >
                 {gridPosts.map((post) => (
@@ -764,7 +760,7 @@ const BlogIndex: React.FC = () => {
 /* ------------------------------------------------------------------ */
 
 const PostNotFound: React.FC = () => (
-  <main className="flex flex-grow items-center bg-[#0B0B0B] px-4 py-32 text-white sm:px-6 lg:px-8">
+  <main className="relative flex flex-grow items-center bg-[#0B0B0B] px-4 py-32 text-white sm:px-6 lg:px-8">
     <style>{blogStyles}</style>
     <div className="pointer-events-none absolute inset-0 tc-blog-glow" aria-hidden="true" />
     <div className="relative z-10 mx-auto max-w-xl text-center">
