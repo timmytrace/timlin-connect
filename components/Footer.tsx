@@ -18,13 +18,13 @@ const Footer: React.FC = () => {
                 Practical Cybersecurity for Organizations Worldwide.
               </p>
               <p className="text-white/40 text-xs mt-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                MagNum AI is currently in development. Early access coming soon.
+                Timlin Gateway is self-hosted and open to design partners.
               </p>
             </div>
           </div>
           <div className="flex space-x-6 text-sm">
             <a href={isHomeRoute ? '#services' : '/#services'} className="text-white/60 hover:text-white transition-colors" style={{ fontFamily: "'DM Sans', sans-serif" }}>Services</a>
-            <a href="/magnum-ai" className="text-white/60 hover:text-white transition-colors" style={{ fontFamily: "'DM Sans', sans-serif" }}>MagNum AI</a>
+            <a href="/gateway" className="text-white/60 hover:text-white transition-colors" style={{ fontFamily: "'DM Sans', sans-serif" }}>Timlin Gateway</a>
             <a href={isHomeRoute ? '#about' : '/#about'} className="text-white/60 hover:text-white transition-colors" style={{ fontFamily: "'DM Sans', sans-serif" }}>About</a>
             <a href={isHomeRoute ? '#contact' : '/#contact'} className="text-white/60 hover:text-white transition-colors" style={{ fontFamily: "'DM Sans', sans-serif" }}>Contact</a>
           </div>

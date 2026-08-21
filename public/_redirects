@@ -1,4 +1,13 @@
-/magnum-ai /index.html 200
-/products/magnum-ai /index.html 200
-/blog /index.html 200
-/blog/* /index.html 200
+# /gateway is canonical. The MagNum AI paths are permanent redirects so existing
+# links, prior indexing and sitemap history keep resolving.
+/magnum-ai            /gateway               301!
+/products/magnum-ai   /gateway               301!
+
+# Serve the PRERENDERED file explicitly, not the generic shell. A bare
+# `/gateway /index.html 200` looks equivalent and is not: it hands crawlers the
+# homepage's Open Graph tags, which is the bug this build step exists to fix.
+# Pointing at the exact file also means a missing prerender 404s loudly instead
+# of silently serving the wrong metadata.
+/gateway              /gateway/index.html    200
+/blog                 /blog/index.html       200
+/blog/*               /index.html            200

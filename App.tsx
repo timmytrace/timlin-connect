@@ -9,8 +9,8 @@ import AboutSection from './components/AboutSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import AiAssistant from './components/AiAssistant';
-import MagnumTeaserSection from './components/MagnumTeaserSection';
-import MagnumAIPage from './components/MagnumAIPage';
+import GatewayTeaserSection from './components/GatewayTeaserSection';
+import GatewayPage from './components/GatewayPage';
 import BlogPage from './components/BlogPage';
 import { getPostBySlug } from './content/posts';
 
@@ -19,8 +19,8 @@ const SITE_IMAGE = `${SITE_URL}/logo1.png`;
 
 const HOME_TITLE = 'Timlin Connect | Cybersecurity Services - Risk Assessments, Pen Testing & vCISO';
 const HOME_DESCRIPTION = 'Timlin Connect provides practical cybersecurity services including risk assessments, penetration testing, compliance readiness (SOC 2, ISO 27001, GDPR, CCPA), and Virtual CISO advisory. Clear guidance, real results.';
-const MAGNUM_TITLE = 'MagNum AI | AI Security Gateway by Timlin Connect';
-const MAGNUM_DESCRIPTION = 'MagNum AI is an upcoming AI security gateway from Timlin Connect, designed to help protect LLM applications from prompt injection, sensitive data leakage, unsafe outputs, and risky AI agent behavior.';
+const GATEWAY_TITLE = 'Timlin Gateway | AI Security Gateway by Timlin Connect';
+const GATEWAY_DESCRIPTION = 'Timlin Gateway is a self-hosted AI security gateway from Timlin Connect. 98.7% prompt-injection recall at a 2.0% false-positive rate, measured on a held-out set, with the known gaps published alongside.';
 const BLOG_TITLE = 'Blog | Timlin Connect - Cybersecurity, Compliance & AI Security Insights';
 const BLOG_DESCRIPTION = 'Practical articles from Timlin Connect on cybersecurity, compliance readiness, penetration testing, incident response, and AI security for LLM applications.';
 
@@ -83,18 +83,36 @@ const setArticleSchema = (schema: object | null) => {
   document.head.appendChild(script);
 };
 
+/**
+ * Compare paths without letting a trailing slash decide the route.
+ *
+ * `/gateway` is served from a prerendered `gateway/index.html`, and hosts
+ * resolve that directory index under both `/gateway` and `/gateway/`. Matching
+ * the exact string meant the slashed form fell through every branch and
+ * rendered the homepage under the product URL.
+ */
+const normalisePath = (value: string): string => {
+  const trimmed = value.replace(/\/+$/, '');
+  return trimmed === '' ? '/' : trimmed;
+};
+
 const App: React.FC = () => {
-  const [pathname, setPathname] = useState(() => window.location.pathname);
+  const [pathname, setPathname] = useState(() => normalisePath(window.location.pathname));
 
   // Client-side navigation dispatches popstate; keep routing in sync with it.
   useEffect(() => {
-    const sync = () => setPathname(window.location.pathname);
+    const sync = () => setPathname(normalisePath(window.location.pathname));
     window.addEventListener('popstate', sync);
     return () => window.removeEventListener('popstate', sync);
   }, []);
 
-  const isMagnumPage = useMemo(
-    () => pathname === '/magnum-ai' || pathname === '/products/magnum-ai',
+  const isGatewayPage = useMemo(
+    () =>
+      pathname === '/gateway' ||
+      // Superseded paths. Netlify 301s these, but a client-side navigation from a
+      // stale in-page link never touches the server, so they are matched here too.
+      pathname === '/magnum-ai' ||
+      pathname === '/products/magnum-ai',
     [pathname]
   );
 
@@ -151,11 +169,11 @@ const App: React.FC = () => {
       return;
     }
 
-    if (isMagnumPage) {
+    if (isGatewayPage) {
       applyMeta({
-        title: MAGNUM_TITLE,
-        description: MAGNUM_DESCRIPTION,
-        url: `${SITE_URL}/magnum-ai`,
+        title: GATEWAY_TITLE,
+        description: GATEWAY_DESCRIPTION,
+        url: `${SITE_URL}/gateway`,
       });
       return;
     }
@@ -168,15 +186,15 @@ const App: React.FC = () => {
         "Practical cybersecurity services - risk assessments, pen testing, compliance readiness, and vCISO advisory. Protect what you've built.",
       url: SITE_URL,
     });
-  }, [isMagnumPage, isBlogPage, postSlug]);
+  }, [isGatewayPage, isBlogPage, postSlug]);
 
   return (
     <div className="flex flex-col min-h-screen bg-[#FAFAFA] text-[#0B0B0B] selection:bg-[#A3E635] selection:text-[#0B0B0B]">
       <Navbar />
       {isBlogPage ? (
         <BlogPage />
-      ) : isMagnumPage ? (
-        <MagnumAIPage />
+      ) : isGatewayPage ? (
+        <GatewayPage />
       ) : (
         <main className="flex-grow">
           <HeroSection />
@@ -184,7 +202,7 @@ const App: React.FC = () => {
           <WhoWeHelpSection />
           <HowWeWorkSection />
           <WhyChooseUsSection />
-          <MagnumTeaserSection />
+          <GatewayTeaserSection />
           <AboutSection />
           <ContactSection />
         </main>

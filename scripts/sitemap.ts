@@ -54,7 +54,7 @@ const buildSitemap = (): string => {
     { loc: '/#services', lastmod: built, changefreq: 'monthly', priority: '0.8' },
     { loc: '/#about', lastmod: built, changefreq: 'monthly', priority: '0.7' },
     { loc: '/#contact', lastmod: built, changefreq: 'monthly', priority: '0.7' },
-    { loc: '/magnum-ai', lastmod: built, changefreq: 'monthly', priority: '0.6' },
+    { loc: '/gateway', lastmod: built, changefreq: 'monthly', priority: '0.8' },
     { loc: '/blog', lastmod: latestPost, changefreq: 'weekly', priority: '0.8' },
     ...posts.map<SitemapEntry>((post) => ({
       loc: `/blog/${post.slug}`,
