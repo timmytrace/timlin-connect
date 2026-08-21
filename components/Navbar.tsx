@@ -4,9 +4,15 @@ const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const pathname = window.location.pathname;
+  // Trailing slashes are stripped before comparison: /gateway is served from a
+  // prerendered directory index, so the browser may show either form and the
+  // active-nav state must not depend on which one it lands on.
+  const pathname = window.location.pathname.replace(/(.)\/+$/, '$1');
   const isHomeRoute = pathname === '/' || pathname === '/index.html';
-  const isMagnumRoute = pathname === '/magnum-ai' || pathname === '/products/magnum-ai';
+  const isGatewayRoute =
+    pathname === '/gateway' ||
+    pathname === '/magnum-ai' ||
+    pathname === '/products/magnum-ai';
   const isBlogRoute = pathname === '/blog' || pathname.startsWith('/blog/');
   // Routes whose page starts with a dark hero can carry a transparent navbar until scroll.
   const hasDarkHero = isHomeRoute || isBlogRoute;
@@ -61,11 +67,11 @@ const Navbar: React.FC = () => {
                 </a>
               ))}
               <a
-                href="/magnum-ai"
+                href="/gateway"
                 onClick={handleNavLinkClick}
-                aria-current={isMagnumRoute ? 'page' : undefined}
+                aria-current={isGatewayRoute ? 'page' : undefined}
                 className={`ml-1 inline-flex items-center gap-2 rounded-full border px-3 py-2 text-sm font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A3E635] ${
-                  isMagnumRoute
+                  isGatewayRoute
                     ? 'border-[#A3E635] bg-[#A3E635] text-[#0B0B0B]'
                     : navIsSolid
                       ? 'border-[#D1D5DB] text-[#0B0B0B] hover:border-[#0B0B0B]'
@@ -73,7 +79,7 @@ const Navbar: React.FC = () => {
                 }`}
               >
                 <span className="h-2 w-2 rounded-full bg-[#A3E635]" aria-hidden="true" />
-                MagNum AI
+                Timlin Gateway
               </a>
               <a
                 href={isHomeRoute ? '#contact' : '/#contact'}
@@ -114,11 +120,11 @@ const Navbar: React.FC = () => {
             </a>
           ))}
           <a
-            href="/magnum-ai"
+            href="/gateway"
             onClick={handleNavLinkClick}
-            aria-current={isMagnumRoute ? 'page' : undefined}
+            aria-current={isGatewayRoute ? 'page' : undefined}
             className={`flex items-center gap-2 px-3 py-2 rounded-md text-base font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A3E635] ${
-              isMagnumRoute
+              isGatewayRoute
                 ? 'bg-[#A3E635] text-[#0B0B0B]'
                 : navIsSolid
                   ? 'text-[#0B0B0B] hover:bg-[#F0F0F0]'
@@ -126,7 +132,7 @@ const Navbar: React.FC = () => {
             }`}
           >
             <span className="h-2 w-2 rounded-full bg-[#A3E635]" aria-hidden="true" />
-            MagNum AI
+            Timlin Gateway
           </a>
           <a
             href={isHomeRoute ? '#contact' : '/#contact'}
