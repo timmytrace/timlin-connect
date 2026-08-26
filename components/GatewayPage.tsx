@@ -240,6 +240,44 @@ const GatewayPage: React.FC = () => {
           </article>
 
           <article className="rounded-xl border border-[#E5E7EB] bg-white p-6 sm:p-7 lg:col-span-2">
+            <div className="max-w-3xl">
+              <p
+                className="inline-flex items-center rounded-full border border-[#D1D5DB] bg-[#F9FAFB] px-3 py-1 text-xs font-semibold tracking-wide text-[#374151]"
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
+              >
+                Recorded run
+              </p>
+              <h3 className="mt-4 text-2xl font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                Eighty seconds, nine attacks, one it misses
+              </h3>
+              <p className="mt-4 text-[#4B5563] leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                A single unedited run against the real detection engines: direct and paraphrased
+                injection, a base64-smuggled payload, zero-width character smuggling, a fabricated
+                conversation turn hidden in a retrieved document, and toxicity wrapped inside a
+                translation task. Two legitimate prompts pass untouched.
+              </p>
+              <p className="mt-3 text-[#4B5563] leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                The last case is one it does not catch. It is in the recording on purpose.
+              </p>
+            </div>
+
+            <div className="mt-7 rounded-2xl border border-[#111827] bg-[#0B0B0B] p-3 sm:p-4 shadow-xl">
+              <video
+                className="w-full rounded-xl border border-white/10 bg-[#050A12]"
+                src="/timlin-gateway-demo.mp4"
+                poster="/timlin-gateway-demo-poster.jpg"
+                controls
+                playsInline
+                preload="metadata"
+                aria-label="Recorded terminal run of Timlin Gateway blocking six attacks, allowing two legitimate prompts, and missing one documented case"
+              >
+                Your browser cannot play embedded video.{' '}
+                <a href="/timlin-gateway-demo.mp4" className="underline">Download the recording</a>.
+              </video>
+            </div>
+          </article>
+
+          <article className="rounded-xl border border-[#E5E7EB] bg-white p-6 sm:p-7 lg:col-span-2">
             <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-5">
               <div className="max-w-3xl">
                 <p
