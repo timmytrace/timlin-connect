@@ -140,6 +140,31 @@ const listItems = (block: string, ordered: boolean): string[] =>
  */
 const IMAGE_BLOCK = /^!\[([^\]]*)\]\(\s*([^)"]+?)\s*(?:"([^"]*)")?\s*\)$/;
 
+/**
+ * GitHub-style pipe tables.
+ *
+ * Added for the findings posts, where a before/after measurement is the point
+ * of the piece rather than a decoration — without this the pipes rendered as
+ * literal text in the middle of a paragraph. A row is only treated as a table
+ * when the second line is a divider, so a paragraph that merely begins with a
+ * pipe is left alone.
+ */
+const TABLE_DIVIDER = /^\s*\|?(?:\s*:?-{2,}:?\s*\|)*\s*:?-{2,}:?\s*\|?\s*$/;
+
+const splitRow = (line: string): string[] =>
+  line
+    .trim()
+    .replace(/^\|/, '')
+    .replace(/\|$/, '')
+    .split('|')
+    .map((cell) => cell.trim());
+
+const alignmentOf = (spec: string): 'left' | 'center' | 'right' => {
+  const trimmed = spec.trim();
+  if (!trimmed.endsWith(':')) return 'left';
+  return trimmed.startsWith(':') ? 'center' : 'right';
+};
+
 const renderBlock = (block: string, key: string): React.ReactNode => {
   const trimmed = block.trim();
   if (trimmed === '') return null;
@@ -196,6 +221,58 @@ const renderBlock = (block: string, key: string): React.ReactNode => {
         className="my-12 text-center text-2xl tracking-[0.6em] text-[#D1D5DB]"
       >
         •••
+      </div>
+    );
+  }
+
+  // Table. Set in the sans body face rather than the reading serif: these are
+  // almost always numbers, and figures line up better without serifs. The
+  // wrapper scrolls itself so a wide table never scrolls the whole page.
+  const rows = trimmed.split(/\r?\n/);
+  if (rows.length >= 2 && rows[0].trim().startsWith('|') && TABLE_DIVIDER.test(rows[1])) {
+    const header = splitRow(rows[0]);
+    const align = splitRow(rows[1]).map(alignmentOf);
+    const body = rows
+      .slice(2)
+      .filter((row) => row.trim() !== '')
+      .map(splitRow);
+
+    return (
+      <div key={key} className="my-9 -mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
+        <table
+          className="w-full min-w-[30rem] border-collapse text-left text-[0.9375rem] sm:text-base"
+          style={{ fontFamily: BODY }}
+        >
+          <thead>
+            <tr className="border-b-2 border-[#0B0B0B]">
+              {header.map((cell, i) => (
+                <th
+                  key={`${key}-h${i}`}
+                  scope="col"
+                  className="py-3 pr-6 font-semibold text-[#0B0B0B] last:pr-0"
+                  style={{ textAlign: align[i] ?? 'left' }}
+                >
+                  {renderInline(cell, `${key}-h${i}`)}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {body.map((cells, r) => (
+              <tr key={`${key}-r${r}`} className="border-b border-[#E5E5E5]">
+                {cells.map((cell, c) => (
+                  <td
+                    key={`${key}-r${r}c${c}`}
+                    className="py-3 pr-6 align-top leading-[1.6] text-[#242424] last:pr-0"
+                    style={{ textAlign: align[c] ?? 'left' }}
+                  >
+                    {renderInline(cell, `${key}-r${r}c${c}`)}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     );
   }
