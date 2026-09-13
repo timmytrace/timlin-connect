@@ -13,9 +13,7 @@ import GatewayTeaserSection from './components/GatewayTeaserSection';
 import GatewayPage from './components/GatewayPage';
 import BlogPage from './components/BlogPage';
 import { getPostBySlug } from './content/posts';
-
-const SITE_URL = 'https://www.timlinconnect.com';
-const SITE_IMAGE = `${SITE_URL}/logo1.png`;
+import { SITE_IMAGE, SITE_URL, canonicalUrl } from './content/site';
 
 const HOME_TITLE = 'Timlin Connect | Cybersecurity Services - Risk Assessments, Pen Testing & vCISO';
 const HOME_DESCRIPTION = 'Timlin Connect provides practical cybersecurity services including risk assessments, penetration testing, compliance readiness (SOC 2, ISO 27001, GDPR, CCPA), and Virtual CISO advisory. Clear guidance, real results.';
@@ -127,7 +125,7 @@ const App: React.FC = () => {
     const post = postSlug ? getPostBySlug(postSlug) : undefined;
 
     if (post) {
-      const url = `${SITE_URL}/blog/${post.id}`;
+      const url = canonicalUrl(`blog/${post.id}`);
       const image = post.image ? `${SITE_URL}${encodeURI(post.image)}` : SITE_IMAGE;
 
       applyMeta({
@@ -164,7 +162,7 @@ const App: React.FC = () => {
       applyMeta({
         title: BLOG_TITLE,
         description: BLOG_DESCRIPTION,
-        url: `${SITE_URL}/blog`,
+        url: canonicalUrl('blog'),
       });
       return;
     }
@@ -173,7 +171,7 @@ const App: React.FC = () => {
       applyMeta({
         title: GATEWAY_TITLE,
         description: GATEWAY_DESCRIPTION,
-        url: `${SITE_URL}/gateway`,
+        url: canonicalUrl('gateway'),
       });
       return;
     }
@@ -184,7 +182,7 @@ const App: React.FC = () => {
       socialTitle: 'Timlin Connect | Cybersecurity Services',
       socialDescription:
         "Practical cybersecurity services - risk assessments, pen testing, compliance readiness, and vCISO advisory. Protect what you've built.",
-      url: SITE_URL,
+      url: canonicalUrl(''),
     });
   }, [isGatewayPage, isBlogPage, postSlug]);
 

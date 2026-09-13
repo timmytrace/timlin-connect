@@ -1,6 +1,6 @@
-import fs from 'node:fs';
-import path from 'node:path';
 import type { Plugin } from 'vite';
+import { SITE_URL, canonicalUrl } from '../content/site';
+import { readPostFrontmatter } from './post-frontmatter';
 
 /**
  * Emits `sitemap.xml` at build time so every published article is discoverable
@@ -8,10 +8,8 @@ import type { Plugin } from 'vite';
  * `content/posts/` is enough.
  */
 
-const SITE_URL = 'https://www.timlinconnect.com';
-const POSTS_DIR = path.resolve(process.cwd(), 'content/posts');
-
 interface SitemapEntry {
+  /** Absolute URL. Routes use canonicalUrl so every entry answers 200 without a redirect. */
   loc: string;
   lastmod: string;
   changefreq: 'daily' | 'weekly' | 'monthly' | 'yearly';
@@ -23,26 +21,9 @@ const today = () => new Date().toISOString().slice(0, 10);
 const escapeXml = (value: string) =>
   value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-/** Pulls just the fields the sitemap needs out of a post's frontmatter. */
-const readPosts = (): Array<{ slug: string; date: string }> => {
-  if (!fs.existsSync(POSTS_DIR)) return [];
-
-  return fs
-    .readdirSync(POSTS_DIR)
-    .filter((file) => file.endsWith('.md'))
-    .map((file) => {
-      const raw = fs.readFileSync(path.join(POSTS_DIR, file), 'utf-8');
-      const frontmatter = /^---\r?\n([\s\S]*?)\r?\n---/.exec(raw.trim());
-      const dateMatch = frontmatter ? /^date:\s*(.+)$/m.exec(frontmatter[1]) : null;
-      const slug = file.replace(/\.md$/, '').replace(/^\d{4}-\d{2}-\d{2}-/, '');
-
-      return {
-        slug,
-        date: (dateMatch?.[1] ?? today()).trim().replace(/^["']|["']$/g, ''),
-      };
-    })
-    .sort((a, b) => b.date.localeCompare(a.date));
-};
+/** The sitemap needs only each post's slug and date. */
+const readPosts = (): Array<{ slug: string; date: string }> =>
+  readPostFrontmatter().map(({ slug, date }) => ({ slug, date: date || today() }));
 
 const buildSitemap = (): string => {
   const posts = readPosts();
@@ -50,14 +31,14 @@ const buildSitemap = (): string => {
   const latestPost = posts[0]?.date ?? built;
 
   const entries: SitemapEntry[] = [
-    { loc: '/', lastmod: built, changefreq: 'monthly', priority: '1.0' },
-    { loc: '/#services', lastmod: built, changefreq: 'monthly', priority: '0.8' },
-    { loc: '/#about', lastmod: built, changefreq: 'monthly', priority: '0.7' },
-    { loc: '/#contact', lastmod: built, changefreq: 'monthly', priority: '0.7' },
-    { loc: '/gateway', lastmod: built, changefreq: 'monthly', priority: '0.8' },
-    { loc: '/blog', lastmod: latestPost, changefreq: 'weekly', priority: '0.8' },
+    { loc: canonicalUrl(''), lastmod: built, changefreq: 'monthly', priority: '1.0' },
+    { loc: `${SITE_URL}/#services`, lastmod: built, changefreq: 'monthly', priority: '0.8' },
+    { loc: `${SITE_URL}/#about`, lastmod: built, changefreq: 'monthly', priority: '0.7' },
+    { loc: `${SITE_URL}/#contact`, lastmod: built, changefreq: 'monthly', priority: '0.7' },
+    { loc: canonicalUrl('gateway'), lastmod: built, changefreq: 'monthly', priority: '0.8' },
+    { loc: canonicalUrl('blog'), lastmod: latestPost, changefreq: 'weekly', priority: '0.8' },
     ...posts.map<SitemapEntry>((post) => ({
-      loc: `/blog/${post.slug}`,
+      loc: canonicalUrl(`blog/${post.slug}`),
       lastmod: post.date,
       changefreq: 'yearly',
       priority: '0.7',
@@ -67,7 +48,7 @@ const buildSitemap = (): string => {
   const urls = entries
     .map(
       (entry) => `  <url>
-    <loc>${escapeXml(SITE_URL + entry.loc)}</loc>
+    <loc>${escapeXml(entry.loc)}</loc>
     <lastmod>${entry.lastmod}</lastmod>
     <changefreq>${entry.changefreq}</changefreq>
     <priority>${entry.priority}</priority>
