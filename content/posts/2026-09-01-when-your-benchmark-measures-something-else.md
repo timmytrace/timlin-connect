@@ -3,7 +3,7 @@ title: When Your Benchmark Measures Something Else
 excerpt: A fix that blocked every encoded injection in controlled testing moved the benchmark by 1.4 points. The gap between those two results turned out to be the most useful finding of the exercise.
 category: AI Security
 date: 2026-09-01
-author: Timlin Connect Team
+author: Timilehin Owolabi
 authorRole: AI Security Research
 image: /magnumai-demo/risk-analytics.png
 featured: true
