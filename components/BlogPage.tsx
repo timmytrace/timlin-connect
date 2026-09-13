@@ -166,7 +166,16 @@ const PostMeta: React.FC<{ post: BlogPost; light?: boolean; className?: string }
   </div>
 );
 
-const Avatar: React.FC<{ light?: boolean }> = ({ light }) => (
+/** "Timilehin Owolabi" → "TO", "Timlin Connect Team" → "TC". */
+const initialsOf = (name: string): string =>
+  name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((word) => word[0].toUpperCase())
+    .join('');
+
+const Avatar: React.FC<{ name: string; light?: boolean }> = ({ name, light }) => (
   <span
     aria-hidden="true"
     className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold ${
@@ -174,7 +183,7 @@ const Avatar: React.FC<{ light?: boolean }> = ({ light }) => (
     }`}
     style={{ fontFamily: HEADING }}
   >
-    TC
+    {initialsOf(name)}
   </span>
 );
 
@@ -374,7 +383,7 @@ const ArticleView: React.FC<{ post: BlogPost }> = ({ post }) => {
             </p>
 
             <div className="tc-rise tc-d4 mt-8 flex flex-wrap items-center gap-4 border-t border-white/10 pt-6">
-              <Avatar light />
+              <Avatar name={post.author} light />
               <div>
                 <p className="text-sm font-semibold text-white" style={{ fontFamily: BODY }}>
                   {post.author}
@@ -714,7 +723,7 @@ const BlogIndex: React.FC = () => {
                 </p>
 
                 <div className="mt-8 flex items-center gap-4 border-t border-white/10 pt-6">
-                  <Avatar light />
+                  <Avatar name={featuredPost.author} light />
                   <div>
                     <p className="text-sm font-semibold" style={{ fontFamily: BODY }}>
                       {featuredPost.author}
