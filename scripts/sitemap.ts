@@ -1,4 +1,5 @@
 import type { Plugin } from 'vite';
+import { SITE_URL, canonicalUrl } from '../content/site';
 import { readPostFrontmatter } from './post-frontmatter';
 
 /**
@@ -7,9 +8,8 @@ import { readPostFrontmatter } from './post-frontmatter';
  * `content/posts/` is enough.
  */
 
-const SITE_URL = 'https://www.timlinconnect.com';
-
 interface SitemapEntry {
+  /** Absolute URL. Routes use canonicalUrl so every entry answers 200 without a redirect. */
   loc: string;
   lastmod: string;
   changefreq: 'daily' | 'weekly' | 'monthly' | 'yearly';
@@ -31,14 +31,14 @@ const buildSitemap = (): string => {
   const latestPost = posts[0]?.date ?? built;
 
   const entries: SitemapEntry[] = [
-    { loc: '/', lastmod: built, changefreq: 'monthly', priority: '1.0' },
-    { loc: '/#services', lastmod: built, changefreq: 'monthly', priority: '0.8' },
-    { loc: '/#about', lastmod: built, changefreq: 'monthly', priority: '0.7' },
-    { loc: '/#contact', lastmod: built, changefreq: 'monthly', priority: '0.7' },
-    { loc: '/gateway', lastmod: built, changefreq: 'monthly', priority: '0.8' },
-    { loc: '/blog', lastmod: latestPost, changefreq: 'weekly', priority: '0.8' },
+    { loc: canonicalUrl(''), lastmod: built, changefreq: 'monthly', priority: '1.0' },
+    { loc: `${SITE_URL}/#services`, lastmod: built, changefreq: 'monthly', priority: '0.8' },
+    { loc: `${SITE_URL}/#about`, lastmod: built, changefreq: 'monthly', priority: '0.7' },
+    { loc: `${SITE_URL}/#contact`, lastmod: built, changefreq: 'monthly', priority: '0.7' },
+    { loc: canonicalUrl('gateway'), lastmod: built, changefreq: 'monthly', priority: '0.8' },
+    { loc: canonicalUrl('blog'), lastmod: latestPost, changefreq: 'weekly', priority: '0.8' },
     ...posts.map<SitemapEntry>((post) => ({
-      loc: `/blog/${post.slug}`,
+      loc: canonicalUrl(`blog/${post.slug}`),
       lastmod: post.date,
       changefreq: 'yearly',
       priority: '0.7',
@@ -48,7 +48,7 @@ const buildSitemap = (): string => {
   const urls = entries
     .map(
       (entry) => `  <url>
-    <loc>${escapeXml(SITE_URL + entry.loc)}</loc>
+    <loc>${escapeXml(entry.loc)}</loc>
     <lastmod>${entry.lastmod}</lastmod>
     <changefreq>${entry.changefreq}</changefreq>
     <priority>${entry.priority}</priority>

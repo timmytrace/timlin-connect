@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import type { Plugin } from 'vite';
+import { SITE_URL, canonicalUrl } from '../content/site';
 import { readPostFrontmatter } from './post-frontmatter';
 
 /**
@@ -30,10 +31,9 @@ import { readPostFrontmatter } from './post-frontmatter';
  * the homepage.
  *
  * Values mirror what `App.tsx` sets after hydration, so the page does not
- * change its own metadata once the bundle runs.
+ * change its own metadata once the bundle runs. URLs come from content/site.ts,
+ * which explains why they are the apex with a trailing slash.
  */
-
-const SITE_URL = 'https://www.timlinconnect.com';
 
 type RouteMeta = {
   route: string;
@@ -122,7 +122,7 @@ const setCanonical = (html: string, url: string): string => {
 };
 
 const renderRoute = (shell: string, meta: RouteMeta): string => {
-  const url = `${SITE_URL}/${meta.route}`;
+  const url = canonicalUrl(meta.route);
   const safeTitle = meta.title.replace(/&/g, '&amp;').replace(/</g, '&lt;');
   let html = shell.replace(/<title>[\s\S]*?<\/title>/i, () => `<title>${safeTitle}</title>`);
   html = setMeta(html, 'description', meta.description);
