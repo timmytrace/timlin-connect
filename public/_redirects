@@ -10,4 +10,9 @@
 # of silently serving the wrong metadata.
 /gateway              /gateway/index.html    200
 /blog                 /blog/index.html       200
+
+# Each published post gets its own rule, generated into dist/_redirects at build
+# time by scripts/prerender-meta.ts and inserted directly above the fallback
+# below. The fallback then only catches unknown slugs, which the SPA renders as
+# not found. Do not hand-write post rules here.
 /blog/*               /index.html            200
