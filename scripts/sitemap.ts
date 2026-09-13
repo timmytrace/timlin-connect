@@ -1,6 +1,5 @@
-import fs from 'node:fs';
-import path from 'node:path';
 import type { Plugin } from 'vite';
+import { readPostFrontmatter } from './post-frontmatter';
 
 /**
  * Emits `sitemap.xml` at build time so every published article is discoverable
@@ -9,7 +8,6 @@ import type { Plugin } from 'vite';
  */
 
 const SITE_URL = 'https://www.timlinconnect.com';
-const POSTS_DIR = path.resolve(process.cwd(), 'content/posts');
 
 interface SitemapEntry {
   loc: string;
@@ -23,26 +21,9 @@ const today = () => new Date().toISOString().slice(0, 10);
 const escapeXml = (value: string) =>
   value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-/** Pulls just the fields the sitemap needs out of a post's frontmatter. */
-const readPosts = (): Array<{ slug: string; date: string }> => {
-  if (!fs.existsSync(POSTS_DIR)) return [];
-
-  return fs
-    .readdirSync(POSTS_DIR)
-    .filter((file) => file.endsWith('.md'))
-    .map((file) => {
-      const raw = fs.readFileSync(path.join(POSTS_DIR, file), 'utf-8');
-      const frontmatter = /^---\r?\n([\s\S]*?)\r?\n---/.exec(raw.trim());
-      const dateMatch = frontmatter ? /^date:\s*(.+)$/m.exec(frontmatter[1]) : null;
-      const slug = file.replace(/\.md$/, '').replace(/^\d{4}-\d{2}-\d{2}-/, '');
-
-      return {
-        slug,
-        date: (dateMatch?.[1] ?? today()).trim().replace(/^["']|["']$/g, ''),
-      };
-    })
-    .sort((a, b) => b.date.localeCompare(a.date));
-};
+/** The sitemap needs only each post's slug and date. */
+const readPosts = (): Array<{ slug: string; date: string }> =>
+  readPostFrontmatter().map(({ slug, date }) => ({ slug, date: date || today() }));
 
 const buildSitemap = (): string => {
   const posts = readPosts();
