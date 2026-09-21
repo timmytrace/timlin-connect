@@ -1,7 +1,7 @@
 ---
 title: A Realistic SOC 2 Roadmap for Startups
 excerpt: SOC 2 does not have to consume your engineering team for a year. A staged approach: scope tightly, automate evidence, and treat the audit as a byproduct of good operations.
-category: Compliance
+category: Cybersecurity
 date: 2026-06-26
 author: Timlin Connect Team
 authorRole: Compliance Advisory

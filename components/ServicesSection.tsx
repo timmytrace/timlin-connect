@@ -14,6 +14,8 @@ type ServiceCard = ServiceItem & { image: string };
 
 type ServiceFamily = {
   id: string;
+  /** The anchor the Services menu links to; must match components/Navbar.tsx. */
+  anchor: string;
   name: string;
   blurb: string;
   items: ServiceCard[];
@@ -22,6 +24,7 @@ type ServiceFamily = {
 const families: ServiceFamily[] = [
   {
     id: 'ai-security',
+    anchor: 'services-ai',
     name: 'AI Security',
     blurb: 'For organizations putting AI in front of their people, their customers or their data.',
     items: [
@@ -71,6 +74,7 @@ const families: ServiceFamily[] = [
   },
   {
     id: 'offensive-security',
+    anchor: 'services-offensive',
     name: 'Offensive Security',
     blurb: 'Find the way in before someone else does. The retest is the deliverable, not the report.',
     items: [
@@ -106,6 +110,7 @@ const families: ServiceFamily[] = [
   },
   {
     id: 'security-advisory',
+    anchor: 'services-advisory',
     name: 'Security Advisory',
     blurb: 'Security leadership, compliance readiness and the plan for the day something goes wrong.',
     items: [
@@ -231,7 +236,8 @@ const ServicesSection: React.FC = () => {
 
         <div ref={gridRef} className="stagger-children space-y-16">
           {families.map((family) => (
-            <div key={family.id}>
+            // scroll-mt clears the fixed navbar so the heading is not hidden under it.
+            <div key={family.id} id={family.anchor} className="scroll-mt-28">
               <div className="flex flex-col gap-1 pb-5 mb-8 border-b-2 border-[#0B0B0B]">
                 <h3 className="text-xl sm:text-2xl font-bold text-[#0B0B0B]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                   {family.name}
