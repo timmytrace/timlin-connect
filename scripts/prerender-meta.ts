@@ -58,12 +58,12 @@ const STATIC_ROUTES: RouteMeta[] = [
   },
   {
     route: 'blog',
-    title: 'Blog | Timlin Connect - Cybersecurity, Compliance & AI Security Insights',
+    title: 'Research & Insights | Timlin Connect',
     description:
-      'Practical articles from Timlin Connect on cybersecurity, compliance readiness, penetration testing, incident response, and AI security for LLM applications.',
-    socialTitle: 'Timlin Connect Blog',
+      'Original security research and practical writing from Timlin Connect: AI security findings, measured detection results, compliance readiness and incident response.',
+    socialTitle: 'Timlin Connect | Research & Insights',
     socialDescription:
-      'Practical writing on cybersecurity, compliance readiness, penetration testing, and AI security.',
+      'Original security research: what we measured, what it found, and where it still falls short.',
   },
 ];
 

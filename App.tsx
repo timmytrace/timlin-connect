@@ -15,12 +15,12 @@ import BlogPage from './components/BlogPage';
 import { getPostBySlug } from './content/posts';
 import { SITE_IMAGE, SITE_URL, canonicalUrl } from './content/site';
 
-const HOME_TITLE = 'Timlin Connect | Cybersecurity Services - Risk Assessments, Pen Testing & vCISO';
-const HOME_DESCRIPTION = 'Timlin Connect provides practical cybersecurity services including risk assessments, penetration testing, compliance readiness (SOC 2, ISO 27001, GDPR, CCPA), and Virtual CISO advisory. Clear guidance, real results.';
+const HOME_TITLE = 'Timlin Connect | AI Security & Cybersecurity';
+const HOME_DESCRIPTION = 'Timlin Connect builds security technology that helps organizations adopt AI safely: Timlin Gateway, plus AI security assessments, red teaming, penetration testing and vCISO advisory.';
 const GATEWAY_TITLE = 'Timlin Gateway | AI Security Gateway by Timlin Connect';
 const GATEWAY_DESCRIPTION = 'Timlin Gateway is a self-hosted AI security gateway from Timlin Connect. 98.7% prompt-injection recall at a 2.0% false-positive rate, measured on a held-out set, with the known gaps published alongside.';
-const BLOG_TITLE = 'Blog | Timlin Connect - Cybersecurity, Compliance & AI Security Insights';
-const BLOG_DESCRIPTION = 'Practical articles from Timlin Connect on cybersecurity, compliance readiness, penetration testing, incident response, and AI security for LLM applications.';
+const BLOG_TITLE = 'Research & Insights | Timlin Connect';
+const BLOG_DESCRIPTION = 'Original security research and practical writing from Timlin Connect: AI security findings, measured detection results, compliance readiness and incident response.';
 
 const ARTICLE_SCHEMA_ID = 'article-schema';
 
@@ -179,9 +179,9 @@ const App: React.FC = () => {
     applyMeta({
       title: HOME_TITLE,
       description: HOME_DESCRIPTION,
-      socialTitle: 'Timlin Connect | Cybersecurity Services',
+      socialTitle: 'Timlin Connect | Security for the AI Era',
       socialDescription:
-        "Practical cybersecurity services - risk assessments, pen testing, compliance readiness, and vCISO advisory. Protect what you've built.",
+        "Secure every interaction between people, data and AI. Security technology, assessments and advisory.",
       url: canonicalUrl(''),
     });
   }, [isGatewayPage, isBlogPage, postSlug]);

@@ -45,25 +45,25 @@ const HeroSection: React.FC = () => {
         <div className="max-w-7xl mx-auto w-full">
           <div className="max-w-2xl">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] text-white" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-              Protect what<br />you've built.
+              Security for<br />the AI era.
             </h1>
             <p className="mt-6 text-lg sm:text-xl text-white/70 max-w-xl leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              Practical security guidance built for organizations that operate across borders. Risk assessments, compliance support, and advisory services aligned with ISO 27001, SOC 2, NIST, and global privacy regulations. Clear guidance without unnecessary complexity.
+              Secure every interaction between your people, your data and AI. We build the gateway that inspects those interactions, and run the assessments, testing and advisory work around it.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
               <a
-                href="#contact"
+                href="/gateway"
                 className="inline-flex items-center justify-center bg-white hover:bg-white/90 text-[#0B0B0B] font-semibold px-8 py-3.5 rounded-lg transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A3E635] text-base"
-                aria-label="Request a consultation"
+                aria-label="Explore the Timlin Gateway platform"
               >
-                Request a Consultation
+                Explore the Platform
               </a>
               <a
-                href="#services"
+                href="#contact"
                 className="inline-flex items-center justify-center border-2 border-white/30 hover:border-white text-white font-semibold px-8 py-3.5 rounded-lg transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A3E635] text-base"
-                aria-label="View our cybersecurity services"
+                aria-label="Talk to the security team"
               >
-                View Services
+                Talk to Security
               </a>
             </div>
           </div>

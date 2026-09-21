@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
     { href: isHomeRoute ? '#services' : '/#services', label: 'Services' },
     { href: isHomeRoute ? '#who-we-help' : '/#who-we-help', label: 'Industries' },
     { href: isHomeRoute ? '#how-we-work' : '/#how-we-work', label: 'How We Work' },
-    { href: '/blog', label: 'Blog' },
+    { href: '/blog', label: 'Research' },
     { href: isHomeRoute ? '#about' : '/#about', label: 'About' },
     { href: isHomeRoute ? '#contact' : '/#contact', label: 'Contact' },
   ];
