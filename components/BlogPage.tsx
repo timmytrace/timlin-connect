@@ -537,7 +537,13 @@ const ArticleView: React.FC<{ post: BlogPost }> = ({ post }) => {
 /* ------------------------------------------------------------------ */
 
 const BlogIndex: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState('All');
+  // A category can be deep-linked (/blog?category=Threat%20Research), so the
+  // Research menu can point at one directly. An unknown value falls back to All
+  // rather than showing an empty list.
+  const [activeCategory, setActiveCategory] = useState(() => {
+    const requested = new URLSearchParams(window.location.search).get('category');
+    return requested && categories.includes(requested) ? requested : 'All';
+  });
   const [query, setQuery] = useState('');
   const counts = useMemo(() => {
     const map: Record<string, number> = { All: posts.length };

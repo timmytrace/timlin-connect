@@ -1,7 +1,7 @@
 ---
 title: When Does a Growing Company Need a vCISO?
 excerpt: The signals that you have outgrown ad-hoc security decisions, and what a fractional security leader should actually deliver in the first ninety days.
-category: Leadership
+category: Cybersecurity
 date: 2026-05-29
 author: Timlin Connect Team
 authorRole: vCISO Practice

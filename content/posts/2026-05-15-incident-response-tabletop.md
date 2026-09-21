@@ -1,7 +1,7 @@
 ---
 title: "Your First Tabletop Exercise: A Field Guide"
 excerpt: An incident response plan that has never been rehearsed is a hypothesis. How to run a first tabletop that finds the gaps before a real incident does.
-category: Incident Response
+category: Cybersecurity
 date: 2026-05-15
 author: Timlin Connect Team
 authorRole: Incident Response
