@@ -49,6 +49,11 @@ const Navbar: React.FC = () => {
           href: '/gateway',
           description: 'Inspect and control every AI interaction',
         },
+        {
+          label: 'AI Security API',
+          href: '/gateway#api',
+          description: 'Proxy your model, or call the detection directly',
+        },
       ],
     },
     {

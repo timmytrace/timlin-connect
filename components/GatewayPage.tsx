@@ -383,6 +383,89 @@ const GatewayPage: React.FC = () => {
             </div>
           </article>
 
+          {/*
+            The API section documents endpoints that exist today, with the auth
+            scheme and status codes taken from the routes themselves rather than
+            described from memory. Anything not yet built stays off the page.
+          */}
+          <article id="api" className="scroll-mt-28 rounded-xl border border-[#E5E7EB] bg-white p-6 sm:p-7 lg:col-span-2">
+            <h3 className="text-2xl font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+              AI Security API
+            </h3>
+            <p className="mt-4 text-[#4B5563] leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+              Two ways to integrate. Put the gateway in front of your model and change one line, or call the
+              detection directly and decide what to do with the verdict yourself. The gateway is self-hosted, so
+              the base URL is your own and prompts are inspected inside your environment.
+            </p>
+
+            <div className="mt-6 grid gap-6 lg:grid-cols-2">
+              <div>
+                <p className="text-sm font-semibold text-[#0B0B0B]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                  1. Drop-in proxy
+                </p>
+                <p className="mt-2 text-sm text-[#4B5563]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                  An OpenAI-compatible endpoint. Only the base URL and key change, because the SDK already sends
+                  the key as a bearer token.
+                </p>
+                <div className="mt-3 overflow-x-auto rounded-lg border border-[#E5E7EB] bg-[#0B0B0B] p-4">
+                  <pre className="text-[13px] leading-relaxed text-[#E5E7EB]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
+{`from openai import OpenAI
+
+client = OpenAI(
+    base_url="https://your-gateway/api/v1",
+    api_key="<your gateway key>",
+)
+
+client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[{"role": "user",
+               "content": "Summarise this ticket."}],
+)`}
+                  </pre>
+                </div>
+                <p className="mt-3 text-sm text-[#4B5563]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                  A blocked request returns <code className="rounded bg-[#F0F0F0] px-1 py-0.5 text-[0.85em]">400</code> with
+                  the reason, rather than reaching the model at all.
+                </p>
+              </div>
+
+              <div>
+                <p className="text-sm font-semibold text-[#0B0B0B]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                  2. Call the detection directly
+                </p>
+                <p className="mt-2 text-sm text-[#4B5563]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                  Every endpoint accepts <code className="rounded bg-[#F0F0F0] px-1 py-0.5 text-[0.85em]">X-API-Key</code> or
+                  a standard bearer token.
+                </p>
+                <div className="mt-3 overflow-x-auto">
+                  <table className="w-full min-w-[26rem] border-collapse text-left text-sm" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <tbody>
+                      {[
+                        ['POST /api/v1/chat/completions', 'Inspect, forward, inspect the response'],
+                        ['POST /api/v1/analyze', 'The same pipeline, returning the full verdict'],
+                        ['POST /api/v1/scan/rag', 'Scan retrieved content for indirect injection'],
+                        ['POST /api/v1/check/tool', "Decide whether an agent's tool call should run"],
+                      ].map(([endpoint, purpose]) => (
+                        <tr key={endpoint} className="border-b border-[#E5E7EB] last:border-0">
+                          <td className="py-2.5 pr-4 align-top">
+                            <code className="text-[12.5px] text-[#0B0B0B]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
+                              {endpoint}
+                            </code>
+                          </td>
+                          <td className="py-2.5 align-top text-[#4B5563]">{purpose}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <p className="mt-3 text-sm text-[#4B5563]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                  The verdict carries the risk scores, the status, which detectors fired, and every finding behind
+                  the decision — so you can log it, review it, or override it.
+                </p>
+              </div>
+            </div>
+          </article>
+
           <article className="rounded-xl border border-[#E5E7EB] bg-white p-6 sm:p-7">
             <h3 className="text-2xl font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
               Who Timlin Gateway is for
