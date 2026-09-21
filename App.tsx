@@ -121,6 +121,60 @@ const App: React.FC = () => {
     return match ? decodeURIComponent(match[1]) : null;
   }, [pathname]);
 
+  /**
+   * Re-apply a URL fragment once the route has rendered.
+   *
+   * The browser resolves `#api` while the page is still an empty root div, so a
+   * cross-page link from the navigation - `/gateway#api`, `/#services-ai` -
+   * lands at the top and the menu entry silently does nothing. Retrying across a
+   * few frames catches content that mounts late.
+   */
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash.length < 2) return;
+    const id = decodeURIComponent(hash.slice(1));
+    let frame = 0;
+    const timers: number[] = [];
+
+    const jump = () => {
+      const target = document.getElementById(id);
+      if (target) target.scrollIntoView({ block: 'start' });
+      return Boolean(target);
+    };
+
+    // Once the visitor takes over, stop correcting: being pulled back to an
+    // anchor while scrolling away is worse than landing slightly off.
+    let cancelled = false;
+    const release = () => {
+      cancelled = true;
+      timers.forEach(window.clearTimeout);
+    };
+    const events = ['wheel', 'touchstart', 'keydown'] as const;
+    events.forEach((e) => window.addEventListener(e, release, { once: true, passive: true }));
+
+    const attempt = (remaining: number) => {
+      if (cancelled) return;
+      if (jump()) {
+        // Images below the fold settle after the first jump and move the target,
+        // so the position is corrected twice rather than left wherever the
+        // half-rendered page happened to put it.
+        timers.push(
+          window.setTimeout(() => !cancelled && jump(), 250),
+          window.setTimeout(() => !cancelled && jump(), 900)
+        );
+        return;
+      }
+      if (remaining > 0) frame = requestAnimationFrame(() => attempt(remaining - 1));
+    };
+    attempt(30);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      timers.forEach(window.clearTimeout);
+      events.forEach((e) => window.removeEventListener(e, release));
+    };
+  }, [isGatewayPage, isBlogPage, postSlug]);
+
   useEffect(() => {
     const post = postSlug ? getPostBySlug(postSlug) : undefined;
 
