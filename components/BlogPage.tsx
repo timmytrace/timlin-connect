@@ -586,24 +586,24 @@ const BlogIndex: React.FC = () => {
                 style={{ fontFamily: BODY }}
               >
                 <span className="tc-pulse h-1.5 w-1.5 rounded-full bg-[#A3E635]" aria-hidden="true" />
-                Insights &amp; Guides
+                Research &amp; Insights
               </p>
 
               <h1
                 className="tc-rise tc-d1 mt-6 text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl"
                 style={{ fontFamily: HEADING }}
               >
-                Field notes on
+                What we tested,
                 <br />
-                <span className="text-[#A3E635]">security that works.</span>
+                <span className="text-[#A3E635]">and what it found.</span>
               </h1>
 
               <p
                 className="tc-rise tc-d2 mt-6 max-w-2xl text-base leading-relaxed text-white/60 sm:text-lg"
                 style={{ fontFamily: BODY }}
               >
-                Practical thinking on cybersecurity, compliance, and AI security — written for the people
-                who have to make it work, not just pass the audit.
+                Original security research, with the method and the failures published beside the results —
+                alongside practical writing for the people who have to make security work, not just pass the audit.
               </p>
 
               {/* Search */}
