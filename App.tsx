@@ -138,7 +138,12 @@ const App: React.FC = () => {
 
     const jump = () => {
       const target = document.getElementById(id);
-      if (target) target.scrollIntoView({ block: 'start' });
+      // Instant, not the smooth scroll `html` sets for in-page links. A cross-page
+      // fragment is four thousand pixels down and the animation starts while the
+      // page is still loading, so it is still running when the browser restores
+      // its own scroll position and cancels it: the visitor is left at the top,
+      // which is exactly the failure this effect exists to fix.
+      if (target) target.scrollIntoView({ block: 'start', behavior: 'instant' });
       return Boolean(target);
     };
 
