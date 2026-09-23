@@ -42,7 +42,42 @@ export const slugify = (value: string): string =>
     .replace(/\s+/g, '-')
     .slice(0, 60);
 
-const splitBlocks = (source: string): string[] => source.trim().split(/\r?\n\s*\r?\n/);
+/**
+ * Split into blocks on blank lines — except inside a fenced code block.
+ *
+ * Splitting naively tears a fence apart the moment a snippet contains an empty
+ * line, and each half then renders as a paragraph full of backticks. Tracking
+ * the fence keeps it whole, and also stops a comment line inside a snippet
+ * from being read as a heading.
+ */
+const splitBlocks = (source: string): string[] => {
+  const blocks: string[] = [];
+  let current: string[] = [];
+  let fenced = false;
+
+  const flush = () => {
+    const joined = current.join('\n').trim();
+    if (joined) blocks.push(joined);
+    current = [];
+  };
+
+  for (const line of source.trim().split(/\r?\n/)) {
+    if (/^\s*```/.test(line)) {
+      if (!fenced) flush(); // opening: close whatever came before it
+      current.push(line);
+      fenced = !fenced;
+      if (!fenced) flush(); // closing: the fence is its own block
+      continue;
+    }
+    if (!fenced && /^\s*$/.test(line)) {
+      flush();
+      continue;
+    }
+    current.push(line);
+  }
+  flush();
+  return blocks;
+};
 
 /** Collects `##`–`####` headings so the article can render a contents rail. */
 export const extractHeadings = (source: string): Heading[] =>
@@ -190,6 +225,22 @@ const renderBlock = (block: string, key: string): React.ReactNode => {
           </figcaption>
         )}
       </figure>
+    );
+  }
+
+  // Fenced code. Rendered raw: no inline pass, so backticks, asterisks and
+  // underscores inside a snippet stay exactly as written.
+  const fence = /^```[a-z0-9+#-]*\r?\n([\s\S]*?)\r?\n?```$/i.exec(trimmed);
+  if (fence) {
+    return (
+      <pre
+        key={key}
+        className="my-8 overflow-x-auto rounded-xl bg-[#0B0B0B] p-5 text-[0.85rem] leading-[1.6] text-[#E5E5E5] sm:text-[0.9rem]"
+      >
+        <code style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
+          {fence[1]}
+        </code>
+      </pre>
     );
   }
 
