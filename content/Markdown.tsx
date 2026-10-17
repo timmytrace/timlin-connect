@@ -95,16 +95,23 @@ export const extractHeadings = (source: string): Heading[] =>
 /* ------------------------------------------------------------------ */
 
 // Order matters: bold before italic so `**x**` is not eaten by the italic rule.
-const INLINE_PATTERN = /(\[[^\]]+\]\([^)\s]+\))|(\*\*[^*]+\*\*)|(_[^_]+_)|(\*[^*]+\*)|(`[^`]+`)/g;
+//
+// Built fresh per call rather than shared. `renderInline` recurses - bold and
+// emphasis render their contents through it - and a `/g` regex carries
+// `lastIndex` on the object itself, so one shared instance would have the
+// nested scan reset the position the outer loop is walking. Same pattern, one
+// per invocation, no shared cursor.
+const inlinePattern = () =>
+  /(\[[^\]]+\]\([^)\s]+\))|(\*\*[^*]+\*\*)|(_[^_]+_)|(\*[^*]+\*)|(`[^`]+`)/g;
 
 const renderInline = (text: string, keyPrefix: string): React.ReactNode[] => {
   const nodes: React.ReactNode[] = [];
+  const pattern = inlinePattern();
   let lastIndex = 0;
   let match: RegExpExecArray | null;
   let i = 0;
 
-  INLINE_PATTERN.lastIndex = 0;
-  while ((match = INLINE_PATTERN.exec(text)) !== null) {
+  while ((match = pattern.exec(text)) !== null) {
     if (match.index > lastIndex) {
       nodes.push(text.slice(lastIndex, match.index));
     }
@@ -131,7 +138,16 @@ const renderInline = (text: string, keyPrefix: string): React.ReactNode[] => {
     } else if (token.startsWith('**')) {
       nodes.push(
         <strong key={key} className="font-semibold text-[#0B0B0B]">
-          {token.slice(2, -2)}
+          {/*
+            Rendered recursively, not as plain text. `**[a](b)**` matches the
+            bold branch first - the link branch cannot start at an asterisk -
+            so emphasising a link used to print its markdown source on the
+            page. It failed silently, in prose, which is the worst place for it:
+            the build passes, the page renders, and the most important link in
+            a post is dead. The inner text contains no `**` by construction, so
+            this cannot recurse forever.
+          */}
+          {renderInline(token.slice(2, -2), `${key}-s`)}
         </strong>
       );
     } else if (token.startsWith('`')) {
@@ -145,7 +161,8 @@ const renderInline = (text: string, keyPrefix: string): React.ReactNode[] => {
         </code>
       );
     } else {
-      nodes.push(<em key={key}>{token.slice(1, -1)}</em>);
+      // Same reasoning as bold above: emphasis can wrap a link or code.
+      nodes.push(<em key={key}>{renderInline(token.slice(1, -1), `${key}-e`)}</em>);
     }
 
     lastIndex = match.index + token.length;
