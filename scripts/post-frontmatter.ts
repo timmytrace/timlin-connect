@@ -39,6 +39,20 @@ const stripQuotes = (value: string): string => {
 export const slugFromFilename = (file: string): string =>
   file.replace(/\.md$/, '').replace(/^\d{4}-\d{2}-\d{2}-/, '');
 
+/**
+ * Mirrors `isPublished` in content/posts.ts: a post dated in the future is
+ * scheduled, and must not reach the sitemap or get a prerendered page.
+ *
+ * Both exist because they answer at different times. This one runs at build,
+ * so a scheduled post is absent from the sitemap until the first deploy on or
+ * after its date — which is correct, since advertising a URL the app will not
+ * render is worse than listing it a day late.
+ */
+const isPublished = (date: string): boolean => {
+  if (!date) return true;
+  return date <= new Date().toISOString().slice(0, 10);
+};
+
 export const readPostFrontmatter = (): PostFrontmatter[] => {
   if (!fs.existsSync(POSTS_DIR)) return [];
 
@@ -63,5 +77,6 @@ export const readPostFrontmatter = (): PostFrontmatter[] => {
         author: field('author') || 'Timlin Connect Team',
       };
     })
+    .filter((post) => isPublished(post.date))
     .sort((a, b) => b.date.localeCompare(a.date));
 };
