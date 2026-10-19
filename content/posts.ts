@@ -125,6 +125,34 @@ const files = import.meta.glob<string>('./posts/*.md', {
   eager: true,
 });
 
+/**
+ * A post dated in the future is scheduled, not published.
+ *
+ * Posts used to be listed purely by date, so merging a piece written ahead of
+ * its publication date put it straight on the front page carrying a date that
+ * had not happened yet. The alternative — holding the branch until the day —
+ * means finished work sitting outside `main`, which is exactly how a concluded
+ * experiment stayed lost on a branch for three months.
+ *
+ * Compared against the reader's own clock rather than the build's, so a post
+ * appears on its date without needing a deploy that morning.
+ *
+ * This is scheduling, not secrecy. `import.meta.glob` is eager, so a scheduled
+ * post's markdown is still inside the JavaScript bundle and anyone willing to
+ * read it can. Do not put anything here that would be damaging to publish
+ * early; put that in a branch.
+ */
+const isPublished = (date: string): boolean => {
+  if (!date) return true; // no date is a content bug, not a schedule
+  const today = new Date();
+  // Local midnight, so a post dated today is live all day in every timezone
+  // west of the author rather than appearing at some point in the afternoon.
+  const todayISO = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(
+    today.getDate()
+  ).padStart(2, '0')}`;
+  return date <= todayISO;
+};
+
 export const posts: BlogPost[] = Object.entries(files)
   .map(([filePath, raw]) => {
     const { data, body } = parseFrontmatter(raw);
@@ -147,6 +175,7 @@ export const posts: BlogPost[] = Object.entries(files)
       body,
     };
   })
+  .filter((post) => isPublished(post.date))
   // Newest first; an explicit `featured: true` post is pinned to the top.
   .sort((a, b) => {
     if (a.featured !== b.featured) return a.featured ? -1 : 1;
