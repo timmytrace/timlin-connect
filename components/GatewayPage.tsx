@@ -56,6 +56,92 @@ const knownGaps: { measure: string; name: string; note: string }[] = [
   },
 ];
 
+/**
+ * OWASP Top 10 for LLM Applications, 2026 edition (published 3 August 2026).
+ *
+ * Four of the ten are honestly "none". They are shown, in the same table and
+ * the same type size as the rest, because a coverage map that lists only
+ * coverage is a datasheet - and the thing a buyer cannot get anywhere else is
+ * where a control stops.
+ *
+ * Check the edition before editing. genai.owasp.org/llm-top-10/ still serves
+ * the 2025 list and describes it as current, so a single lookup returns the
+ * superseded ordering. Excessive Agency is third in 2026, not sixth; Improper
+ * Output Handling is tenth, not fifth; and System Prompt Leakage became Hidden
+ * Context Exposure, broadened to all non-user-visible context.
+ */
+type Coverage = 'primary' | 'covered' | 'partial' | 'none';
+
+const owaspCoverage: { id: string; name: string; level: Coverage; note: string }[] = [
+  {
+    id: 'LLM01',
+    name: 'Prompt Injection',
+    level: 'primary',
+    note: 'Three detection layers plus decoding of encoded payloads, and the same stack over retrieved documents for the indirect case. The only entry here with published measurement behind it.',
+  },
+  {
+    id: 'LLM02',
+    name: 'Sensitive Information Disclosure',
+    level: 'covered',
+    note: 'Around thirty pattern categories inbound — government, health and payment identifiers, and credentials for the major providers — and a repeat check on the response. Pattern matching, so it finds known shapes.',
+  },
+  {
+    id: 'LLM03',
+    name: 'Excessive Agency',
+    level: 'covered',
+    note: 'Every tool call is allowed, blocked or held for confirmation against your policy. Calls originating from a web page, email or PDF are blocked by default, which is where indirect injection turns into damage.',
+  },
+  {
+    id: 'LLM04',
+    name: 'Supply Chain',
+    level: 'partial',
+    note: 'An allowlist governs which classifier models the engine will load. No dependency provenance, model signing or plugin review — largely a build-time problem.',
+  },
+  {
+    id: 'LLM05',
+    name: 'Data and Model Poisoning',
+    level: 'none',
+    note: 'Poisoning happens during training. The gateway sits in front of a model at inference time and has no view of how it was produced.',
+  },
+  {
+    id: 'LLM06',
+    name: 'Unbounded Consumption',
+    level: 'none',
+    note: 'There is a rate limiter, but it protects API endpoints. No token budget, no cost ceiling, no denial-of-wallet detection. Claiming this on the strength of a login limit would be dishonest.',
+  },
+  {
+    id: 'LLM07',
+    name: 'Misinformation',
+    level: 'none',
+    note: 'A tripwire matches explicit hallucination markers, which catches a model announcing its own uncertainty. A model that is confidently wrong passes. Treat as unaddressed.',
+  },
+  {
+    id: 'LLM08',
+    name: 'Hidden Context Exposure',
+    level: 'partial',
+    note: 'Six rules score attempts to extract the system prompt, in English and German. Nothing inspects how your context window is assembled, and whether a secret belonged in it is an application question.',
+  },
+  {
+    id: 'LLM09',
+    name: 'Vector and Embedding Weaknesses',
+    level: 'none',
+    note: 'The gateway uses embeddings for its own detection. It does not secure yours: no vector-store access control, no inversion assessment, no tenant-isolation checks.',
+  },
+  {
+    id: 'LLM10',
+    name: 'Improper Output Handling',
+    level: 'partial',
+    note: 'Responses are checked for leaked data and unsafe content. That is whether output is safe to read, not safe to run — parameterised queries and output encoding remain yours.',
+  },
+];
+
+const coverageStyles: Record<Coverage, { label: string; className: string }> = {
+  primary: { label: 'Primary', className: 'bg-[#166534] text-white' },
+  covered: { label: 'Covered', className: 'bg-[#DCFCE7] text-[#166534]' },
+  partial: { label: 'Partial', className: 'bg-[#FEF3C7] text-[#92400E]' },
+  none: { label: 'Not addressed', className: 'bg-[#FDF7F5] text-[#9A3412] border border-[#F0DDD7]' },
+};
+
 const demoScreenshots = [
   {
     id: 'dashboard',
@@ -233,6 +319,56 @@ const GatewayPage: React.FC = () => {
                     style={{ fontFamily: "'DM Sans', sans-serif" }}
                   >
                     {gap.note}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </article>
+
+          <article
+            id="owasp"
+            className="scroll-mt-28 rounded-xl border border-[#E5E7EB] bg-white p-6 sm:p-7 lg:col-span-2"
+          >
+            <h3 className="text-2xl font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+              OWASP Top 10 for LLM Applications
+            </h3>
+            <p className="mt-3 max-w-3xl text-[#4B5563] leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+              A coverage map against the 2026 edition, published 3 August 2026. There is no
+              certification behind the OWASP Top 10 and nobody has audited this — it is here so you
+              can see where the gateway stops. <strong className="font-semibold text-[#111827]">Four
+              of the ten are not addressed at all</strong>, and they are listed the same way as the
+              rest.
+            </p>
+            <ul className="mt-6 flex flex-col">
+              {owaspCoverage.map((item) => (
+                <li
+                  key={item.id}
+                  className="border-t border-[#F3F4F6] py-4 first:border-t-0 first:pt-0 sm:grid sm:grid-cols-12 sm:gap-4"
+                >
+                  <div className="sm:col-span-4">
+                    <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
+                      <span className="text-sm font-semibold tabular-nums text-[#6B7280]">
+                        {item.id}
+                      </span>
+                      <span
+                        className={`inline-flex rounded-full px-2.5 py-0.5 text-[0.7rem] font-semibold ${coverageStyles[item.level].className}`}
+                        style={{ fontFamily: "'DM Sans', sans-serif" }}
+                      >
+                        {coverageStyles[item.level].label}
+                      </span>
+                    </div>
+                    <p
+                      className="mt-1 text-sm font-semibold text-[#111827]"
+                      style={{ fontFamily: "'DM Sans', sans-serif" }}
+                    >
+                      {item.name}
+                    </p>
+                  </div>
+                  <p
+                    className="mt-1.5 text-sm leading-relaxed text-[#6B7280] sm:col-span-8 sm:mt-0"
+                    style={{ fontFamily: "'DM Sans', sans-serif" }}
+                  >
+                    {item.note}
                   </p>
                 </li>
               ))}

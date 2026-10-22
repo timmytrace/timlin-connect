@@ -91,10 +91,25 @@ const HeroSection: React.FC = () => {
               <ShieldIcon />
               <span className="text-sm font-medium">Self‑Hosted</span>
             </div>
-            <div className="flex items-center gap-2.5 text-white/70">
+            {/*
+              A link, not a label. "Measured, Not Claimed" sat here and was a
+              slogan - true in spirit, but nothing a reader could check.
+
+              This badge is only honest because /gateway#owasp exists and says
+              four of the ten are not addressed at all. If that section is ever
+              removed or softened into a list of successes, remove this too:
+              a framework name on a dark bar with nothing behind it is the
+              certification claim we took off this row in #34.
+            */}
+            <a
+              href="/gateway#owasp"
+              className="flex items-center gap-2.5 text-white/70 transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A3E635] rounded"
+            >
               <GlobeIcon />
-              <span className="text-sm font-medium">Measured, Not Claimed</span>
-            </div>
+              <span className="text-sm font-medium underline-offset-4 decoration-white/30 hover:underline">
+                OWASP LLM Top 10 — mapped
+              </span>
+            </a>
             <div className="flex items-center gap-2.5 text-white/70">
               <GridIcon />
               <span className="text-sm font-medium">Vendor‑Neutral</span>
