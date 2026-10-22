@@ -60,8 +60,6 @@ const Navbar: React.FC = () => {
       label: 'Services',
       items: [
         { label: 'AI Security', href: home('#services-ai'), description: 'Assessments, red teaming, governance' },
-        { label: 'Offensive Security', href: home('#services-offensive'), description: 'Penetration and vulnerability testing' },
-        { label: 'Security Advisory', href: home('#services-advisory'), description: 'Risk, compliance, vCISO, incident response' },
       ],
     },
     {

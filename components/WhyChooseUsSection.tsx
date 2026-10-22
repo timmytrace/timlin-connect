@@ -31,7 +31,7 @@ const WhyChooseUsSection: React.FC = () => {
               Engagement Models
             </h3>
             <p className="text-[#6B7280] text-sm leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              We offer flexible engagement models—fixed-scope assessments, project-based work, and ongoing advisory retainers.
+              We offer fixed-scope assessments and project-based work. No retainers until there is a track record to justify one.
             </p>
           </div>
 

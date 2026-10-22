@@ -16,11 +16,11 @@ import { getPostBySlug } from './content/posts';
 import { SITE_IMAGE, SITE_URL, canonicalUrl } from './content/site';
 
 const HOME_TITLE = 'Timlin Connect | AI Security & Cybersecurity';
-const HOME_DESCRIPTION = 'Timlin Connect builds security technology that helps organizations adopt AI safely: Timlin Gateway, plus AI security assessments, red teaming, penetration testing and vCISO advisory.';
+const HOME_DESCRIPTION = 'Timlin Connect is an independent AI security practice: Timlin Gateway, plus AI security assessments, red teaming and governance readiness. Open, reproducible research on how AI guardrails fail.';
 const GATEWAY_TITLE = 'Timlin Gateway | AI Security Gateway by Timlin Connect';
-const GATEWAY_DESCRIPTION = 'Timlin Gateway is a self-hosted AI security gateway from Timlin Connect. 98.7% prompt-injection recall at a 2.0% false-positive rate, measured on a held-out set, with the known gaps published alongside.';
+const GATEWAY_DESCRIPTION = 'Timlin Gateway is a self-hosted AI security gateway from Timlin Connect. 98.7% prompt-injection recall at a 2.0% false-positive rate on curated benign datasets, with the known gaps published alongside.';
 const BLOG_TITLE = 'Research & Insights | Timlin Connect';
-const BLOG_DESCRIPTION = 'Original security research and practical writing from Timlin Connect: AI security findings, measured detection results, compliance readiness and incident response.';
+const BLOG_DESCRIPTION = 'Original security research from Timlin Connect: prompt-injection findings, measured detection results, and the bypasses we found in our own product.';
 
 const ARTICLE_SCHEMA_ID = 'article-schema';
 
@@ -240,7 +240,7 @@ const App: React.FC = () => {
       description: HOME_DESCRIPTION,
       socialTitle: 'Timlin Connect | Security for the AI Era',
       socialDescription:
-        "Secure every interaction between people, data and AI. Security technology, assessments and advisory.",
+        "Secure every interaction between people, data and AI. An AI security gateway, assessments and red teaming, and open research on how guardrails fail.",
       url: canonicalUrl(''),
     });
   }, [isGatewayPage, isBlogPage, postSlug]);

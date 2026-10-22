@@ -128,13 +128,19 @@ const ContactSection: React.FC = () => {
                   className="w-full px-4 py-3 bg-white border border-white/20 rounded-lg text-[#0B0B0B] focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all"
                   style={{ fontFamily: "'DM Sans', sans-serif" }}
                 >
+                  {/*
+                    These must match the services actually offered in
+                    components/ServicesSection.tsx. They did not: the form
+                    listed six services, none of them the AI work, while the
+                    site said the AI practice led. A contact form offering
+                    something the site does not is its own kind of overclaim.
+                  */}
                   <option value="">Select a service</option>
-                  <option value="risk-assessment">Cybersecurity Risk Assessment</option>
-                  <option value="vulnerability">Vulnerability Assessment</option>
-                  <option value="pentest">Penetration Testing</option>
-                  <option value="compliance">Compliance &amp; Privacy Readiness</option>
-                  <option value="vciso">Virtual CISO (vCISO)</option>
-                  <option value="incident-response">Incident Response Planning</option>
+                  <option value="ai-assessment">AI Security Assessment</option>
+                  <option value="ai-red-team">AI Red Teaming</option>
+                  <option value="llm-app-testing">LLM &amp; Application Security Testing</option>
+                  <option value="ai-governance">AI Governance Readiness</option>
+                  <option value="design-partner">Timlin Gateway design partner</option>
                   <option value="other">Other / Not Sure</option>
                 </select>
               </div>

@@ -3,7 +3,15 @@ import type { ServiceItem } from '../types';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 /**
- * Services are grouped into three practices, each laid out as a list.
+ * Services are grouped into practices, each laid out as a list.
+ *
+ * There is one practice now. Offensive Security and Security Advisory offered
+ * seven services - penetration testing, vCISO, incident response - that nobody
+ * here has delivered. A capability list is a claim, and a claim you cannot meet
+ * does more damage than a short list: the first prospect who asks about your
+ * pen-testing methodology finds out, and then doubts the parts that were true.
+ * The structure stays plural because a second practice should be added back
+ * only when there is delivered work behind it.
  *
  * The previous version put every service in one card grid: nine cards of three
  * columns, split 3 / 2 / 4, so the middle practice left a hole and the last
@@ -67,75 +75,6 @@ const families: ServiceFamily[] = [
       },
     ],
   },
-  {
-    id: 'offensive-security',
-    anchor: 'services-offensive',
-    name: 'Offensive Security',
-    blurb: 'Finding the way in before someone else does. The retest is the deliverable, not the report.',
-    image: '/penetration testing.png',
-    cta: 'Scope a penetration test',
-    items: [
-      {
-        id: 'pentest',
-        title: 'Penetration Testing',
-        description: 'Real-world attack simulation: how an attacker gets in, and what it costs you when they do.',
-        includes: ['Internal and external network testing', 'Web application testing', 'Social engineering simulation', 'Exploit validation and remediation guidance'],
-        bestFor: 'Companies handling sensitive data or seeking compliance',
-      },
-      {
-        id: 'api-cloud-testing',
-        title: 'API & Cloud Security Testing',
-        description: 'The surfaces that grew fastest and are reviewed least: your APIs and your cloud configuration.',
-        includes: ['API authentication and authorization', 'Cloud configuration review', 'Identity and permission boundaries', 'Exposed service discovery'],
-        bestFor: 'Teams whose estate moved to cloud faster than their reviews did',
-      },
-      {
-        id: 'vulnerability',
-        title: 'Vulnerability Assessments',
-        description: 'Technical weaknesses across systems, networks, cloud environments and applications.',
-        includes: ['Network and system scanning', 'Cloud environment review', 'Authenticated and unauthenticated scans', 'Detailed findings report'],
-        bestFor: 'Businesses preparing for a product launch or audit',
-      },
-    ],
-  },
-  {
-    id: 'security-advisory',
-    anchor: 'services-advisory',
-    name: 'Security Advisory',
-    blurb: 'Security leadership, compliance readiness, and the plan for the day something goes wrong.',
-    image: '/virtual ciso.png',
-    cta: 'Talk about your security program',
-    items: [
-      {
-        id: 'risk-assessment',
-        title: 'Cybersecurity Risk Assessments',
-        description: 'Your real exposure across people, process and technology, ranked by impact on the business.',
-        includes: ['People, process and technology review', 'Risk register and scoring', 'Prioritized remediation roadmap', 'Executive summary report'],
-        bestFor: 'Organizations without a dedicated security team',
-      },
-      {
-        id: 'compliance',
-        title: 'Compliance & Privacy Readiness',
-        description: 'Controls aligned to the frameworks and privacy laws you actually answer to.',
-        includes: ['Gap analysis against SOC 2 / ISO 27001 / PHIPA / PIPEDA / GDPR', 'Policy and procedure review', 'Compliance roadmap', 'Board-ready reporting'],
-        bestFor: 'Organizations preparing for audits or regulatory reviews',
-      },
-      {
-        id: 'vciso',
-        title: 'Virtual CISO (vCISO)',
-        description: 'Security leadership and ongoing advisory without a full-time hire.',
-        includes: ['Monthly advisory sessions', 'Security program development', 'Board and stakeholder reporting', 'Vendor and contract security review'],
-        bestFor: 'Growing companies that need security leadership, not a headcount',
-      },
-      {
-        id: 'incident-response',
-        title: 'Incident Response Planning',
-        description: 'A tested plan, and a team that has already rehearsed the decisions.',
-        includes: ['Custom IR plan development', 'Tabletop exercise facilitation', 'Team roles and playbook definition', 'Post-incident review support'],
-        bestFor: 'Organizations with no existing incident response plan',
-      },
-    ],
-  },
 ];
 
 const ServiceRow: React.FC<{ service: ServiceItem }> = ({ service }) => (
@@ -182,8 +121,9 @@ const ServicesSection: React.FC = () => {
             Services
           </h2>
           <p className="mt-4 text-[#6B7280] text-base sm:text-lg leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-            Three practices. The AI work leads, because that is where the product is; the offensive and advisory
-            practice funds it and tells us what to build next.
+            One practice, deliberately. The work we publish is on prompt injection, detection and the failure
+            modes of AI guardrails, so that is what we take on — and the research is open, so you can judge the
+            depth before you engage us.
           </p>
         </div>
 
@@ -227,9 +167,9 @@ const ServicesSection: React.FC = () => {
                 CSS columns, not a grid, so unequal practices still balance. At
                 full width a single list ran 771px beside a 385px card, leaving
                 a 386px hole; two columns halve it. A grid would fix the number
-                of cells, so Offensive Security's three services would leave one
-                empty — the hole the card layout had. Multi-column balances the
-                fill instead, wherever a practice has three services or five.
+                of cells, so a practice with an odd number of services would
+                leave one empty — the hole the card layout had. Multi-column
+                balances the fill instead, at three services or five.
               */}
               <div className="lg:col-span-8 lg:columns-2 lg:gap-x-10">
                 {family.items.map((service) => (
