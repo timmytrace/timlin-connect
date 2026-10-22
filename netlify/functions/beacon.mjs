@@ -18,9 +18,14 @@ const PIXEL = Uint8Array.from(
   (c) => c.charCodeAt(0)
 );
 
+// Path routing for the same reason as canary.mjs: a rewrite dropped the token
+// while still returning a valid GIF, so every hit would have been recorded
+// against an empty token and the variant breakdown would have been silently
+// uniform.
+export const config = { path: "/b/:token" };
+
 export default async (request, context) => {
-  const url = new URL(request.url);
-  const token = (url.searchParams.get("t") || "").toLowerCase();
+  const token = (context?.params?.token || "").toLowerCase();
   const variant = token.replace(/-\d+$/, "");
 
   const headers = {};

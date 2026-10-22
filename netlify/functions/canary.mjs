@@ -217,9 +217,19 @@ Questions, or a request to be excluded: see the site.</small></p>
 </body>
 </html>`;
 
+/**
+ * Routed by path, not by a rewrite.
+ *
+ * `_redirects` forwards the *incoming* query string and discards the one
+ * written in the destination, so `/canary/:variant -> ...?v=:variant` reached
+ * this function with no variant at all. It still returned a response, which is
+ * how that failure stays invisible: the status code is fine and the data is
+ * empty. Functions v2 path config gives real parameters.
+ */
+export const config = { path: ["/canary", "/canary/", "/canary/:variant"] };
+
 export default async (request, context) => {
-  const url = new URL(request.url);
-  const variant = (url.searchParams.get("v") || "").toLowerCase();
+  const variant = (context?.params?.variant || "index").toLowerCase();
 
   if (variant === "index") {
     try {
