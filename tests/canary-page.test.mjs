@@ -16,11 +16,13 @@ import { resultsSection } from "../netlify/functions/canary.mjs";
 const withReads = {
   since: "2026-10-22T11:05:00Z",
   reads: 5,
+  explainer_reads: 3,
   beacons: 0,
   follow_through: 0,
   by_variant: {
     visible: { reads: 1, beacons: 0 },
     comment: { reads: 1, beacons: 0 },
+    index: { reads: 3, beacons: 0 },
   },
   named: [["Mozilla/5.0 (compatible; ClaudeBot/1.0; +claudebot@anthropic.com)", 4]],
   anonymous: 1,
@@ -35,20 +37,36 @@ test("a failed read says so instead of rendering zeros", () => {
 });
 
 test("no traffic is distinguished from no logging", () => {
-  const html = resultsSection({ since: "2026-10-22T11:05:00Z", reads: 0, beacons: 0, by_variant: {}, named: [], anonymous: 0 });
-  assert.match(html, /No reads recorded yet/i);
+  const html = resultsSection({ since: "2026-10-22T11:05:00Z", reads: 0, explainer_reads: 0, beacons: 0, by_variant: {}, named: [], anonymous: 0 });
+  assert.match(html, /No reads of an instrumented page yet/i);
   // Says why the absence is trustworthy.
   // The template wraps, so match across whitespace rather than on one line.
   assert.match(html, /absence of traffic\s+rather than an absence of logging/i);
   assert.match(html, /2026-10-22T11:05:00Z/);
 });
 
+test("explainer traffic is mentioned even when nothing instrumented was read", () => {
+  // Otherwise "no reads" reads as "nobody found it", when in fact three
+  // readers found the explainer and none went on to an instrumented page.
+  const html = resultsSection({ since: null, reads: 0, explainer_reads: 3, beacons: 0, by_variant: {}, named: [], anonymous: 0 });
+  assert.match(html, /this explainer has been fetched 3 times/i);
+});
+
 test("reads and beacons are reported with the window", () => {
   const html = resultsSection(withReads);
-  assert.match(html, /5 reads, 0 beacons/);
+  assert.match(html, /5 reads of a page carrying an instruction, 0 beacons/);
   assert.match(html, /none went on to act on what it read/);
   assert.match(html, /Window opens 2026-10-22T11:05:00Z/);
   assert.match(html, /<td>visible<\/td>|<code>visible<\/code>/);
+});
+
+test("the explainer is shown in the table but excluded from the ratio", () => {
+  // The headline says 5, the table says index: 3. Without this sentence the
+  // page appears to contradict itself.
+  const html = resultsSection(withReads);
+  assert.match(html, /5 reads of a page carrying an instruction/);
+  assert.match(html, /<code>index<\/code><\/td><td>3<\/td>/);
+  assert.match(html, /its 3 reads are excluded from the figures above/is);
 });
 
 test("a declared reader is named, an undeclared one is counted only", () => {
@@ -68,7 +86,7 @@ test("the crawler-versus-agent caveat is always present with data", () => {
 
 test("a non-zero follow-through is rendered as a percentage", () => {
   const html = resultsSection({ ...withReads, beacons: 1, follow_through: 0.2 });
-  assert.match(html, /5 reads, 1 beacon\b/);
+  assert.match(html, /5 reads of a page carrying an instruction, 1 beacon\b/);
   assert.match(html, /20\.0% went on to act/);
 });
 

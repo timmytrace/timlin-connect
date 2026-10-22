@@ -58,7 +58,21 @@ export const summarize = (all, { since = null, sinceMs = null } = {}) => {
     }
   }
 
-  const reads = entries.filter((e) => e.kind === "read");
+  /**
+   * A read belongs in the denominator only if the page carried an instruction.
+   *
+   * The index explains the method and deliberately carries none, so a reader
+   * that fetched it was never given anything to act on. Counting it dilutes
+   * follow-through - and it grows every time somebody loads the page to check
+   * the results, which makes reading the number change it. ClaudeBot's honest
+   * figure is 0 of 4 instrumented surfaces, not 0 of 5 pages.
+   *
+   * Reported separately rather than dropped: explainer traffic is still
+   * evidence that something found the experiment.
+   */
+  const allReads = entries.filter((e) => e.kind === "read");
+  const reads = allReads.filter((e) => e.variant !== "index");
+  const explainerReads = allReads.filter((e) => e.variant === "index");
   const beacons = entries.filter((e) => e.kind === "beacon");
 
   return {
@@ -69,16 +83,24 @@ export const summarize = (all, { since = null, sinceMs = null } = {}) => {
       since,
       excluded,
       total_recorded: all.length,
+      // Reads of instrumented surfaces: pages that carried an instruction.
       reads: reads.length,
+      // The index explainer, which carries none. Not in the ratio below.
+      explainer_reads: explainerReads.length,
       beacons: beacons.length,
-      // The headline ratio: of everything that read a canary page, the share
-      // that went on to act on what it read.
+      // The headline ratio: of everything that read a page carrying an
+      // instruction, the share that went on to act on it.
       follow_through: reads.length ? beacons.length / reads.length : null,
+      // Built from allReads, not from the instrumented subset: the breakdown
+      // shows every surface including the explainer, while the ratio above
+      // counts only pages that carried an instruction. Excluded from the
+      // figure is not the same as hidden from the table, and a first draft of
+      // this silently reported the index row as zero.
       by_variant: Object.fromEntries(
         [...new Set(entries.map((e) => e.variant))].filter(Boolean).map((v) => [
           v,
           {
-            reads: reads.filter((e) => e.variant === v).length,
+            reads: allReads.filter((e) => e.variant === v).length,
             beacons: beacons.filter((e) => e.variant === v).length,
           },
         ])

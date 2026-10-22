@@ -65,10 +65,14 @@ const publicResults = async () => {
       sinceMs: Number.isNaN(sinceMs) ? null : sinceMs,
     });
 
+    // Instrumented reads only, matching the headline. Counting a reader's
+    // index fetch here would put a different number beside its name than the
+    // one in the ratio above it, which is how a page starts arguing with
+    // itself.
     const named = new Map();
     let anonymous = 0;
     for (const e of entries) {
-      if (e.kind !== "read") continue;
+      if (e.kind !== "read" || e.variant === "index") continue;
       if (e.ua && DECLARED.test(e.ua)) named.set(e.ua, (named.get(e.ua) ?? 0) + 1);
       else anonymous += 1;
     }
@@ -95,8 +99,14 @@ export const resultsSection = (r) => {
 just now, which is a fault at our end and not a measurement. Try again shortly.</p>`;
   }
   if (!r.reads) {
-    return `<p>No reads recorded yet in the current window${
+    return `<p>No reads of an instrumented page yet in the current window${
       r.since ? ` (since ${escape(r.since)})` : ""
+    }${
+      r.explainer_reads
+        ? `, though this explainer has been fetched ${r.explainer_reads} time${
+            r.explainer_reads === 1 ? "" : "s"
+          }`
+        : ""
     }. The store is being read successfully, so this is an absence of traffic
 rather than an absence of logging.</p>`;
   }
@@ -115,9 +125,11 @@ rather than an absence of logging.</p>`;
 identify themselves. Those user agents are not published here.</p>`
     : "";
 
-  return `<p class="note"><strong>${r.reads} read${r.reads === 1 ? "" : "s"}, ${r.beacons} beacon${
+  return `<p class="note"><strong>${r.reads} read${
+    r.reads === 1 ? "" : "s"
+  } of a page carrying an instruction, ${r.beacons} beacon${
     r.beacons === 1 ? "" : "s"
-  }.</strong> Of everything that read a canary page, ${
+  }.</strong> Of those readers, ${
     r.beacons === 0
       ? "none went on to act on what it read"
       : `${(r.follow_through * 100).toFixed(1)}% went on to act on what it read`
@@ -127,6 +139,13 @@ identify themselves. Those user agents are not published here.</p>`
 <tr><th>Variant</th><th>Reads</th><th>Beacons</th></tr>
 ${rows}
 </table>
+
+<p>The <code>index</code> row is this page. It carries no instruction, by
+design, so a beacon could never be ambiguous about which surface produced it —
+which also means its ${r.explainer_reads ?? 0} read${
+    (r.explainer_reads ?? 0) === 1 ? "" : "s"
+  } are excluded from the figures above. Otherwise every visit to check the
+results would dilute the ratio those results report.</p>
 
 ${readers}
 ${anon}

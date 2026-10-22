@@ -104,6 +104,27 @@ test("a beacon with no variant is surfaced, not silently dropped", () => {
   assert.equal(attributed + summary.unattributed.beacons, summary.beacons);
 });
 
+test("the explainer is excluded from the ratio and reported separately", () => {
+  // The index page carries no instruction by design, so a reader that fetched
+  // it was never given anything to act on. Counting it diluted follow-through,
+  // and it grew every time somebody loaded the page to check the results - so
+  // reading the number changed it.
+  const { summary } = summarize([
+    read("2026-10-22T13:00:00Z", "comment"),
+    read("2026-10-22T13:01:00Z", "hidden"),
+    read("2026-10-22T13:02:00Z", "index"),
+    read("2026-10-22T13:03:00Z", "index"),
+    beacon("2026-10-22T13:04:00Z", "comment"),
+  ], { since: SINCE, sinceMs });
+
+  assert.equal(summary.reads, 2);
+  assert.equal(summary.explainer_reads, 2);
+  // 1 of 2 instrumented, not 1 of 4 pages.
+  assert.equal(summary.follow_through, 0.5);
+  // Still visible in the breakdown - excluded from the ratio, not hidden.
+  assert.equal(summary.by_variant.index.reads, 2);
+});
+
 test("follow_through is null rather than zero when nothing was read", () => {
   // 0/0 reported as 0 would read as "agents saw it and ignored it", which is a
   // claim the data does not support.
