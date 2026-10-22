@@ -18,6 +18,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Netlify treats every module in netlify/functions/ as a deployable
+      # function and derives the name from the filename, which cannot contain a
+      # period. A test file there failed the deploy outright, and nothing in
+      # this workflow would have caught it: npm test and npm run build both
+      # pass on a tree Netlify refuses to bundle.
+      #
+      # Cheap, and placed first so it fails before anything is installed.
+      - name: Function filenames must be deployable
+        run: |
+          bad=$(find netlify/functions -maxdepth 1 -type f \
+                  \( -name '*.mjs' -o -name '*.js' -o -name '*.ts' \) \
+                  -printf '%f\n' | awk -F. 'NF > 2')
+          if [ -n "$bad" ]; then
+            echo "Netlify rejects periods in a function name:"
+            echo "$bad" | sed 's/^/  /'
+            echo "Anything that is not a function belongs outside this directory."
+            exit 1
+          fi
+
       # Read from .nvmrc rather than pinned here, so CI and the Netlify build
       # cannot drift apart. Testing on a runtime production does not use is a
       # green check that means nothing.
