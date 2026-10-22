@@ -37,8 +37,50 @@ are served `no-store` for the same reason: a cached read is a read we never see.
 curl "https://timlinconnect.com/.netlify/functions/canary-log?key=$CANARY_LOG_KEY" > canary.json
 ```
 
-Set `CANARY_LOG_KEY` in the Netlify site environment. If it is unset the
-endpoint refuses rather than defaulting to open.
+Set `CANARY_LOG_KEY` in the Netlify site environment, scoped to **Functions**,
+and redeploy — Netlify fixes the environment into a deploy at build time, so
+saving the variable alone leaves the running function without it. If it is
+unset the endpoint refuses rather than defaulting to open.
+
+### The collection window
+
+Blobs are site-scoped, not deploy-scoped. Every beacon fired at a deploy
+preview while the routing bug was live sits in the same store as production
+data, as do our own verification requests. Two filters narrow the summary:
+
+```bash
+curl ".../canary-log?key=$CANARY_LOG_KEY&since=2026-10-22T11:00:00Z"
+```
+
+`since` takes any ISO 8601 timestamp and can be set once as `CANARY_SINCE`
+instead. An unparseable value returns `400` rather than falling through to the
+full history under a heading that claims a window. Requests tagged
+`TimlinCanarySelfTest` are excluded unconditionally.
+
+Both filters report what they removed, in `excluded`, against `total_recorded`.
+Nothing is deleted — the pre-fix entries are evidence of a bug worth keeping,
+they are just not evidence of an agent. **A published figure should always name
+its `since`.**
+
+### Reconciling the breakdown
+
+`by_variant` is built from the set of variants actually seen, so an entry
+recorded with an empty variant disappears from the breakdown while still
+counting in the totals. That is how the routing bug stayed invisible: the first
+real read of the log showed four beacons over a breakdown that summed to three,
+and only arithmetic revealed it. `unattributed` now names that gap. A non-zero
+value there is a routing bug, not an agent.
+
+### Tests
+
+```bash
+npm test
+```
+
+Covers the filters and the reconciliation, not the storage probe. A filter that
+silently keeps everything returns a number indistinguishable from a correct
+one — which is the whole reason the first summary read `follow_through: 0.31`
+when every request in it was our own.
 
 **Check `storage_ok` before anything else.** The canary and beacon functions
 deliberately swallow write failures so a logging outage cannot change what a
