@@ -68,13 +68,32 @@ const HeroSection: React.FC = () => {
       <div className="relative z-10 border-t border-white/10 bg-[#0B0B0B]/80 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
           <div className="flex flex-wrap justify-start gap-8 sm:gap-12">
+            {/*
+              This row said "SOC 2 / ISO 27001". Both readings of it were
+              false: Timlin Connect is not audited against either, and the
+              compliance-readiness service that could have justified naming
+              them was removed in #31. A badge beside a shield icon reads as a
+              certification whatever was meant by it.
+
+              Its replacement is a property of the product that is true and
+              checkable - the gateway runs in your own infrastructure, so your
+              prompts never reach ours. For a security control that inspects
+              every prompt your users send, that is the thing a buyer most
+              needs to know, and it is a real differentiator against hosted
+              guardrails.
+
+              "ISO / NIST-Based" went with it. Nothing in the engine or the
+              research maps to a NIST or ISO control set, so it described a
+              methodology we do not follow. What the work does follow is
+              measurement, which the next badge now says plainly.
+            */}
             <div className="flex items-center gap-2.5 text-white/70">
               <ShieldIcon />
-              <span className="text-sm font-medium">SOC 2 / ISO 27001</span>
+              <span className="text-sm font-medium">Self‑Hosted</span>
             </div>
             <div className="flex items-center gap-2.5 text-white/70">
               <GlobeIcon />
-              <span className="text-sm font-medium">ISO / NIST‑Based</span>
+              <span className="text-sm font-medium">Measured, Not Claimed</span>
             </div>
             <div className="flex items-center gap-2.5 text-white/70">
               <GridIcon />
