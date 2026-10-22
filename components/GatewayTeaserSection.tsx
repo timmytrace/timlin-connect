@@ -62,8 +62,10 @@ const GatewayTeaserSection: React.FC = () => {
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
               98.7% prompt-injection recall at a 2.0% false-positive rate, measured on a held-out
-              set. The gaps are published alongside the results. Open to design partners who want
-              to run it against their own traffic.
+              set of curated benign prompts. That qualifier matters: when we wrote our own benign
+              sentences, of the kind people actually type at work, an earlier version of the same
+              rules fired on 15.7% of them. The gaps are published alongside the results. Open to
+              design partners who want to run it against their own traffic.
             </p>
           </div>
         </div>

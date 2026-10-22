@@ -6,7 +6,7 @@ const measuredCapabilities: { name: string; measure: string; note: string }[] = 
   {
     name: 'Prompt injection detection',
     measure: '98.7% recall',
-    note: '148 of 150 on a held-out set, at a 2.0% false-positive rate.',
+    note: '148 of 150 on a held-out set, at a 2.0% false-positive rate on curated benign prompts.',
   },
   {
     name: 'Encoded and obfuscated payloads',
@@ -138,7 +138,7 @@ const GatewayPage: React.FC = () => {
               className="mt-6 inline-flex rounded-lg bg-white/10 border border-white/20 px-4 py-2 text-sm sm:text-base text-white/90"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
-              98.7% injection recall at a 2.0% false-positive rate, measured on a held-out set.
+              98.7% injection recall at a 2.0% false-positive rate, on curated benign datasets.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
               <a

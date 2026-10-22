@@ -51,16 +51,16 @@ const STATIC_ROUTES: RouteMeta[] = [
     route: 'gateway',
     title: 'Timlin Gateway | AI Security Gateway by Timlin Connect',
     description:
-      'Timlin Gateway is a self-hosted AI security gateway from Timlin Connect. 98.7% prompt-injection recall at a 2.0% false-positive rate, measured on a held-out set, with the known gaps published alongside.',
+      'Timlin Gateway is a self-hosted AI security gateway from Timlin Connect. 98.7% prompt-injection recall at a 2.0% false-positive rate on curated benign datasets, with the known gaps published alongside.',
     socialTitle: 'Timlin Gateway | AI Security Gateway',
     socialDescription:
-      'Self-hosted LLM security. 98.7% injection recall at 2.0% false positives, measured — and the failure modes published next to the results.',
+      'Self-hosted LLM security. 98.7% injection recall at 2.0% false positives on curated benign data — and the failure modes published next to the results.',
   },
   {
     route: 'blog',
     title: 'Research & Insights | Timlin Connect',
     description:
-      'Original security research and practical writing from Timlin Connect: AI security findings, measured detection results, compliance readiness and incident response.',
+      'Original security research from Timlin Connect: prompt-injection findings, measured detection results, and the bypasses we found in our own product.',
     socialTitle: 'Timlin Connect | Research & Insights',
     socialDescription:
       'Original security research: what we measured, what it found, and where it still falls short.',

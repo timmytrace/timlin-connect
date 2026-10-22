@@ -41,7 +41,7 @@ const HeroSection: React.FC = () => {
               Security for<br />the AI era.
             </h1>
             <p className="mt-6 text-lg sm:text-xl text-white/70 max-w-xl leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              Secure every interaction between your people, your data and AI. We build the gateway that inspects those interactions, and run the assessments, testing and advisory work around it.
+              Secure every interaction between your people, your data and AI. We build the gateway that inspects those interactions, publish what we learn about how guardrails fail, and run the assessments and red teaming around it.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
               <a
@@ -79,9 +79,15 @@ const HeroSection: React.FC = () => {
               <GridIcon />
               <span className="text-sm font-medium">Vendor‑Neutral</span>
             </div>
+            {/*
+              "Global Delivery" was here. It described no capability - one
+              person in Ontario is not a global delivery model - and it was
+              the easiest claim on the page to disprove in conversation.
+              Replaced with something checkable: the research is public.
+            */}
             <div className="flex items-center gap-2.5 text-white/70">
-              <GlobeIcon />
-              <span className="text-sm font-medium">Global Delivery</span>
+              <GridIcon />
+              <span className="text-sm font-medium">Published Research</span>
             </div>
           </div>
         </div>

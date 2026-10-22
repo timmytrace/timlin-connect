@@ -15,10 +15,10 @@ const AboutSection: React.FC = () => {
           {/* Left: Content */}
           <div>
             <p className="text-lg text-[#6B7280] leading-relaxed mb-6" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              Our mission is to help growing organizations navigate international cybersecurity and regulatory landscapes with clarity and confidence, guided by experienced professionals in cybersecurity and compliance.
+              Timlin Connect is an independent AI security practice based in Ontario, founded by Timilehin Owolabi. The work is security research first: measuring how AI guardrails fail, publishing the results including the ones that are unflattering, and building the gateway those findings feed into.
             </p>
             <p className="text-lg text-[#6B7280] leading-relaxed mb-6" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              We are experienced cybersecurity professionals with advanced tools and methodologies, helping organizations mitigate risk across complex, cross-border security and regulatory landscapes. Clear guidance without unnecessary complexity.
+              The research is open and reproducible, so you can judge it before you engage us — including an evaluation of suffix-based guardrail evasion built on Inspect, the UK AI Security Institute&rsquo;s framework, and write-ups of bypasses found in our own product.
             </p>
 
             <ul className="space-y-2 mt-6">

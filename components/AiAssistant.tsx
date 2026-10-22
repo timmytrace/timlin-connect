@@ -4,7 +4,7 @@ import { ChatMessage } from '../types';
 const WELCOME_MESSAGE: ChatMessage = {
   id: 'welcome',
   role: 'assistant',
-  content: "Hello! I'm the Timlin Connect AI Assistant. I can help answer questions about our cybersecurity services, compliance readiness, risk assessments, and more. How can I help you today?",
+  content: "Hello! I'm the Timlin Connect AI Assistant. I can answer questions about our AI security work — assessments, red teaming, governance readiness — and about Timlin Gateway. How can I help?",
   timestamp: new Date(),
 };
 
