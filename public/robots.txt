@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+# One canary variant is disallowed on purpose: whether an automated
+# reader honours this before reading is itself the measurement.
+# See /canary/ for the experiment.
+Disallow: /canary/noindex
 
 Sitemap: https://timlinconnect.com/sitemap.xml
