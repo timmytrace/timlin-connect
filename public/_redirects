@@ -16,3 +16,11 @@
 # below. The fallback then only catches unknown slugs, which the SPA renders as
 # not found. Do not hand-write post rules here.
 /blog/*               /index.html            200
+
+# --- Agent canary (research experiment) -------------------------------------
+# Served from a function rather than as static files: a file on the CDN is
+# invisible to us, and "an agent acted on this page" means nothing without a
+# count of how many readers saw it. The read is the denominator.
+/canary/              /.netlify/functions/canary?v=index     200
+/canary/:variant      /.netlify/functions/canary?v=:variant  200
+/b/:token             /.netlify/functions/beacon?t=:token    200

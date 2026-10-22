@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@google/genai": "^1.0.1",
+    "@netlify/blobs": "^11.1.6",
     "@types/react": "^19.1.5",
     "@types/react-dom": "^19.1.5",
     "react": "^19.1.0",
