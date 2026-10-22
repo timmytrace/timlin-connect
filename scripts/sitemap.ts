@@ -43,6 +43,23 @@ const buildSitemap = (): string => {
       changefreq: 'yearly',
       priority: '0.7',
     })),
+    /**
+     * The agent canary. Listed because an experiment measuring what automated
+     * readers do needs automated readers to find it first - and nothing on
+     * this site links to these pages, so without the sitemap `reads: 0` would
+     * be a measurement of discoverability wearing the costume of a finding.
+     *
+     * `canary/noindex` is deliberately absent. It is Disallowed in robots.txt,
+     * and advertising a URL you have asked crawlers not to fetch would make
+     * "did it honour the exclusion" unanswerable. Its only discovery path is
+     * the link on the index page, which is the question that variant asks.
+     */
+    ...['', 'visible', 'comment', 'hidden', 'alt'].map<SitemapEntry>((variant) => ({
+      loc: canonicalUrl(variant ? `canary/${variant}` : 'canary'),
+      lastmod: built,
+      changefreq: 'daily',
+      priority: '0.5',
+    })),
   ];
 
   const urls = entries
