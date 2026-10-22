@@ -1,16 +1,20 @@
 /**
  * Tests for the log summary.
  *
- *     node --test netlify/functions/
+ *     npm test
  *
  * The filters are worth testing and the storage probe is not: a filter that
  * silently keeps everything returns a number that looks exactly like a correct
  * one, which is how the first round of canary data came back reporting a
  * follow-through rate of 0.31 that was entirely our own curl requests.
+ *
+ * This file lives outside netlify/functions/ because Netlify treats every
+ * module in that directory as a deployable function, and a function name
+ * cannot contain a period. Putting it there broke the deploy outright.
  */
 import test from "node:test";
 import assert from "node:assert/strict";
-import { summarize } from "./canary-log.mjs";
+import { summarize } from "../netlify/functions/canary-log.mjs";
 
 const AGENT = "SomeBot/1.0";
 const SELF = "TimlinCanarySelfTest/1 (verification; filter me out)";
