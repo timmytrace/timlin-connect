@@ -1,0 +1,47 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  # The site publishes blog posts on a date filter, so a build that works today
+  # can break on a day nobody pushed anything. A daily run catches that, and
+  # catches dependency drift in a repository that goes weeks without a commit.
+  schedule:
+    - cron: "0 7 * * *"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Read from .nvmrc rather than pinned here, so CI and the Netlify build
+      # cannot drift apart. Testing on a runtime production does not use is a
+      # green check that means nothing.
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      # ci, not install: it installs from the lockfile and fails if the
+      # lockfile and package.json disagree. `npm install` would quietly resolve
+      # new versions and test something other than what deploys - the same bug
+      # as the Dockerfile that fell through to a plain install because npm
+      # rejected a yarn flag.
+      - name: Install
+        run: npm ci
+
+      # The function summary arithmetic: the filters that decide which entries
+      # count toward a published figure. No network, no store, no credentials.
+      - name: Tests
+        run: npm test
+
+      # Netlify runs this on every deploy, so a failure here is a failure that
+      # would otherwise be discovered by the site going stale. It also exercises
+      # the prerender and post-scheduling steps, which are build-time and
+      # therefore invisible to the unit tests.
+      - name: Build
+        run: npm run build
