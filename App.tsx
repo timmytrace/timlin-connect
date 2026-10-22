@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import ServicesSection from './components/ServicesSection';
+import ResearchSection from './components/ResearchSection';
 import WhoWeHelpSection from './components/WhoWeHelpSection';
 import HowWeWorkSection from './components/HowWeWorkSection';
 import WhyChooseUsSection from './components/WhyChooseUsSection';
@@ -254,12 +255,25 @@ const App: React.FC = () => {
         <GatewayPage />
       ) : (
         <main className="flex-grow">
+          {/*
+            Order matters more than it looks. The gateway and the research
+            used to sit sixth and nowhere: a visitor scrolled past six
+            sections of capability claims - the part of this site anyone with
+            a template could reproduce - before reaching the product, and
+            never reached the findings at all.
+
+            Now the two things that are ours come directly after what we do.
+            How We Work and Why Choose Us still earn their place for a buyer
+            comparing suppliers, but they are furniture, so they sit after
+            the argument rather than in front of it.
+          */}
           <HeroSection />
           <ServicesSection />
+          <GatewayTeaserSection />
+          <ResearchSection />
           <WhoWeHelpSection />
           <HowWeWorkSection />
           <WhyChooseUsSection />
-          <GatewayTeaserSection />
           <AboutSection />
           <ContactSection />
         </main>
