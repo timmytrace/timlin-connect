@@ -41,11 +41,17 @@ const AboutSection: React.FC = () => {
             </ul>
           </div>
 
-          {/* Right: Image */}
+          {/*
+            Was a stock photograph captioned "Team at work", beside copy that
+            names one person. A real portrait of the founder belongs here and
+            would be better than this - an independent practice is a feature,
+            not something to hide behind stock. Until there is one, the
+            product is at least ours.
+          */}
           <div className="w-full aspect-[4/3] bg-[#E5E5E5] rounded-xl overflow-hidden">
             <img
-              src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=800&q=80"
-              alt="Team at work"
+              src="/magnumai-demo/blocked-requests.png"
+              alt="Timlin Gateway blocking prompt-injection attempts, with the matched rule for each"
               className="w-full h-full object-cover grayscale"
               loading="lazy"
             />

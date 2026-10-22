@@ -21,17 +21,18 @@ const GridIcon: React.FC = () => (
 const HeroSection: React.FC = () => {
   return (
     <section id="home" className="relative bg-[#0B0B0B] min-h-screen flex flex-col overflow-hidden">
-      {/* Background image overlay */}
-      <div className="absolute inset-0 z-0">
-        <div className="w-full h-full bg-[#1a1a1a]" style={{
-          // Download this image and save to public/hero-bg.jpg:
-          // https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1920&q=80
-          backgroundImage: 'url("/hero-bg.jpg")',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          filter: 'grayscale(100%) brightness(0.4)',
-        }} />
-      </div>
+      {/*
+        This asked for /hero-bg.jpg, which was never added, so every visitor
+        fetched a 404 and saw the fallback colour underneath it - the flat
+        near-black the hero has always actually rendered. A comment above it
+        held the download instruction, which is how it survived: the page
+        looked finished, so nobody went looking for the missing file.
+
+        The flat field is the better design anyway. A darkened stock
+        photograph of an office behind the headline is the look we have been
+        removing everywhere else on this site.
+      */}
+      <div className="absolute inset-0 z-0 bg-[#1a1a1a]" />
 
       {/* Content */}
       <div className="relative z-10 flex-grow flex items-center pt-20 pb-8 px-4 sm:px-6 lg:px-8">

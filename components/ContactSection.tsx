@@ -46,15 +46,60 @@ const ContactSection: React.FC = () => {
     <section id="contact" className="section bg-[#0B0B0B] py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-          {/* Left Side — Image */}
-          <div className="hidden lg:block">
-            <div className="w-full aspect-[3/4] rounded-xl overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80"
-                alt="Team meeting"
-                className="w-full h-full object-cover grayscale opacity-60"
-                loading="lazy"
-              />
+          {/*
+            A stock photograph of six people in a meeting used to sit here,
+            captioned "Team meeting", beside copy that names a sole founder.
+            Generic office stock is the clearest template signal a page can
+            send, and it was hotlinked from Unsplash's CDN, so every visitor's
+            browser called a third party.
+
+            What replaces it is what someone actually wants before sending a
+            message to a stranger: who reads it, how fast, and what to put in
+            it. The space was never doing visual work the form needed.
+          */}
+          <div className="order-last lg:order-first">
+            <h3
+              className="text-xl font-semibold text-white"
+              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            >
+              What happens next
+            </h3>
+            <dl className="mt-6 space-y-6" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+              <div className="border-l-[3px] border-[#A3E635] pl-5">
+                <dt className="text-white font-medium">Timilehin reads it</dt>
+                <dd className="mt-1 text-white/60 leading-relaxed">
+                  Not a form queue. The person who does the work replies, usually within one
+                  business day.
+                </dd>
+              </div>
+              <div className="border-l-[3px] border-white/15 pl-5">
+                <dt className="text-white font-medium">A straight answer on fit</dt>
+                <dd className="mt-1 text-white/60 leading-relaxed">
+                  If this is not work we should take on, we will say so and point you somewhere
+                  better. We would rather lose an engagement than take one we cannot do well.
+                </dd>
+              </div>
+              <div className="border-l-[3px] border-white/15 pl-5">
+                <dt className="text-white font-medium">Then a scoped proposal</dt>
+                <dd className="mt-1 text-white/60 leading-relaxed">
+                  Fixed scope, fixed price, named deliverables and a retest. No open-ended
+                  retainers.
+                </dd>
+              </div>
+            </dl>
+
+            <div className="mt-8 border-t border-white/10 pt-6" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+              <p className="text-white/60 text-sm leading-relaxed">
+                Helpful to include: what the model is used for, what data reaches it, and whether
+                it can call tools or retrieve documents. If you would rather just email,{' '}
+                <a
+                  href="mailto:info@timlinconnect.com"
+                  className="text-white underline underline-offset-4 decoration-[#A3E635] hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A3E635] rounded"
+                >
+                  info@timlinconnect.com
+                </a>
+                .
+              </p>
             </div>
           </div>
 
