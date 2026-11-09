@@ -13,6 +13,7 @@ import AiAssistant from './components/AiAssistant';
 import GatewayTeaserSection from './components/GatewayTeaserSection';
 import GatewayPage from './components/GatewayPage';
 import BlogPage from './components/BlogPage';
+import ChangelogPage from './components/ChangelogPage';
 import { getPostBySlug } from './content/posts';
 import { SITE_IMAGE, SITE_URL, canonicalUrl } from './content/site';
 
@@ -20,6 +21,8 @@ const HOME_TITLE = 'Timlin Connect | AI Security & Cybersecurity';
 const HOME_DESCRIPTION = 'Timlin Connect is an independent AI security practice: Timlin Gateway, plus AI security assessments, red teaming and governance readiness. Open, reproducible research on how AI guardrails fail.';
 const GATEWAY_TITLE = 'Timlin Gateway | AI Security Gateway by Timlin Connect';
 const GATEWAY_DESCRIPTION = 'Timlin Gateway is a self-hosted AI security gateway from Timlin Connect. 98.7% prompt-injection recall at a 2.0% false-positive rate on curated benign datasets, with the known gaps published alongside.';
+const CHANGELOG_TITLE = 'What shipped | Timlin Connect';
+const CHANGELOG_DESCRIPTION = 'Work that landed, dated: detection rules, measurements, open-source releases, and corrections to our own earlier numbers.';
 const BLOG_TITLE = 'Research & Insights | Timlin Connect';
 const BLOG_DESCRIPTION = 'Original security research from Timlin Connect: prompt-injection findings, measured detection results, and the bypasses we found in our own product.';
 
@@ -116,6 +119,7 @@ const App: React.FC = () => {
   );
 
   const isBlogPage = useMemo(() => pathname === '/blog' || pathname.startsWith('/blog/'), [pathname]);
+  const isChangelogPage = useMemo(() => pathname === '/changelog', [pathname]);
 
   const postSlug = useMemo(() => {
     const match = /^\/blog\/([^/]+)\/?$/.exec(pathname);
@@ -218,6 +222,15 @@ const App: React.FC = () => {
 
     setArticleSchema(null);
 
+    if (isChangelogPage) {
+      applyMeta({
+        title: CHANGELOG_TITLE,
+        description: CHANGELOG_DESCRIPTION,
+        url: canonicalUrl('changelog'),
+      });
+      return;
+    }
+
     if (isBlogPage) {
       applyMeta({
         title: BLOG_TITLE,
@@ -249,7 +262,9 @@ const App: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen bg-[#FAFAFA] text-[#0B0B0B] selection:bg-[#A3E635] selection:text-[#0B0B0B]">
       <Navbar />
-      {isBlogPage ? (
+      {isChangelogPage ? (
+        <ChangelogPage />
+      ) : isBlogPage ? (
         <BlogPage />
       ) : isGatewayPage ? (
         <GatewayPage />

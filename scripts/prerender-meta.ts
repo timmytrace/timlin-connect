@@ -65,6 +65,15 @@ const STATIC_ROUTES: RouteMeta[] = [
     socialDescription:
       'Original security research: what we measured, what it found, and where it still falls short.',
   },
+  {
+    route: 'changelog',
+    title: 'What shipped | Timlin Connect',
+    description:
+      'Work that landed, dated: detection rules, measurements, open-source releases, and corrections to our own earlier numbers.',
+    socialTitle: 'Timlin Connect | What shipped',
+    socialDescription:
+      'A dated record of what actually shipped, including the fixes to our own published figures.',
+  },
 ];
 
 // A slug goes into a filesystem path and a `_redirects` line. Anything outside
