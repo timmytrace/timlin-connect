@@ -66,6 +66,7 @@ const Navbar: React.FC = () => {
       label: 'Research',
       items: [
         { label: 'Research & Insights', href: '/blog', description: 'Everything we publish' },
+        { label: 'What shipped', href: '/changelog', description: 'Work that landed, dated' },
         { label: 'Threat Research', href: '/blog?category=Threat%20Research', description: 'What we tested, and what it found' },
         { label: 'AI Security', href: '/blog?category=AI%20Security', description: 'Prompt injection, leakage, agents' },
       ],

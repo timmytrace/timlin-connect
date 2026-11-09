@@ -1,6 +1,7 @@
 import type { Plugin } from 'vite';
 import { SITE_URL, canonicalUrl } from '../content/site';
 import { readPostFrontmatter } from './post-frontmatter';
+import { lastShipped } from '../content/changelog';
 
 /**
  * Emits `sitemap.xml` at build time so every published article is discoverable
@@ -37,6 +38,10 @@ const buildSitemap = (): string => {
     { loc: `${SITE_URL}/#contact`, lastmod: built, changefreq: 'monthly', priority: '0.7' },
     { loc: canonicalUrl('gateway'), lastmod: built, changefreq: 'monthly', priority: '0.8' },
     { loc: canonicalUrl('blog'), lastmod: latestPost, changefreq: 'weekly', priority: '0.8' },
+    // lastmod is the date of the newest entry, not the build date. A changelog
+    // claiming to have changed every time the site rebuilds is lying to
+    // crawlers about exactly the thing it exists to report.
+    { loc: canonicalUrl('changelog'), lastmod: lastShipped ?? built, changefreq: 'weekly', priority: '0.7' },
     ...posts.map<SitemapEntry>((post) => ({
       loc: canonicalUrl(`blog/${post.slug}`),
       lastmod: post.date,

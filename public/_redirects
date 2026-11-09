@@ -10,6 +10,7 @@
 # of silently serving the wrong metadata.
 /gateway              /gateway/index.html    200
 /blog                 /blog/index.html       200
+/changelog            /changelog/index.html  200
 
 # Each published post gets its own rule, generated into dist/_redirects at build
 # time by scripts/prerender-meta.ts and inserted directly above the fallback
