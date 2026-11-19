@@ -12,6 +12,28 @@ on:
   workflow_dispatch:
 
 jobs:
+  # This repository is public, so anything committed here is readable the
+  # moment it is pushed - there is no window in which to notice and force-push
+  # over it. The scanner originally lived only in the private repository,
+  # which had it the wrong way round.
+  #
+  # Its own job rather than a step in `test`: it needs no Node, no lockfile and
+  # no build, so it can report in seconds instead of waiting behind npm ci, and
+  # a red check here is unambiguous about what is wrong.
+  secret-scan:
+    name: Secret scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # --all scans tracked files, which is what can reach the remote. The
+      # local pre-commit hook is opt-in and can be bypassed with --no-verify,
+      # so the same scan runs here where it cannot be skipped.
+      - name: Scan tracked files for credentials
+        run: python scripts/secret_scan.py --all
+
   test:
     runs-on: ubuntu-latest
 

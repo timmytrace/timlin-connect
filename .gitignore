@@ -27,3 +27,14 @@ dist-ssr
 
 # Local Netlify folder
 .netlify
+
+# Environment files.
+#
+# `*.local` above already catches .env.local, which is the one Vite creates -
+# and catches nothing else. A plain `.env` was committable in a PUBLIC
+# repository, which is the gap this closes. The site's real secrets live in
+# the Netlify site environment (CANARY_LOG_KEY, scoped to Functions) and must
+# never exist in a tracked file here.
+.env
+.env.*
+!.env.example
