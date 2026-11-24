@@ -5,7 +5,7 @@ category: Threat Research
 date: 2026-09-21
 author: Timilehin Owolabi
 authorRole: Founder & CEO
-image: /magnumai-demo/blocked-requests.png
+image: /gateway-demo/blocked-requests.png
 featured: true
 takeaways:
   - A mitigation's benefit has to be measured on the population it claims to serve. Any other benign set will report that it is free, because it never fires.

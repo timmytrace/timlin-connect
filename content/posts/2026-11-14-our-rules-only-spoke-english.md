@@ -5,7 +5,7 @@ category: Threat Research
 date: 2026-11-14
 author: Timilehin Owolabi
 authorRole: Founder & CEO
-image: /magnumai-demo/blocked-requests.png
+image: /gateway-demo/blocked-requests.png
 featured: true
 takeaways:
   - A detection layer written in one language gives you a security property that varies with the language your user happens to write in.

@@ -5,7 +5,7 @@ category: AI Security
 date: 2026-07-10
 author: Timlin Connect Team
 authorRole: AI Security Research
-image: /magnumai-demo/blocked-requests.png
+image: /gateway-demo/blocked-requests.png
 takeaways:
   - Direct injection abuses the input box; indirect injection abuses your retrieval pipeline.
   - "Normalization first: attackers hide payloads in encodings, split tokens, and invisible characters."

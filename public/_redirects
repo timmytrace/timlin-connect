@@ -3,6 +3,12 @@
 /magnum-ai            /gateway               301!
 /products/magnum-ai   /gateway               301!
 
+# The demo screenshots moved from /magnumai-demo/ to /gateway-demo/. Ten
+# published posts used the old path as their Open Graph image, so those URLs
+# are already out in link previews, feed readers and anything that cached a
+# social card. Redirect rather than break them.
+/magnumai-demo/*      /gateway-demo/:splat   301!
+
 # Serve the PRERENDERED file explicitly, not the generic shell. A bare
 # `/gateway /index.html 200` looks equivalent and is not: it hands crawlers the
 # homepage's Open Graph tags, which is the bug this build step exists to fix.

@@ -5,7 +5,7 @@ category: Threat Research
 date: 2026-09-01
 author: Timilehin Owolabi
 authorRole: Founder & CEO
-image: /magnumai-demo/risk-analytics.png
+image: /gateway-demo/risk-analytics.png
 featured: true
 takeaways:
   - An aggregate score is meaningless until you have read the actual items it is scoring.
