@@ -20,7 +20,7 @@ category: AI Security
 date: 2026-08-14
 author: Timlin Connect Team
 authorRole: AI Security Research
-image: /magnumai-demo/dashboard-overview.png
+image: /gateway-demo/dashboard-overview.png
 featured: false
 takeaways:
   - First thing a reader should remember.

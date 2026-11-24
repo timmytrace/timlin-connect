@@ -42,7 +42,7 @@ const families: ServiceFamily[] = [
     name: 'AI Security',
     blurb:
       'For organizations putting AI in front of their people, their customers or their data.',
-    image: '/magnumai-demo/risk-analytics.png',
+    image: '/gateway-demo/risk-analytics.png',
     cta: 'Request an AI security assessment',
     items: [
       {

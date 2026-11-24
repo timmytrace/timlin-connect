@@ -5,7 +5,7 @@ category: Threat Research
 date: 2026-10-31
 author: Timilehin Owolabi
 authorRole: Founder & CEO
-image: /magnumai-demo/security-policies.png
+image: /gateway-demo/security-policies.png
 featured: true
 takeaways:
   - Curated benign datasets do not contain the sentences people actually type. Nobody writes down "please ignore my previous message" as a security example.

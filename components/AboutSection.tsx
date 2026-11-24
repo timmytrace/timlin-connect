@@ -50,7 +50,7 @@ const AboutSection: React.FC = () => {
           */}
           <div className="w-full aspect-[4/3] bg-[#E5E5E5] rounded-xl overflow-hidden">
             <img
-              src="/magnumai-demo/blocked-requests.png"
+              src="/gateway-demo/blocked-requests.png"
               alt="Timlin Gateway blocking prompt-injection attempts, with the matched rule for each"
               className="w-full h-full object-cover grayscale"
               loading="lazy"

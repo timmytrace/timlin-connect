@@ -5,7 +5,7 @@ category: Threat Research
 date: 2026-09-23
 author: Timilehin Owolabi
 authorRole: Founder & CEO
-image: /magnumai-demo/interaction-logs.png
+image: /gateway-demo/interaction-logs.png
 featured: true
 takeaways:
   - An exception handler is code that does not run until the worst day. If you have never seen it run, you have not tested it.

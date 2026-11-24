@@ -148,7 +148,7 @@ const demoScreenshots = [
     label: 'Dashboard',
     title: 'Security Overview Dashboard',
     description: 'Real-time gateway monitoring with threat counts, risk score, activity charts, and security posture.',
-    src: '/magnumai-demo/dashboard-overview.png',
+    src: '/gateway-demo/dashboard-overview.png',
     alt: 'Timlin Gateway security overview dashboard with threat metrics and charts',
   },
   {
@@ -156,7 +156,7 @@ const demoScreenshots = [
     label: 'Logs',
     title: 'Interaction Logs',
     description: 'Review model interactions by status, risk level, detection type, API key, and risk score.',
-    src: '/magnumai-demo/interaction-logs.png',
+    src: '/gateway-demo/interaction-logs.png',
     alt: 'Timlin Gateway interaction logs table showing allowed, flagged, blocked, and sanitized requests',
   },
   {
@@ -164,7 +164,7 @@ const demoScreenshots = [
     label: 'Blocked',
     title: 'Blocked Requests',
     description: 'See prompt injection and jailbreak attempts stopped by the AI security gateway.',
-    src: '/magnumai-demo/blocked-requests.png',
+    src: '/gateway-demo/blocked-requests.png',
     alt: 'Timlin Gateway blocked requests table listing high risk prompt injection attempts',
   },
   {
@@ -172,7 +172,7 @@ const demoScreenshots = [
     label: 'Analytics',
     title: 'Risk Analytics',
     description: 'Track risk distribution, threat patterns, block rate, latency, and detection performance.',
-    src: '/magnumai-demo/risk-analytics.png',
+    src: '/gateway-demo/risk-analytics.png',
     alt: 'Timlin Gateway risk analytics dashboard with charts and detection benchmark cards',
   },
   {
@@ -180,7 +180,7 @@ const demoScreenshots = [
     label: 'Policies',
     title: 'Security Policies',
     description: 'Configure gateway rules for blocking, sanitization, PII redaction, and tool-call controls.',
-    src: '/magnumai-demo/security-policies.png',
+    src: '/gateway-demo/security-policies.png',
     alt: 'Timlin Gateway security policies page listing active gateway policies',
   },
 ];

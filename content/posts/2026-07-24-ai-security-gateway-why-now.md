@@ -5,7 +5,7 @@ category: AI Security
 date: 2026-07-24
 author: Timlin Connect Team
 authorRole: AI Security Research
-image: /magnumai-demo/dashboard-overview.png
+image: /gateway-demo/dashboard-overview.png
 featured: true
 takeaways:
   - Prompt injection targets model semantics, so traditional gateways and WAFs miss it entirely.

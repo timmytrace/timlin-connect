@@ -5,7 +5,7 @@ category: Threat Research
 date: 2026-11-07
 author: Timilehin Owolabi
 authorRole: Founder & CEO
-image: /magnumai-demo/interaction-logs.png
+image: /gateway-demo/interaction-logs.png
 featured: true
 takeaways:
   - User agents and request rates identify crawlers. They do not identify agents, because the thing that separates an agent from a scraper is whether it acts on what it reads.
