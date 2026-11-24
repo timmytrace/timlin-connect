@@ -5,7 +5,7 @@ category: AI Security
 date: 2026-11-21
 author: Timilehin Owolabi
 authorRole: Founder & CEO
-image: /magnumai-demo/blocked-requests.png
+image: /gateway-demo/blocked-requests.png
 featured: true
 takeaways:
   - Download counts measure adoption, not upkeep. A model pulled 400,000 times a month can be frozen for two and a half years and formally archived, and the number will not move.
