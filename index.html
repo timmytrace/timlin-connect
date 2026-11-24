@@ -28,7 +28,18 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/logo1.png">
 
-  <!-- JSON-LD Structured Data -->
+  <!-- JSON-LD Structured Data.
+
+       NOTE: the block below is parsed as JSON, not HTML. Comments inside it
+       break it silently - the markup still renders, the schema just stops
+       existing. Keep notes out here.
+
+       `sameAs` is how Google binds this Organization to the same entity
+       elsewhere. It was an empty array, which gave Google nothing to resolve
+       against, so it described the practice from the oldest blog posts
+       instead - still listing the pre-October service set. Only profiles that
+       verifiably resolve to this entity belong here; a wrong URL is worse
+       than none. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -37,7 +48,9 @@
     "url": "https://timlinconnect.com/",
     "logo": "https://timlinconnect.com/logo1.png",
     "description": "Timlin Connect is an independent AI security practice: Timlin Gateway, plus AI security assessments, red teaming and governance readiness. Open, reproducible research on how AI guardrails fail.",
-    "sameAs": [],
+    "sameAs": [
+      "https://github.com/timmytrace"
+    ],
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "customer support",
